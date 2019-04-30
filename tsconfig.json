@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "sourceMap": true,
+    "pretty": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "lib": [
+      "es5",
+      "es2015",
+      "es2016.array.include",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.spec.js",
+    "src/**/*.js"
+  ]
+}
