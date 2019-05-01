@@ -1,9 +1,12 @@
 
 
-Example
-https://github.com/slackapi/node-slack-sdk/blob/master/src/WebClient.ts
+# TicketEngine SDK
+JavaScript SDK with a web client for TicketEngine
 
+## Installation 
+```sh
+npm i ticketengine-sdk
+```
 
-- queue requests
-- retry requests
+## Usage
 
