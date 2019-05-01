@@ -3,17 +3,17 @@ import {ApiResponse, CommandData} from "../call";
 
 
 export enum CapacityAllocation {
-    static = 'STATIC',
-    dynamic = 'DYNAMIC',
+    static = 'static',
+    dynamic = 'dynamic',
 }
 export enum CapacityLocationAllocation {
-    all = 'ALL',
-    priority = 'PRIORITY',
-    select = 'SELECT',
+    all = 'all',
+    priority = 'priority',
+    select = 'select',
 }
 export enum CapacityType {
-    nonRegulated = 'NON_REGULATED',
-    seated = 'SEATED',
+    nonRegulated = 'nonRegulated',
+    seated = 'seated',
 }
 export enum ConditionOperators {
     and = 'and',
@@ -52,10 +52,57 @@ export interface PlanEventArguments extends CommandData {
     description?: string;
     start: Date;
     end: Date;
+    tags: Array<string>
+    externalIds: Array<{id: string, description: string}>
+}
+
+export interface RenameEventArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    name?: string;
+    description?: string;
+}
+
+export interface RescheduleEventArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    start: Date;
+    end: Date;
+}
+
+export interface AssignEventTagArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    tag: string;
+}
+
+export interface RevokeEventTagArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    tag: string;
+}
+
+export interface AddEventExternalIdArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    tag: string;
+}
+
+export interface RemoveEventExternalIdArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    externalId: string;
+    description: string;
 }
 
 export interface AddCapacityArguments extends CommandData {
     aggregateId: string;
+    capacity: any;
+}
+
+export interface ChangeCapacityArguments extends CommandData {
+    aggregateId: string;
+    capacityId: string;
     capacity: any;
 }
 
@@ -72,6 +119,77 @@ export interface AddAccessDefinitionArguments extends CommandData {
     tags?: Array<string>;
     limit?: number;
     isTemplate?: boolean;
+}
+
+export interface RenameAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    name?: string;
+    description?: string;
+}
+
+export interface RescheduleAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    start: Date;
+    end: Date;
+}
+
+export interface ChangeAccessDefinitionConditionsArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    accessConditions: any;
+}
+
+export interface AddAccessDefinitionCapacityLocationArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    capacityLocation: string;
+}
+
+export interface RemoveAccessDefinitionCapacityLocationArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    capacityLocation: string;
+}
+
+export interface ChangeAccessDefinitionCapacityLocationAllocationArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    capacityLocationAllocation: string;
+}
+
+export interface ChangeAccessDefinitionUseLimitArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    useLimit: number;
+}
+
+export interface AssignAccessDefinitionTagArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    tag: string;
+}
+
+export interface RevokeAccessDefinitionTagArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    tag: string;
+}
+
+export interface MarkAccessDefinitionAsTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
 }
 
 export interface ReserveAccessArguments extends CommandData {
@@ -115,12 +233,63 @@ export interface PlanEventResponse extends ApiResponse {
     eventId: string;
 }
 
+export interface RenameEventResponse extends ApiResponse {
+}
+
+export interface RescheduleEventResponse extends ApiResponse {
+}
+
+export interface AssignEventTagResponse extends ApiResponse {
+}
+
+export interface RevokeEventTagResponse extends ApiResponse {
+}
+
+export interface AddEventExternalIdResponse extends ApiResponse {
+}
+
+export interface RemoveEventExternalIdResponse extends ApiResponse {
+}
+
 export interface AddCapacityResponse extends ApiResponse {
     capacityId: string;
 }
 
+export interface ChangeCapacityResponse extends ApiResponse {
+}
+
 export interface AddAccessDefinitionResponse extends ApiResponse {
     accessDefinitionId: string;
+}
+
+export interface RenameAccessDefinitionResponse extends ApiResponse {
+}
+
+export interface RescheduleAccessDefinitionResponse extends ApiResponse {
+}
+
+export interface ChangeAccessDefinitionConditionsResponse extends ApiResponse {
+}
+
+export interface AddAccessDefinitionCapacityLocationResponse extends ApiResponse {
+}
+
+export interface RemoveAccessDefinitionCapacityLocationResponse extends ApiResponse {
+}
+
+export interface ChangeAccessDefinitionCapacityLocationAllocationResponse extends ApiResponse {
+}
+
+export interface ChangeAccessDefinitionUseLimitResponse extends ApiResponse {
+}
+
+export interface AssignAccessDefinitionTagResponse extends ApiResponse {
+}
+
+export interface RevokeAccessDefinitionTagResponse extends ApiResponse {
+}
+
+export interface MarkAccessDefinitionAsTemplateResponse extends ApiResponse {
 }
 
 export interface ReserveAccessResponse extends ApiResponse {

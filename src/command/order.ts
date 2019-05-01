@@ -51,6 +51,15 @@ export interface CancelOrderArguments extends CommandData {
     aggregateId: string;
 }
 
+export interface CheckoutOrderArguments extends CommandData {
+    aggregateId: string;
+    customerEmail: string;
+}
+
+export interface CompleteOrderArguments extends CommandData {
+    aggregateId: string;
+}
+
 
 
 
@@ -83,6 +92,12 @@ export interface RemoveItemFromCartResponse extends ApiResponse {
 }
 
 export interface CancelOrderResponse extends ApiResponse {
+}
+
+export interface CheckoutOrderResponse extends ApiResponse {
+}
+
+export interface CompleteOrderResponse extends ApiResponse {
 }
 
 

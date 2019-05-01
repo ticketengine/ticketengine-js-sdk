@@ -21,7 +21,40 @@ import {
     ReturnAccessArguments,
     ReturnAccessResponse,
     UseAccessArguments,
-    UseAccessResponse
+    UseAccessResponse,
+    RenameEventArguments,
+    RenameEventResponse,
+    RescheduleEventArguments,
+    RescheduleEventResponse,
+    AssignEventTagArguments,
+    AssignEventTagResponse,
+    RevokeEventTagArguments,
+    RevokeEventTagResponse,
+    AddEventExternalIdArguments,
+    AddEventExternalIdResponse,
+    RemoveEventExternalIdArguments,
+    RemoveEventExternalIdResponse,
+    ChangeCapacityArguments,
+    ChangeCapacityResponse,
+    RenameAccessDefinitionArguments,
+    RenameAccessDefinitionResponse,
+    RescheduleAccessDefinitionArguments,
+    RescheduleAccessDefinitionResponse,
+    ChangeAccessDefinitionConditionsArguments,
+    ChangeAccessDefinitionConditionsResponse,
+    AddAccessDefinitionCapacityLocationArguments,
+    AddAccessDefinitionCapacityLocationResponse,
+    RemoveAccessDefinitionCapacityLocationArguments,
+    RemoveAccessDefinitionCapacityLocationResponse,
+    ChangeAccessDefinitionCapacityLocationAllocationArguments,
+    ChangeAccessDefinitionCapacityLocationAllocationResponse,
+    ChangeAccessDefinitionUseLimitArguments,
+    ChangeAccessDefinitionUseLimitResponse,
+    AssignAccessDefinitionTagArguments,
+    AssignAccessDefinitionTagResponse,
+    RevokeAccessDefinitionTagArguments,
+    RevokeAccessDefinitionTagResponse,
+    MarkAccessDefinitionAsTemplateArguments, MarkAccessDefinitionAsTemplateResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -39,7 +72,11 @@ import {
     RemoveItemFromCartArguments,
     RemoveItemFromCartResponse,
     CompleteItemInCartArguments,
-    CompleteItemInCartResponse
+    CompleteItemInCartResponse,
+    CheckoutOrderArguments,
+    CheckoutOrderResponse,
+    CompleteOrderArguments,
+    CompleteOrderResponse
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -215,10 +252,44 @@ export class WebClient {
             this.sendCommand<CreateEventManagerResponse>('CreateEventManager', data),
         planEvent: async (data: PlanEventArguments): Promise<PlanEventResponse> =>
             this.sendCommand<PlanEventResponse>('PlanEvent', data),
+        renameEvent: async (data: RenameEventArguments): Promise<RenameEventResponse> =>
+            this.sendCommand<RenameEventResponse>('RenameEvent', data),
+        rescheduleEvent: async (data: RescheduleEventArguments): Promise<RescheduleEventResponse> =>
+            this.sendCommand<RescheduleEventResponse>('RescheduleEvent', data),
+        assignEventTag: async (data: AssignEventTagArguments): Promise<AssignEventTagResponse> =>
+            this.sendCommand<AssignEventTagResponse>('AssignEventTag', data),
+        revokeEventTag: async (data: RevokeEventTagArguments): Promise<RevokeEventTagResponse> =>
+            this.sendCommand<RevokeEventTagResponse>('RevokeEventTag', data),
+        addEventExternalId: async (data: AddEventExternalIdArguments): Promise<AddEventExternalIdResponse> =>
+            this.sendCommand<AddEventExternalIdResponse>('AddEventExternalId', data),
+        removeEventExternalId: async (data: RemoveEventExternalIdArguments): Promise<RemoveEventExternalIdResponse> =>
+            this.sendCommand<RemoveEventExternalIdResponse>('RemoveEventExternalId', data),
         addCapacity: async (data: AddCapacityArguments): Promise<AddCapacityResponse> =>
             this.sendCommand<AddCapacityResponse>('AddCapacity', data),
+        changeCapacity: async (data: ChangeCapacityArguments): Promise<ChangeCapacityResponse> =>
+            this.sendCommand<ChangeCapacityResponse>('ChangeCapacity', data),
         addAccessDefinition: async (data: AddAccessDefinitionArguments): Promise<AddAccessDefinitionResponse> =>
             this.sendCommand<AddAccessDefinitionResponse>('AddAccessDefinition', data),
+        renameAccessDefinition: async (data: RenameAccessDefinitionArguments): Promise<RenameAccessDefinitionResponse> =>
+            this.sendCommand<RenameAccessDefinitionResponse>('RenameAccessDefinition', data),
+        rescheduleAccessDefinition: async (data: RescheduleAccessDefinitionArguments): Promise<RescheduleAccessDefinitionResponse> =>
+            this.sendCommand<RescheduleAccessDefinitionResponse>('RescheduleAccessDefinition', data),
+        changeAccessDefinitionConditions: async (data: ChangeAccessDefinitionConditionsArguments): Promise<ChangeAccessDefinitionConditionsResponse> =>
+            this.sendCommand<ChangeAccessDefinitionConditionsResponse>('ChangeAccessDefinitionConditions', data),
+        addAccessDefinitionCapacityLocation: async (data: AddAccessDefinitionCapacityLocationArguments): Promise<AddAccessDefinitionCapacityLocationResponse> =>
+            this.sendCommand<AddAccessDefinitionCapacityLocationResponse>('AddAccessDefinitionCapacityLocation', data),
+        removeAccessDefinitionCapacityLocation: async (data: RemoveAccessDefinitionCapacityLocationArguments): Promise<RemoveAccessDefinitionCapacityLocationResponse> =>
+            this.sendCommand<RemoveAccessDefinitionCapacityLocationResponse>('RemoveAccessDefinitionCapacityLocation', data),
+        changeAccessDefinitionCapacityLocationAllocation: async (data: ChangeAccessDefinitionCapacityLocationAllocationArguments): Promise<ChangeAccessDefinitionCapacityLocationAllocationResponse> =>
+            this.sendCommand<ChangeAccessDefinitionCapacityLocationAllocationResponse>('ChangeAccessDefinitionCapacityLocationAllocation', data),
+        changeAccessDefinitionUseLimit: async (data: ChangeAccessDefinitionUseLimitArguments): Promise<ChangeAccessDefinitionUseLimitResponse> =>
+            this.sendCommand<ChangeAccessDefinitionUseLimitResponse>('ChangeAccessDefinitionUseLimit', data),
+        assignAccessDefinitionTag: async (data: AssignAccessDefinitionTagArguments): Promise<AssignAccessDefinitionTagResponse> =>
+            this.sendCommand<AssignAccessDefinitionTagResponse>('AssignAccessDefinitionTag', data),
+        revokeAccessDefinitionTag: async (data: RevokeAccessDefinitionTagArguments): Promise<RevokeAccessDefinitionTagResponse> =>
+            this.sendCommand<RevokeAccessDefinitionTagResponse>('RevokeAccessDefinitionTag', data),
+        markAccessDefinitionAsTemplate: async (data: MarkAccessDefinitionAsTemplateArguments): Promise<MarkAccessDefinitionAsTemplateResponse> =>
+            this.sendCommand<MarkAccessDefinitionAsTemplateResponse>('MarkAccessDefinitionAsTemplate', data),
         reserveAccess: async (data: ReserveAccessArguments): Promise<ReserveAccessResponse> =>
             this.sendCommand<ReserveAccessResponse>('ReserveAccess', data),
         grantAccess: async (data: GrantAccessArguments): Promise<GrantAccessResponse> =>
@@ -258,6 +329,10 @@ export class WebClient {
             this.sendCommand<RemoveItemFromCartResponse>('RemoveItemFromCart', data),
         cancelOrder: async (data: CancelOrderArguments): Promise<CancelOrderResponse> =>
             this.sendCommand<CancelOrderResponse>('CancelOrder', data),
+        checkoutOrder: async (data: CheckoutOrderArguments): Promise<CheckoutOrderResponse> =>
+            this.sendCommand<CheckoutOrderResponse>('CheckoutOrder', data),
+        completeOrder: async (data: CompleteOrderArguments): Promise<CompleteOrderResponse> =>
+            this.sendCommand<CompleteOrderResponse>('CompleteOrder', data),
         getOrder: async (query: string): Promise<QueryResponse<Order>> =>
             this.sendQuery<QueryResponse<Order>>(query),
         getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
