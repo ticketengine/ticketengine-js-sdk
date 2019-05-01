@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "target": "es2017",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -23,6 +23,7 @@
       "es5",
       "es2015",
       "es2016.array.include",
+      "es2017",
       "esnext.asynciterable"
     ]
   },

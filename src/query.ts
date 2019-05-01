@@ -80,6 +80,15 @@ export interface Tax {
 }
 
 
+export interface Search {
+    id: string;
+    type: string;
+    status: string;
+    name: string;
+    description: string;
+    date: string;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command responses

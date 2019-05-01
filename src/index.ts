@@ -1,109 +1,109 @@
-import {WebClient} from './WebClient';
-import {Logger} from './Logger';
-import {
-    AddAccessDefinitionArguments,
-    AddCapacityArguments,
-    ConditionOperators,
-    ConditionFieldOperators,
-    ConditionFacts,
-    CapacityAllocation,
-    CapacityLocationAllocation,
-    CapacityType,
-    CreateEventManagerArguments,
-    PlanEventArguments,
-    ReserveAccessArguments
-} from './command/access';
+// import {WebClient} from './WebClient';
+// import {Logger} from './Logger';
+// import {
+//     AddAccessDefinitionArguments,
+//     AddCapacityArguments,
+//     ConditionOperators,
+//     ConditionFieldOperators,
+//     ConditionFacts,
+//     CapacityAllocation,
+//     CapacityLocationAllocation,
+//     CapacityType,
+//     CreateEventManagerArguments,
+//     PlanEventArguments,
+//     ReserveAccessArguments
+// } from './command/access';
 
 
-const token = 'some token';
-const logger = new Logger();
-const client = new WebClient(token, logger, 'http://graphql-query.ticketengine.localhost:8000');
-
-
-
-const eventManager: CreateEventManagerArguments = {
-    capacityAllocation: CapacityAllocation.static
-};
-
-const event: PlanEventArguments = {
-    aggregateId: '',
-    name: 'Moonlight',
-    description: 'Lorum ipsum...',
-    start: new Date('2019-03-06T18:00:00Z'),
-    end: new Date('2019-03-06T19:42:00Z')
-};
-
-const capacity: AddCapacityArguments = {
-    aggregateId: '',
-    capacity: {
-        location: 'Pathe1',
-        children: [
-            {
-                type: CapacityType.nonRegulated,
-                location: 'Regulier',
-                value: 125,
-            },
-            {
-                type: CapacityType.nonRegulated,
-                location: 'VIP',
-                value: 25,
-            }
-        ],
-    }
-};
-
-const accessDefinition: AddAccessDefinitionArguments = {
-    aggregateId: '',
-    eventId: '',
-    name: 'Reguliere toegang',
-    description: 'lorum ipsum...',
-    start: new Date('2019-03-06T18:00:00Z'),
-    end: new Date('2019-03-06T19:42:00Z'),
-    accessConditions: {
-        operator: ConditionOperators.or,
-        conditions: [
-            {
-                operator: ConditionOperators.and,
-                conditions: [
-                    {
-                        fact: ConditionFacts.price,
-                        price: 15,
-                        currency: 'EUR',
-                        postponed: new Date('2020-11-01T13:30:00+00:00'),
-                    }
-                ],
-            },
-            {
-                operator: ConditionOperators.and,
-                conditions: [
-                    {
-                        fact: ConditionFacts.itemsInCart,
-                        operator: ConditionFieldOperators.greaterThen,
-                        value: 1
-                    },
-                    {
-                        fact: ConditionFacts.price,
-                        price: 10,
-                        currency: 'EUR',
-                        postponed: new Date('2020-11-01T13:30:00+00:00'),
-                    }
-                ],
-            }
-        ],
-    },
-    capacityLocations: ['Regulier', 'VIP'],
-    capacityLocationAllocation: CapacityLocationAllocation.priority,
-    tags: [],
-    limit: 1,
-    isTemplate: false
-};
-
-const reserveAccess: ReserveAccessArguments = {
-    aggregateId: '',
-    eventId: '',
-    orderId: '236ebaa4-84fa-481f-8570-909d82cb93fd',
-    accessDefinitionId: ''
-};
+// const token = 'some token';
+// const logger = new Logger();
+// const client = new WebClient(token, logger, 'http://graphql-query.ticketengine.localhost:8000');
+//
+//
+//
+// const eventManager: CreateEventManagerArguments = {
+//     capacityAllocation: CapacityAllocation.static
+// };
+//
+// const event: PlanEventArguments = {
+//     aggregateId: '',
+//     name: 'Moonlight',
+//     description: 'Lorum ipsum...',
+//     start: new Date('2019-03-06T18:00:00Z'),
+//     end: new Date('2019-03-06T19:42:00Z')
+// };
+//
+// const capacity: AddCapacityArguments = {
+//     aggregateId: '',
+//     capacity: {
+//         location: 'Pathe1',
+//         children: [
+//             {
+//                 type: CapacityType.nonRegulated,
+//                 location: 'Regulier',
+//                 value: 125,
+//             },
+//             {
+//                 type: CapacityType.nonRegulated,
+//                 location: 'VIP',
+//                 value: 25,
+//             }
+//         ],
+//     }
+// };
+//
+// const accessDefinition: AddAccessDefinitionArguments = {
+//     aggregateId: '',
+//     eventId: '',
+//     name: 'Reguliere toegang',
+//     description: 'lorum ipsum...',
+//     start: new Date('2019-03-06T18:00:00Z'),
+//     end: new Date('2019-03-06T19:42:00Z'),
+//     accessConditions: {
+//         operator: ConditionOperators.or,
+//         conditions: [
+//             {
+//                 operator: ConditionOperators.and,
+//                 conditions: [
+//                     {
+//                         fact: ConditionFacts.price,
+//                         price: 15,
+//                         currency: 'EUR',
+//                         postponed: new Date('2020-11-01T13:30:00+00:00'),
+//                     }
+//                 ],
+//             },
+//             {
+//                 operator: ConditionOperators.and,
+//                 conditions: [
+//                     {
+//                         fact: ConditionFacts.itemsInCart,
+//                         operator: ConditionFieldOperators.greaterThen,
+//                         value: 1
+//                     },
+//                     {
+//                         fact: ConditionFacts.price,
+//                         price: 10,
+//                         currency: 'EUR',
+//                         postponed: new Date('2020-11-01T13:30:00+00:00'),
+//                     }
+//                 ],
+//             }
+//         ],
+//     },
+//     capacityLocations: ['Regulier', 'VIP'],
+//     capacityLocationAllocation: CapacityLocationAllocation.priority,
+//     tags: [],
+//     limit: 1,
+//     isTemplate: false
+// };
+//
+// const reserveAccess: ReserveAccessArguments = {
+//     aggregateId: '',
+//     eventId: '',
+//     orderId: '236ebaa4-84fa-481f-8570-909d82cb93fd',
+//     accessDefinitionId: ''
+// };
 
 
 async function run() {

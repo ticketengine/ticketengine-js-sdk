@@ -96,7 +96,7 @@ import {
     SendEmailArguments,
     SendEmailResponse
 } from './command/email';
-import {Access, AccessDefinition, Event, Order, QueryResponse} from "./query";
+import {Access, AccessDefinition, Event, Order, QueryResponse, Search} from "./query";
 import {
     AddDeliveryDefinitionArguments,
     AddDeliveryDefinitionResponse,
@@ -246,6 +246,10 @@ export class WebClient {
         // return pRetry(task, {retries: 5});
     }
 
+    public readonly search = {
+        search: async (query: string): Promise<QueryResponse<Search>> =>
+            this.sendQuery<QueryResponse<Search>>(query),
+    };
 
     public readonly access = {
         createEventManager: async (data: CreateEventManagerArguments): Promise<CreateEventManagerResponse> =>
