@@ -106,7 +106,7 @@
 // };
 
 
-async function run() {
+// async function run() {
     // console.log('createEventManager');
     // const em = await client.access.createEventManager(eventManager);
     //
@@ -139,15 +139,18 @@ async function run() {
     // const accessDefintions = await client.access.getAccessDefinitions('query { accessDefinitions{id,eventManagerId,eventId,name,description,start,end,conditions,capacityLocations,capacityLocationAllocation,tags,useLimit,isTemplate} }');
     // const order = await client.order.getOrder('query { order(id: "a85a4480-5c28-11e9-8ccc-0242ac1b0009"){id,salesChannelId,registerId,status} }');
     // const orders = await client.order.getOrder('query { orders{id,salesChannelId,registerId,status} }');
-    console.log();
-}
-run();
+    // console.log();
+// }
+// run();
 
 
 
 
 
 
+export {
+    WebClient
+} from './WebClient';
 
 
 
