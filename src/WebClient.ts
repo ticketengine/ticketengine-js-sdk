@@ -3,6 +3,7 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // @ts-ignore
 // import PQueue = require('p-queue');
 import {LoggerInterface} from './LoggerInterface';
+import {Logger} from './Logger';
 // import pRetry = require('p-retry');
 // import * as pRetry from 'p-retry';
 import {
@@ -128,10 +129,10 @@ export class WebClient {
 
 
     // constructor({apiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
-    constructor(token: string, logger: LoggerInterface, apiUrl?: string) {
+    constructor(token: string, logger?: LoggerInterface, apiUrl?: string) {
         this.token = token;
         this.apiUrl = apiUrl || 'https://ticketengine.com/api/';
-        this.logger = logger;
+        this.logger = logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         this.axios = axios.create({
             // baseURL: apiUrl || 'https://ticketengine.com/api/',
