@@ -259,10 +259,16 @@ export class WebClient {
         // return pRetry(task, {retries: 5});
     }
 
-    public readonly search = {
-        search: async (query: string): Promise<QueryResponse<Search>> =>
-            this.sendQuery<QueryResponse<Search>>(query),
-    };
+
+    public async query(query: string): Promise<QueryResponse<Search>> {
+        return this.sendQuery<QueryResponse<Search>>(query)
+    }
+
+
+    // public readonly search = {
+    //     search: async (query: string): Promise<QueryResponse<Search>> =>
+    //         this.sendQuery<QueryResponse<Search>>(query),
+    // };
 
     public readonly access = {
         createEventManager: async (data: CreateEventManagerArguments): Promise<CreateEventManagerResponse> =>
@@ -315,18 +321,18 @@ export class WebClient {
             this.sendCommand<ReturnAccessResponse>('ReturnAccess', data),
         useAccess: async (data: UseAccessArguments): Promise<UseAccessResponse> =>
             this.sendCommand<UseAccessResponse>('UseAccess', data),
-        getEvent: async (query: string): Promise<QueryResponse<Event>> =>
-            this.sendQuery<QueryResponse<Event>>(query),
-        getEvents: async (query: string): Promise<QueryResponse<Array<Event>>> =>
-            this.sendQuery<QueryResponse<Array<Event>>>(query),
-        getAccess: async (query: string): Promise<QueryResponse<Access>> =>
-            this.sendQuery<QueryResponse<Access>>(query),
-        getAcceses: async (query: string): Promise<QueryResponse<Array<Access>>> =>
-            this.sendQuery<QueryResponse<Array<Access>>>(query),
-        getAccessDefinition: async (query: string): Promise<QueryResponse<AccessDefinition>> =>
-            this.sendQuery<QueryResponse<AccessDefinition>>(query),
-        getAccessDefinitions: async (query: string): Promise<QueryResponse<AccessDefinition>> =>
-            this.sendQuery<QueryResponse<AccessDefinition>>(query),
+        // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
+        //     this.sendQuery<QueryResponse<Event>>(query),
+        // getEvents: async (query: string): Promise<QueryResponse<Array<Event>>> =>
+        //     this.sendQuery<QueryResponse<Array<Event>>>(query),
+        // getAccess: async (query: string): Promise<QueryResponse<Access>> =>
+        //     this.sendQuery<QueryResponse<Access>>(query),
+        // getAcceses: async (query: string): Promise<QueryResponse<Array<Access>>> =>
+        //     this.sendQuery<QueryResponse<Array<Access>>>(query),
+        // getAccessDefinition: async (query: string): Promise<QueryResponse<AccessDefinition>> =>
+        //     this.sendQuery<QueryResponse<AccessDefinition>>(query),
+        // getAccessDefinitions: async (query: string): Promise<QueryResponse<AccessDefinition>> =>
+        //     this.sendQuery<QueryResponse<AccessDefinition>>(query),
     };
 
     public readonly order = {
@@ -350,10 +356,10 @@ export class WebClient {
             this.sendCommand<CheckoutOrderResponse>('CheckoutOrder', data),
         completeOrder: async (data: CompleteOrderArguments): Promise<CompleteOrderResponse> =>
             this.sendCommand<CompleteOrderResponse>('CompleteOrder', data),
-        getOrder: async (query: string): Promise<QueryResponse<Order>> =>
-            this.sendQuery<QueryResponse<Order>>(query),
-        getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
-            this.sendQuery<QueryResponse<Array<Order>>>(query),
+        // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
+        //     this.sendQuery<QueryResponse<Order>>(query),
+        // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
+        //     this.sendQuery<QueryResponse<Array<Order>>>(query),
     };
 
     public readonly payment = {
