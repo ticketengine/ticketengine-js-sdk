@@ -212,7 +212,8 @@ export class WebClient {
          * START TEMP BLOCK
          ******************************************************************************/
 
-        const url = 'http://graphql-query.ticketengine.localhost:8000';
+        let url = this.apiUrl;
+        url = 'http://graphql-query.ticketengine.localhost:8000';
 
         /*******************************************************************************
          * END TEMP BLOCK
