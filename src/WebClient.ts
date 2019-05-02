@@ -207,7 +207,18 @@ export class WebClient {
 
     private async sendQuery<T>(query: string): Promise<T> {
         this.logger.debug('send query :' + query);
-        const url = this.apiUrl; // http://graphql-query.ticketengine.localhost:8000
+
+        /*******************************************************************************
+         * START TEMP BLOCK
+         ******************************************************************************/
+
+        const url = 'http://graphql-query.ticketengine.localhost:8000';
+
+        /*******************************************************************************
+         * END TEMP BLOCK
+         ******************************************************************************/
+
+        // const url = this.apiUrl;
         const body = {query};
         const headers = {
             'Authentication': this.token,
