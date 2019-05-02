@@ -97,7 +97,8 @@ import {
     SendEmailArguments,
     SendEmailResponse
 } from './command/email';
-import {Access, AccessDefinition, Event, Order, QueryResponse, Search} from "./query";
+// import {Access, AccessDefinition, Event, Order, QueryResponse, Search} from "./query";
+import {QueryResponse, Search} from "./query";
 import {
     AddDeliveryDefinitionArguments,
     AddDeliveryDefinitionResponse,
