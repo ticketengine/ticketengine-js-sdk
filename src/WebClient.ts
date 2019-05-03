@@ -55,7 +55,13 @@ import {
     AssignAccessDefinitionTagResponse,
     RevokeAccessDefinitionTagArguments,
     RevokeAccessDefinitionTagResponse,
-    MarkAccessDefinitionAsTemplateArguments, MarkAccessDefinitionAsTemplateResponse
+    MarkAccessDefinitionAsTemplateArguments,
+    MarkAccessDefinitionAsTemplateResponse,
+    ChangeEventTagsArguments,
+    ChangeEventTagsResponse,
+    ChangeEventExternalIdsArguments,
+    ChangeEventExternalIdsResponse,
+    ChangeAccessDefinitionTagsArguments, ChangeAccessDefinitionTagsResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -284,10 +290,14 @@ export class WebClient {
             this.sendCommand<AssignEventTagResponse>('AssignEventTag', data),
         revokeEventTag: async (data: RevokeEventTagArguments): Promise<RevokeEventTagResponse> =>
             this.sendCommand<RevokeEventTagResponse>('RevokeEventTag', data),
+        changeEventTags: async (data: ChangeEventTagsArguments): Promise<ChangeEventTagsResponse> =>
+            this.sendCommand<ChangeEventTagsResponse>('ChangeEventTags', data),
         addEventExternalId: async (data: AddEventExternalIdArguments): Promise<AddEventExternalIdResponse> =>
             this.sendCommand<AddEventExternalIdResponse>('AddEventExternalId', data),
         removeEventExternalId: async (data: RemoveEventExternalIdArguments): Promise<RemoveEventExternalIdResponse> =>
             this.sendCommand<RemoveEventExternalIdResponse>('RemoveEventExternalId', data),
+        changeEventExternalIds: async (data: ChangeEventExternalIdsArguments): Promise<ChangeEventExternalIdsResponse> =>
+            this.sendCommand<ChangeEventExternalIdsResponse>('ChangeEventExternalIds', data),
         addCapacity: async (data: AddCapacityArguments): Promise<AddCapacityResponse> =>
             this.sendCommand<AddCapacityResponse>('AddCapacity', data),
         changeCapacity: async (data: ChangeCapacityArguments): Promise<ChangeCapacityResponse> =>
@@ -312,6 +322,8 @@ export class WebClient {
             this.sendCommand<AssignAccessDefinitionTagResponse>('AssignAccessDefinitionTag', data),
         revokeAccessDefinitionTag: async (data: RevokeAccessDefinitionTagArguments): Promise<RevokeAccessDefinitionTagResponse> =>
             this.sendCommand<RevokeAccessDefinitionTagResponse>('RevokeAccessDefinitionTag', data),
+        changeAccessDefinitionTags: async (data: ChangeAccessDefinitionTagsArguments): Promise<ChangeAccessDefinitionTagsResponse> =>
+            this.sendCommand<ChangeAccessDefinitionTagsResponse>('ChangeAccessDefinitionTags', data),
         markAccessDefinitionAsTemplate: async (data: MarkAccessDefinitionAsTemplateArguments): Promise<MarkAccessDefinitionAsTemplateResponse> =>
             this.sendCommand<MarkAccessDefinitionAsTemplateResponse>('MarkAccessDefinitionAsTemplate', data),
         reserveAccess: async (data: ReserveAccessArguments): Promise<ReserveAccessResponse> =>

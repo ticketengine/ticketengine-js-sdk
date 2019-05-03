@@ -82,6 +82,12 @@ export interface RevokeEventTagArguments extends CommandData {
     tag: string;
 }
 
+export interface ChangeEventTagsArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    tags: Array<string>
+}
+
 export interface AddEventExternalIdArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -93,6 +99,12 @@ export interface RemoveEventExternalIdArguments extends CommandData {
     eventId: string;
     externalId: string;
     description: string;
+}
+
+export interface ChangeEventExternalIdsArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    externalId: Array<{id: string, description: string}>
 }
 
 export interface AddCapacityArguments extends CommandData {
@@ -186,6 +198,13 @@ export interface RevokeAccessDefinitionTagArguments extends CommandData {
     tag: string;
 }
 
+export interface ChangeAccessDefinitionTagsArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    tags: Array<string>;
+}
+
 export interface MarkAccessDefinitionAsTemplateArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -245,10 +264,16 @@ export interface AssignEventTagResponse extends ApiResponse {
 export interface RevokeEventTagResponse extends ApiResponse {
 }
 
+export interface ChangeEventTagsResponse extends ApiResponse {
+}
+
 export interface AddEventExternalIdResponse extends ApiResponse {
 }
 
 export interface RemoveEventExternalIdResponse extends ApiResponse {
+}
+
+export interface ChangeEventExternalIdsResponse extends ApiResponse {
 }
 
 export interface AddCapacityResponse extends ApiResponse {
@@ -287,6 +312,9 @@ export interface AssignAccessDefinitionTagResponse extends ApiResponse {
 }
 
 export interface RevokeAccessDefinitionTagResponse extends ApiResponse {
+}
+
+export interface ChangeAccessDefinitionTagsResponse extends ApiResponse {
 }
 
 export interface MarkAccessDefinitionAsTemplateResponse extends ApiResponse {
