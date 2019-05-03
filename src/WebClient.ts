@@ -61,7 +61,9 @@ import {
     ChangeEventTagsResponse,
     ChangeEventExternalIdsArguments,
     ChangeEventExternalIdsResponse,
-    ChangeAccessDefinitionTagsArguments, ChangeAccessDefinitionTagsResponse
+    ChangeAccessDefinitionTagsArguments,
+    ChangeAccessDefinitionTagsResponse,
+    ChangeAccessDefinitionCapacityLocationsArguments, ChangeAccessDefinitionCapacityLocationsResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -314,6 +316,8 @@ export class WebClient {
             this.sendCommand<AddAccessDefinitionCapacityLocationResponse>('AddAccessDefinitionCapacityLocation', data),
         removeAccessDefinitionCapacityLocation: async (data: RemoveAccessDefinitionCapacityLocationArguments): Promise<RemoveAccessDefinitionCapacityLocationResponse> =>
             this.sendCommand<RemoveAccessDefinitionCapacityLocationResponse>('RemoveAccessDefinitionCapacityLocation', data),
+        changeAccessDefinitionCapacityLocations: async (data: ChangeAccessDefinitionCapacityLocationsArguments): Promise<ChangeAccessDefinitionCapacityLocationsResponse> =>
+            this.sendCommand<ChangeAccessDefinitionCapacityLocationsResponse>('ChangeAccessDefinitionCapacityLocations', data),
         changeAccessDefinitionCapacityLocationAllocation: async (data: ChangeAccessDefinitionCapacityLocationAllocationArguments): Promise<ChangeAccessDefinitionCapacityLocationAllocationResponse> =>
             this.sendCommand<ChangeAccessDefinitionCapacityLocationAllocationResponse>('ChangeAccessDefinitionCapacityLocationAllocation', data),
         changeAccessDefinitionUseLimit: async (data: ChangeAccessDefinitionUseLimitArguments): Promise<ChangeAccessDefinitionUseLimitResponse> =>

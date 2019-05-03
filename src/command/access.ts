@@ -170,6 +170,13 @@ export interface RemoveAccessDefinitionCapacityLocationArguments extends Command
     capacityLocation: string;
 }
 
+export interface ChangeAccessDefinitionCapacityLocationsArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+    capacityLocations: Array<string>;
+}
+
 export interface ChangeAccessDefinitionCapacityLocationAllocationArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -300,6 +307,9 @@ export interface AddAccessDefinitionCapacityLocationResponse extends ApiResponse
 }
 
 export interface RemoveAccessDefinitionCapacityLocationResponse extends ApiResponse {
+}
+
+export interface ChangeAccessDefinitionCapacityLocationsResponse extends ApiResponse {
 }
 
 export interface ChangeAccessDefinitionCapacityLocationAllocationResponse extends ApiResponse {
