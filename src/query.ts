@@ -48,7 +48,7 @@ export interface AccessDefinition {
     description: string;
     start: string;
     end: string;
-    conditions: string;
+    accessConditions: string;
     capacityLocations: Array<string>;
     capacityLocationAllocation: string;
     tags: Array<string>;

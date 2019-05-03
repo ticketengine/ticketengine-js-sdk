@@ -235,8 +235,11 @@ export class WebClient {
             'Authentication': this.token,
             'Content-Type': 'application/json'
         };
-
         const response = await this.request<T>(url, body, headers);
+
+        // parse access conditions, access conditions are passes as json string and should be parsed
+        if(response.data && response.data.data && response.data.data.accessDefinition && response.data.data.accessDefinition.accessConditions) response.data.data.accessDefinition.accessConditions = JSON.parse(response.data.data.accessDefinition.accessConditions);
+
         return response.data;
     }
 
