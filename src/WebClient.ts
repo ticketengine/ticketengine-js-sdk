@@ -171,11 +171,11 @@ export class WebClient {
          ******************************************************************************/
         let url = 'http://access-command.ticketengine.localhost:8000/';
 
-        const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder'];
+        const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder', 'CheckoutOrder'];
         if(orderCommands.indexOf(command) !== -1) {
             url = 'http://order-command.ticketengine.localhost:8000/';
         }
-        const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreateAdyenPaymentSession'];
+        const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreatePinPayment', 'CreateAdyenPaymentSession'];
         if(paymentCommands.indexOf(command) !== -1) {
             url = 'http://payment-command.ticketengine.localhost:8000/';
         }
