@@ -37,6 +37,13 @@ export interface CreateCashPaymentArguments extends CommandData {
     amount: number;
 }
 
+export interface CreatePinPaymentArguments extends CommandData {
+    orderId: string;
+    customerId: string;
+    currency: string;
+    amount: number;
+}
+
 export interface CreateAdyenPaymentSessionArguments extends CommandData {
     orderId: string;
     customerId: string;
@@ -64,6 +71,10 @@ export interface EditAdyenClientSettingsResponse extends ApiResponse {
 }
 
 export interface CreateCashPaymentResponse extends ApiResponse {
+    paymentId: string;
+}
+
+export interface CreatePinPaymentResponse extends ApiResponse {
     paymentId: string;
 }
 

@@ -1,7 +1,9 @@
 import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // import { ApiCallOptions, ApiCallResult } from './apiCall';
 // @ts-ignore
-// import PQueue = require('p-queue');
+// const PQueue = require('p-queue');
+import * as Promise from 'bluebird';
+import {TaskQueue} from 'cwait';
 import {LoggerInterface} from './LoggerInterface';
 import {Logger} from './Logger';
 // import pRetry = require('p-retry');
@@ -95,7 +97,7 @@ import {
     CreateCashPaymentArguments,
     CreateCashPaymentResponse,
     CreateAdyenPaymentSessionArguments,
-    CreateAdyenPaymentSessionResponse
+    CreateAdyenPaymentSessionResponse, CreatePinPaymentArguments, CreatePinPaymentResponse
 } from './command/payment';
 import {
     AddMailgunClientSettingsArguments,
@@ -130,6 +132,9 @@ export class WebClient {
 
     // private requestQueue: PQueue;
 
+    // private requestQueue: TaskQueue<Promise<AxiosResponse>>;
+    private requestQueue: TaskQueue<Promise>;
+
     private logger: LoggerInterface;
 
     private readonly token: string;
@@ -143,6 +148,7 @@ export class WebClient {
         this.apiUrl = apiUrl || 'https://ticketengine.com/api/';
         this.logger = logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
+        this.requestQueue = new TaskQueue(Promise, 1);
         this.axios = axios.create({
             // baseURL: apiUrl || 'https://ticketengine.com/api/',
             // headers: Object.assign({
@@ -236,16 +242,14 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<T>(url, body, headers);
-
-        // parse access conditions, access conditions are passes as json string and should be parsed
-        if(response.data && response.data.data && response.data.data.accessDefinition && response.data.data.accessDefinition.accessConditions) response.data.data.accessDefinition.accessConditions = JSON.parse(response.data.data.accessDefinition.accessConditions);
-
         return response.data;
     }
 
 
     private async request<T>(url: string, body: any, headers: any = {}): Promise<AxiosResponse<T>> {
         // const task = () => this.requestQueue.add(async () => {
+        // return this.requestQueue.add(async () => {
+        return this.requestQueue.add(async () => {
             this.logger.debug('make request');
             try {
                 // const requestTime = Date.now();
@@ -266,7 +270,7 @@ export class WebClient {
                 }
                 throw error;
             }
-        // });
+        });
 
         // return pRetry(task, {retries: 5});
     }
@@ -389,6 +393,8 @@ export class WebClient {
             this.sendCommand<EditAdyenClientSettingsResponse>('EditAdyenClientSettings', data),
         createCashPayment: async (data: CreateCashPaymentArguments): Promise<CreateCashPaymentResponse> =>
             this.sendCommand<CreateCashPaymentResponse>('CreateCashPayment', data),
+        createPinPayment: async (data: CreatePinPaymentArguments): Promise<CreatePinPaymentResponse> =>
+            this.sendCommand<CreatePinPaymentResponse>('CreatePinPayment', data),
         createAdyenPaymentSession: async (data: CreateAdyenPaymentSessionArguments): Promise<CreateAdyenPaymentSessionResponse> =>
             this.sendCommand<CreateAdyenPaymentSessionResponse>('CreateAdyenPaymentSession', data),
     };

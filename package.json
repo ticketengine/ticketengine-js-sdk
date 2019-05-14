@@ -1,12 +1,15 @@
 {
   "name": "ticketengine-sdk",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "description": "JavaScript SDK with a web client for TicketEngine",
   "dependencies": {
     "@types/form-data": "^2.2.1",
     "@types/lodash": "^4.14.117",
     "@types/node": "^10.12.0",
+    "@types/p-queue": "^3.2.1",
     "axios": "^0.18.0",
+    "bluebird": "^3.5.4",
+    "cwait": "^1.1.2",
     "form-data": "^2.3.3",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -29,7 +32,7 @@
     "type": "git",
     "url": "git+https://github.com/ticketengine/ticketengine-js-sdk.git"
   },
-  "homepage":"https://github.com/ticketengine/ticketengine-js-sdk#readme",
+  "homepage": "https://github.com/ticketengine/ticketengine-js-sdk#readme",
   "keywords": [
     "ticketengine",
     "client",
