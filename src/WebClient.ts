@@ -121,6 +121,12 @@ import {
     RenameSalesChannelArguments,
     RenameSalesChannelResponse
 } from "./command/salesChannel";
+import {
+    ChangeCustomerArguments,
+    ChangeCustomerResponse,
+    CreateCustomerArguments,
+    CreateCustomerResponse
+} from "./command/customer";
 
 // import * as apiResponse from './Responses';
 
@@ -186,6 +192,11 @@ export class WebClient {
         const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
         if(salesChannelCommands.indexOf(command) !== -1) {
             url = 'http://sales-channel-command.ticketengine.localhost:8000/';
+        }
+
+        const customerCommands = ['CreateCustomer', 'ChangeCustomer'];
+        if(customerCommands.indexOf(command) !== -1) {
+            url = 'http://customer.ticketengine.localhost:8000/';
         }
 
         const headers = {
@@ -397,6 +408,13 @@ export class WebClient {
             this.sendCommand<CreatePinPaymentResponse>('CreatePinPayment', data),
         createAdyenPaymentSession: async (data: CreateAdyenPaymentSessionArguments): Promise<CreateAdyenPaymentSessionResponse> =>
             this.sendCommand<CreateAdyenPaymentSessionResponse>('CreateAdyenPaymentSession', data),
+    };
+
+    public readonly customer = {
+        createCustomer: async (data: CreateCustomerArguments): Promise<CreateCustomerResponse> =>
+            this.sendCommand<CreateCustomerResponse>('CreateCustomer', data),
+        changeCustomer: async (data: ChangeCustomerArguments): Promise<ChangeCustomerResponse> =>
+            this.sendCommand<ChangeCustomerResponse>('ChangeCustomer', data),
     };
 
     public readonly email = {
