@@ -127,6 +127,18 @@ import {
     CreateCustomerArguments,
     CreateCustomerResponse
 } from "./command/customer";
+import {
+    CreateUserArguments,
+    CreateUserResponse,
+    ChangeUserPasswordArguments,
+    ChangeUserPasswordResponse,
+    ChangeUserScopeArguments,
+    ChangeUserScopeResponse,
+    EnableUserArguments,
+    EnableUserResponse,
+    DisableUserArguments,
+    DisableUserResponse
+} from "./command/user";
 
 // import * as apiResponse from './Responses';
 
@@ -193,10 +205,13 @@ export class WebClient {
         if(salesChannelCommands.indexOf(command) !== -1) {
             url = 'http://sales-channel-command.ticketengine.localhost:8000/';
         }
-
         const customerCommands = ['CreateCustomer', 'ChangeCustomer'];
         if(customerCommands.indexOf(command) !== -1) {
             url = 'http://customer.ticketengine.localhost:8000/';
+        }
+        const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
+        if(authCommands.indexOf(command) !== -1) {
+            url = 'http://auth.ticketengine.localhost:8000/';
         }
 
         const headers = {
@@ -443,6 +458,18 @@ export class WebClient {
             this.sendCommand<CreateEmailDeliveryResponse>('CreateEmailDelivery', data),
     };
 
+    public readonly user = {
+        createUser: async (data: CreateUserArguments): Promise<CreateUserResponse> =>
+            this.sendCommand<CreateUserResponse>('CreateUser', data),
+        changeUserScope: async (data: ChangeUserScopeArguments): Promise<ChangeUserScopeResponse> =>
+            this.sendCommand<ChangeUserScopeResponse>('ChangeUserScope', data),
+        changeUserPassword: async (data: ChangeUserPasswordArguments): Promise<ChangeUserPasswordResponse> =>
+            this.sendCommand<ChangeUserPasswordResponse>('ChangeUserPassword', data),
+        enableUser: async (data: EnableUserArguments): Promise<EnableUserResponse> =>
+            this.sendCommand<EnableUserResponse>('EnableUser', data),
+        disableUser: async (data: DisableUserArguments): Promise<DisableUserResponse> =>
+            this.sendCommand<DisableUserResponse>('DisableUser', data),
+    };
 }
 
 
