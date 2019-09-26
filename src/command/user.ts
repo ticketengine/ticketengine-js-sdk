@@ -28,6 +28,15 @@ export interface DisableUserArguments extends CommandData {
     id: string;
 }
 
+export interface GetAuthTokenArguments extends CommandData {
+    grantType: string;
+    clientId: string;
+    clientSecret: string;
+    scope: string;
+    username?: string;
+    password?: string;
+    refreshToken?: string;
+}
 
 
 
@@ -48,5 +57,10 @@ export interface EnableUserResponse extends ApiResponse {}
 
 export interface DisableUserResponse extends ApiResponse {}
 
-
+export interface GetAuthTokenResponse extends ApiResponse {
+    token_type: string;
+    expires_in: string;
+    access_token: string;
+    refresh_token: string;
+}
 

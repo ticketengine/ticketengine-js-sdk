@@ -137,7 +137,7 @@ import {
     EnableUserArguments,
     EnableUserResponse,
     DisableUserArguments,
-    DisableUserResponse
+    DisableUserResponse, GetAuthTokenArguments, GetAuthTokenResponse
 } from "./command/user";
 
 // import * as apiResponse from './Responses';
@@ -178,6 +178,16 @@ export class WebClient {
             // validateStatus: () => true, // all HTTP status codes should result in a resolved promise (as opposed to only 2xx)
             // maxRedirects: 0,
         });
+    }
+
+    private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
+        const url = 'http://access-command.ticketengine.localhost:8000/';
+        const headers = {
+            'Authentication': this.token,
+            'Content-Type': 'application/json'
+        };
+        const response = await this.request<GetAuthTokenResponse>(url, data, headers);
+        return response.data;
     }
 
 
@@ -469,6 +479,8 @@ export class WebClient {
             this.sendCommand<EnableUserResponse>('EnableUser', data),
         disableUser: async (data: DisableUserArguments): Promise<DisableUserResponse> =>
             this.sendCommand<DisableUserResponse>('DisableUser', data),
+        getAuthToken: async (data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> =>
+            this.getAuthToken<GetAuthTokenResponse>(data),
     };
 }
 
