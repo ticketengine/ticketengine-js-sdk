@@ -181,7 +181,7 @@ export class WebClient {
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
-        const url = 'http://access-command.ticketengine.localhost:8000/';
+        const url = 'http://auth.ticketengine.localhost:8000/';
         const headers = {
             'Authentication': this.token,
             'Content-Type': 'application/json'
