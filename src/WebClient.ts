@@ -119,7 +119,13 @@ import {
     CreateSalesChannelArguments,
     CreateSalesChannelResponse, RenameDeliveryDefinitionArguments, RenameDeliveryDefinitionResponse,
     RenameSalesChannelArguments,
-    RenameSalesChannelResponse
+    RenameSalesChannelResponse,
+    CreateRegisterArguments,
+    CreateRegisterResponse,
+    RenameRegisterArguments,
+    RenameRegisterResponse,
+    RemoveRegisterArguments,
+    RemoveRegisterResponse
 } from "./command/salesChannel";
 import {
     ChangeCustomerArguments,
@@ -139,7 +145,14 @@ import {
     DisableUserArguments,
     DisableUserResponse, GetAuthTokenArguments, GetAuthTokenResponse
 } from "./command/user";
-
+import {
+    CreateTagArguments,
+    CreateTagResponse,
+    RemoveTagArguments,
+    RemoveTagResponse,
+    RenameTagArguments,
+    RenameTagResponse
+} from "./command/tag";
 // import * as apiResponse from './Responses';
 
 
@@ -456,6 +469,12 @@ export class WebClient {
             this.sendCommand<CreateSalesChannelResponse>('CreateSalesChannel', data),
         renameSalesChannel: async (data: RenameSalesChannelArguments): Promise<RenameSalesChannelResponse> =>
             this.sendCommand<RenameSalesChannelResponse>('RenameSalesChannel', data),
+        createRegister: async (data: CreateRegisterArguments): Promise<CreateRegisterResponse> =>
+            this.sendCommand<CreateRegisterResponse>('CreateRegister', data),
+        renameRegister: async (data: RenameRegisterArguments): Promise<RenameRegisterResponse> =>
+            this.sendCommand<RenameRegisterResponse>('RenameRegister', data),
+        removeRegister: async (data: RemoveRegisterArguments): Promise<RemoveRegisterResponse> =>
+            this.sendCommand<RemoveRegisterResponse>('RemoveRegister', data),
         addDeliveryDefinition: async (data: AddDeliveryDefinitionArguments): Promise<AddDeliveryDefinitionResponse> =>
             this.sendCommand<AddDeliveryDefinitionResponse>('AddDeliveryDefinition', data),
         changeDeliveryDefinitionCondition: async (data: ChangeDeliveryDefinitionConditionArguments): Promise<ChangeDeliveryDefinitionConditionResponse> =>
@@ -481,6 +500,15 @@ export class WebClient {
             this.sendCommand<DisableUserResponse>('DisableUser', data),
         getAuthToken: async (data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> =>
             this.getAuthToken<GetAuthTokenResponse>(data),
+    };
+
+    public readonly tag = {
+        createTag: async (data: CreateTagArguments): Promise<CreateTagResponse> =>
+            this.sendCommand<CreateTagResponse>('CreateTag', data),
+        renameTag: async (data: RenameTagArguments): Promise<RenameTagResponse> =>
+            this.sendCommand<RenameTagResponse>('RenameTag', data),
+        removeTag: async (data: RemoveTagArguments): Promise<RemoveTagResponse> =>
+            this.sendCommand<RemoveTagResponse>('RemoveTag', data),
     };
 }
 
