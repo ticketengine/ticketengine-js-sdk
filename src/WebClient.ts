@@ -224,7 +224,7 @@ export class WebClient {
         if(emailCommands.indexOf(command) !== -1) {
             url = 'http://email-command.ticketengine.localhost:8000/';
         }
-        const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
+        const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'CreateRegister', 'RenameRegister', 'RemoveRegister', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
         if(salesChannelCommands.indexOf(command) !== -1) {
             url = 'http://sales-channel-command.ticketengine.localhost:8000/';
         }
@@ -235,6 +235,10 @@ export class WebClient {
         const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
         if(authCommands.indexOf(command) !== -1) {
             url = 'http://auth.ticketengine.localhost:8000/';
+        }
+        const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
+        if(tagCommands.indexOf(command) !== -1) {
+            url = 'http://tag.ticketengine.localhost:8000/';
         }
 
         const headers = {
