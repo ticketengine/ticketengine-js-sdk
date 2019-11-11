@@ -223,6 +223,7 @@ export interface ReserveAccessArguments extends CommandData {
     eventId: string;
     orderId: string;
     accessDefinitionId: string;
+    requestedConditionPath: Array<string>;
 }
 
 export interface GrantAccessArguments extends CommandData {
