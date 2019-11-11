@@ -29,6 +29,8 @@ import {
     RenameEventResponse,
     RescheduleEventArguments,
     RescheduleEventResponse,
+    CancelEventArguments,
+    CancelEventResponse,
     AssignEventTagArguments,
     AssignEventTagResponse,
     RevokeEventTagArguments,
@@ -348,6 +350,8 @@ export class WebClient {
             this.sendCommand<RenameEventResponse>('RenameEvent', data),
         rescheduleEvent: async (data: RescheduleEventArguments): Promise<RescheduleEventResponse> =>
             this.sendCommand<RescheduleEventResponse>('RescheduleEvent', data),
+        cancelEvent: async (data: CancelEventArguments): Promise<CancelEventResponse> =>
+            this.sendCommand<CancelEventResponse>('CancelEvent', data),
         assignEventTag: async (data: AssignEventTagArguments): Promise<AssignEventTagResponse> =>
             this.sendCommand<AssignEventTagResponse>('AssignEventTag', data),
         revokeEventTag: async (data: RevokeEventTagArguments): Promise<RevokeEventTagResponse> =>

@@ -70,6 +70,11 @@ export interface RescheduleEventArguments extends CommandData {
     end: Date;
 }
 
+export interface CancelEventArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+}
+
 export interface AssignEventTagArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -264,6 +269,9 @@ export interface RenameEventResponse extends ApiResponse {
 }
 
 export interface RescheduleEventResponse extends ApiResponse {
+}
+
+export interface CancelEventResponse extends ApiResponse {
 }
 
 export interface AssignEventTagResponse extends ApiResponse {
