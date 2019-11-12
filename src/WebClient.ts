@@ -240,7 +240,7 @@ export class WebClient {
         }
         const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
         if(tagCommands.indexOf(command) !== -1) {
-            url = 'http://tag.ticketengine.localhost:8000/';
+            url = 'http://tag-command.ticketengine.localhost:8000/';
         }
 
         const headers = {
