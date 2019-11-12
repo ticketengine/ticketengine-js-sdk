@@ -133,7 +133,9 @@ import {
     ChangeCustomerArguments,
     ChangeCustomerResponse,
     CreateCustomerArguments,
-    CreateCustomerResponse
+    CreateCustomerResponse,
+    RemoveCustomerArguments,
+    RemoveCustomerResponse
 } from "./command/customer";
 import {
     CreateUserArguments,
@@ -230,7 +232,7 @@ export class WebClient {
         if(salesChannelCommands.indexOf(command) !== -1) {
             url = 'http://sales-channel-command.ticketengine.localhost:8000/';
         }
-        const customerCommands = ['CreateCustomer', 'ChangeCustomer'];
+        const customerCommands = ['CreateCustomer', 'ChangeCustomer', 'RemoveCustomer'];
         if(customerCommands.indexOf(command) !== -1) {
             url = 'http://customer.ticketengine.localhost:8000/';
         }
@@ -461,6 +463,8 @@ export class WebClient {
             this.sendCommand<CreateCustomerResponse>('CreateCustomer', data),
         changeCustomer: async (data: ChangeCustomerArguments): Promise<ChangeCustomerResponse> =>
             this.sendCommand<ChangeCustomerResponse>('ChangeCustomer', data),
+        removeCustomer: async (data: RemoveCustomerArguments): Promise<RemoveCustomerResponse> =>
+            this.sendCommand<RemoveCustomerResponse>('RemoveCustomer', data),
     };
 
     public readonly email = {

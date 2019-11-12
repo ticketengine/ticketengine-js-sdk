@@ -15,7 +15,6 @@ export interface CreateCustomerArguments extends CommandData {
     tags?: Array<string>;
 }
 
-
 export interface ChangeCustomerArguments extends CommandData {
     id: string;
     firstName?: string;
@@ -24,6 +23,10 @@ export interface ChangeCustomerArguments extends CommandData {
     email?: string;
     gender?: string;
     tags?: Array<string>;
+}
+
+export interface RemoveCustomerArguments extends CommandData {
+    id: string;
 }
 
 
@@ -35,6 +38,8 @@ export interface CreateCustomerResponse extends ApiResponse {
     customerId: string;
 }
 
-
 export interface ChangeCustomerResponse extends ApiResponse {
+}
+
+export interface RemoveCustomerResponse extends ApiResponse {
 }
