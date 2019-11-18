@@ -247,15 +247,16 @@ export class WebClient {
 
         const headers = {
             'Authentication': this.token,
+            'X-Command': command,
             'Content-Type': 'application/json'
         };
 
         const body = Object.assign(
             {
-                command,
-                'correlationId': '76053244-3b62-11e9-b210-d663bd873d23',
-                'clientId': '650533a2-3b62-11e9-b210-d663bd873d93',
-                'userId': '650534e2-3b62-11e9-b210-d663bd873d93',
+                // command,
+                // 'correlationId': '76053244-3b62-11e9-b210-d663bd873d23',
+                // 'clientId': '650533a2-3b62-11e9-b210-d663bd873d93',
+                // 'userId': '650534e2-3b62-11e9-b210-d663bd873d93',
             },
             commandData
         );
