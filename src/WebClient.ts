@@ -96,10 +96,18 @@ import {
     AddAdyenClientSettingsResponse,
     EditAdyenClientSettingsArguments,
     EditAdyenClientSettingsResponse,
+    AddMollieClientSettingsArguments,
+    AddMollieClientSettingsResponse,
+    EditMollieClientSettingsArguments,
+    EditMollieClientSettingsResponse,
     CreateCashPaymentArguments,
     CreateCashPaymentResponse,
     CreateAdyenPaymentSessionArguments,
-    CreateAdyenPaymentSessionResponse, CreatePinPaymentArguments, CreatePinPaymentResponse
+    CreateAdyenPaymentSessionResponse,
+    CreatePinPaymentArguments,
+    CreatePinPaymentResponse,
+    CreateMolliePaymentArguments,
+    CreateMolliePaymentResponse
 } from './command/payment';
 import {
     AddMailgunClientSettingsArguments,
@@ -451,12 +459,18 @@ export class WebClient {
             this.sendCommand<AddAdyenClientSettingsResponse>('AddAdyenClientSettings', data),
         editAdyenClientSettings: async (data: EditAdyenClientSettingsArguments): Promise<EditAdyenClientSettingsResponse> =>
             this.sendCommand<EditAdyenClientSettingsResponse>('EditAdyenClientSettings', data),
+        addMollieClientSettings: async (data: AddMollieClientSettingsArguments): Promise<AddMollieClientSettingsResponse> =>
+            this.sendCommand<AddMollieClientSettingsResponse>('AddMollieClientSettings', data),
+        editMollieClientSettings: async (data: EditMollieClientSettingsArguments): Promise<EditMollieClientSettingsResponse> =>
+            this.sendCommand<EditMollieClientSettingsResponse>('EditMollieClientSettings', data),
         createCashPayment: async (data: CreateCashPaymentArguments): Promise<CreateCashPaymentResponse> =>
             this.sendCommand<CreateCashPaymentResponse>('CreateCashPayment', data),
         createPinPayment: async (data: CreatePinPaymentArguments): Promise<CreatePinPaymentResponse> =>
             this.sendCommand<CreatePinPaymentResponse>('CreatePinPayment', data),
         createAdyenPaymentSession: async (data: CreateAdyenPaymentSessionArguments): Promise<CreateAdyenPaymentSessionResponse> =>
             this.sendCommand<CreateAdyenPaymentSessionResponse>('CreateAdyenPaymentSession', data),
+        createMolliePayment: async (data: CreateMolliePaymentArguments): Promise<CreateMolliePaymentResponse> =>
+            this.sendCommand<CreateMolliePaymentResponse>('CreateMolliePayment', data),
     };
 
     public readonly customer = {

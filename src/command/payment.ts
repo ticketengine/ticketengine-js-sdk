@@ -30,6 +30,22 @@ export interface EditAdyenClientSettingsArguments extends CommandData {
     enablePayPut: boolean;
 }
 
+export interface AddMollieClientSettingsArguments extends CommandData {
+    clientId: string;
+    apiKey: string;
+    shopperStatement: string;
+    redirectUrl: string;
+    webHookUrl: string;
+}
+
+export interface EditMollieClientSettingsArguments extends CommandData {
+    clientId: string;
+    apiKey: string;
+    shopperStatement: string;
+    redirectUrl: string;
+    webHookUrl: string;
+}
+
 export interface CreateCashPaymentArguments extends CommandData {
     orderId: string;
     customerId: string;
@@ -57,6 +73,14 @@ export interface CreateAdyenPaymentSessionArguments extends CommandData {
     sdkVersion?: string;
 }
 
+export interface CreateMolliePaymentArguments extends CommandData {
+    orderId: string;
+    customerId: string;
+    currency: string;
+    amount: number;
+    paymentMethod?: string;
+    issuer?: string;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +92,12 @@ export interface AddAdyenClientSettingsResponse extends ApiResponse {
 }
 
 export interface EditAdyenClientSettingsResponse extends ApiResponse {
+}
+
+export interface AddMollieClientSettingsResponse extends ApiResponse {
+}
+
+export interface EditMollieClientSettingsResponse extends ApiResponse {
 }
 
 export interface CreateCashPaymentResponse extends ApiResponse {
@@ -82,4 +112,7 @@ export interface CreateAdyenPaymentSessionResponse extends ApiResponse {
     paymentId: string;
 }
 
+export interface CreateMolliePaymentResponse extends ApiResponse {
+    paymentId: string;
+}
 
