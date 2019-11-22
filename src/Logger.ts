@@ -3,6 +3,10 @@ import {LoggerInterface} from "./LoggerInterface";
 
 export class Logger implements LoggerInterface {
 
+    constructor() {
+
+    }
+
     debug(msg: string): void {
         console.log(msg);
     }

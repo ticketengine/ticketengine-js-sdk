@@ -188,7 +188,7 @@ export class WebClient {
     // constructor({apiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
     constructor(token: string, logger?: LoggerInterface, apiUrl?: string) {
         this.token = token;
-        this.apiUrl = apiUrl || 'https://ticketengine.com/api/';
+        this.apiUrl = apiUrl || 'https://admin-api.ticketengine.io/';
         this.logger = logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         this.requestQueue = new TaskQueue(Promise, 1);
@@ -222,41 +222,44 @@ export class WebClient {
         /*******************************************************************************
          * START TEMP BLOCK
          ******************************************************************************/
-        let url = 'http://access-command.ticketengine.localhost:8000/';
+        let url = 'http://access.default.svc.cluster.local:8000/';
 
         const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder', 'CheckoutOrder', 'CompleteOrder'];
         if(orderCommands.indexOf(command) !== -1) {
-            url = 'http://order-command.ticketengine.localhost:8000/';
+            url = 'http://order.default.svc.cluster.local:8000/';
         }
         const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreatePinPayment', 'CreateAdyenPaymentSession'];
         if(paymentCommands.indexOf(command) !== -1) {
-            url = 'http://payment-command.ticketengine.localhost:8000/';
+            url = 'http://payment.default.svc.cluster.local:8000/';
         }
         const emailCommands = ['AddMailgunClientSettings', 'EditMailgunClientSettings', 'SendEmail'];
         if(emailCommands.indexOf(command) !== -1) {
-            url = 'http://email-command.ticketengine.localhost:8000/';
+            url = 'http://email.default.svc.cluster.local:8000/';
         }
         const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'CreateRegister', 'RenameRegister', 'RemoveRegister', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
         if(salesChannelCommands.indexOf(command) !== -1) {
-            url = 'http://sales-channel-command.ticketengine.localhost:8000/';
+            url = 'http://sales-channel.default.svc.cluster.local:8000/';
         }
         const customerCommands = ['CreateCustomer', 'ChangeCustomer', 'RemoveCustomer'];
         if(customerCommands.indexOf(command) !== -1) {
-            url = 'http://customer.ticketengine.localhost:8000/';
+            url = 'http://customer.default.svc.cluster.local:8000/';
         }
         const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
         if(authCommands.indexOf(command) !== -1) {
-            url = 'http://auth.ticketengine.localhost:8000/';
+            url = 'http://auth.default.svc.cluster.local:8000/';
         }
         const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
         if(tagCommands.indexOf(command) !== -1) {
-            url = 'http://tag-command.ticketengine.localhost:8000/';
+            url = 'http://tag.default.svc.cluster.local:8000/';
         }
 
         const headers = {
             'Authentication': this.token,
             'X-Command': command,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
+            'X-Correlation-Id': '76053244-3b62-11e9-b210-d663bd873d23',
+            'X-User-Id': '650534e2-3b62-11e9-b210-d663bd873d93',
         };
 
         const body = Object.assign(
@@ -295,7 +298,7 @@ export class WebClient {
          ******************************************************************************/
 
         let url = this.apiUrl;
-        url = 'http://graphql-query.ticketengine.localhost:8000';
+        url = 'http://graph-api.default.svc.cluster.local:8000';
 
         /*******************************************************************************
          * END TEMP BLOCK
