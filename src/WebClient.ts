@@ -4,6 +4,7 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // const PQueue = require('p-queue');
 import * as Promise from 'bluebird';
 import {TaskQueue} from 'cwait';
+import {attach, RaxConfig} from 'retry-axios';
 import {LoggerInterface} from './LoggerInterface';
 import {Logger} from './Logger';
 // import pRetry = require('p-retry');
@@ -203,6 +204,10 @@ export class WebClient {
             // validateStatus: () => true, // all HTTP status codes should result in a resolved promise (as opposed to only 2xx)
             // maxRedirects: 0,
         });
+        // this.axios.defaults.raxConfig = {
+        //     instance: this.axios
+        // };
+        attach(this.axios);
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
@@ -217,7 +222,7 @@ export class WebClient {
 
 
     private async sendCommand<T>(command: string, commandData: any): Promise<T> {
-        this.logger.debug('send command :' + command);
+        this.logger.debug('send command: ' + command);
 
         /*******************************************************************************
          * START TEMP BLOCK
@@ -278,6 +283,13 @@ export class WebClient {
         const response = await this.request<T>(url, body, headers);
         return response.data;
 
+//         try {
+//             const response = await this.request<T>(url, body, headers);
+//             return response.data;
+//         } catch (e) {
+// console.error(e);
+//         }
+
         // const response = await this.requesturl, body, headers);
         // const result = this.buildResult(response);
 
@@ -318,11 +330,18 @@ export class WebClient {
     private async request<T>(url: string, body: any, headers: any = {}): Promise<AxiosResponse<T>> {
         // const task = () => this.requestQueue.add(async () => {
         // return this.requestQueue.add(async () => {
+
         return this.requestQueue.add(async () => {
             this.logger.debug('make request');
             try {
                 // const requestTime = Date.now();
-                const response = await this.axios.post(url, body, headers);
+                // const response = await this.axios.post(url, body, {headers: headers});
+                const response = await this.axios.request({
+                    method: 'post',
+                    url: url,
+                    data: body,
+                    headers: headers
+                });
                 this.logger.debug('response received');
                 return response;
             } catch (error) {
@@ -340,6 +359,9 @@ export class WebClient {
                 throw error;
             }
         });
+
+
+
 
         // return pRetry(task, {retries: 5});
     }

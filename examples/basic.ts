@@ -10,14 +10,19 @@ async function run() {
     //
     const token = 'some token';
     const logger = new Logger();
-    const client = new WebClient(token, logger, 'http://graphql-query.ticketengine.localhost:8000');
+    const client = new WebClient(token, logger);
 
     //
     // const em = await client.access.createEventManager({capacityAllocation: CapacityAllocation.static});
     
-    const em = await client.tag.createTag({name: 'myTag'});
-    console.log(em);
 
+
+    try {
+        const tag = await client.tag.createTag({name: 'myTag'});
+console.log(tag);
+    } catch (e) {
+console.error(e);
+    }
 
 
 }
