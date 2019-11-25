@@ -328,10 +328,11 @@ export class WebClient {
 
 
     private async request<T>(url: string, body: any, headers: any = {}, remainingTries = 1): Promise<AxiosResponse<T>> {
+        const self = this;
         // const task = () => this.requestQueue.add(async () => {
-        // return this.requestQueue.add(async () => {
+        // return this.requestQueue.add(async () =>
 
-        return this.requestQueue.add(async () => {
+        // return this.requestQueue.add(async () => {
             this.logger.debug('make request');
             try {
                 // const requestTime = Date.now();
@@ -356,9 +357,9 @@ export class WebClient {
                 // abort retry, resource doesn't exist
                 if(error.response.status === 404) throw error;
 
-                return await this.request<T>(url, body, headers, remainingTries - 1);
+                return await self.request<T>(url, body, headers, remainingTries - 1);
             }
-        });
+        // });
 
 
 
