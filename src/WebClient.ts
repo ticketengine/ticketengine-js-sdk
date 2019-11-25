@@ -4,7 +4,7 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // const PQueue = require('p-queue');
 import * as Promise from 'bluebird';
 import {TaskQueue} from 'cwait';
-import {attach, RaxConfig} from 'retry-axios';
+// import {attach, RaxConfig} from 'retry-axios';
 import {LoggerInterface} from './LoggerInterface';
 import {Logger} from './Logger';
 // import pRetry = require('p-retry');
@@ -207,7 +207,7 @@ export class WebClient {
         // this.axios.defaults.raxConfig = {
         //     instance: this.axios
         // };
-        attach(this.axios);
+        // attach(this.axios);
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
@@ -216,7 +216,7 @@ export class WebClient {
             'Authentication': this.token,
             'Content-Type': 'application/json'
         };
-        const response = await this.request<GetAuthTokenResponse>(url, data, headers);
+        const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
         return response.data;
     }
 
@@ -280,7 +280,7 @@ export class WebClient {
          * END TEMP BLOCK
          ******************************************************************************/
 
-        const response = await this.request<T>(url, body, headers);
+        const response = await this.request<T>(url, body, headers, 3);
         return response.data;
 
 //         try {
@@ -322,12 +322,12 @@ export class WebClient {
             'Authentication': this.token,
             'Content-Type': 'application/json'
         };
-        const response = await this.request<T>(url, body, headers);
+        const response = await this.request<T>(url, body, headers, 3);
         return response.data;
     }
 
 
-    private async request<T>(url: string, body: any, headers: any = {}): Promise<AxiosResponse<T>> {
+    private async request<T>(url: string, body: any, headers: any = {}, remainingTries = 1): Promise<AxiosResponse<T>> {
         // const task = () => this.requestQueue.add(async () => {
         // return this.requestQueue.add(async () => {
 
@@ -346,17 +346,17 @@ export class WebClient {
                 return response;
             } catch (error) {
                 this.logger.debug('request failed');
-                // this.logger.debug(error.response.data);
 
-                // // Abort retrying if the resource doesn't exist
-                // if (response.status === 404) {
-                //     throw new pRetry.AbortError(response.statusText);
-                // }
+                // abort retry, retries attempts exceeded
+                if (remainingTries === 1) throw error;
 
-                if (error.request) {
-                    // throw requestErrorWithOriginal(error);
-                }
-                throw error;
+                // abort retry, unauthorized
+                if(error.response.status === 401) throw error;
+
+                // abort retry, resource doesn't exist
+                if(error.response.status === 404) throw error;
+
+                return await this.request<T>(url, body, headers, remainingTries - 1);
             }
         });
 

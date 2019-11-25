@@ -13,15 +13,17 @@ async function run() {
     const client = new WebClient(token, logger);
 
     //
-    // const em = await client.access.createEventManager({capacityAllocation: CapacityAllocation.static});
+    // const r = await client.access.createEventManager({capacityAllocation: CapacityAllocation.static});
     
 
 
     try {
-        const tag = await client.tag.createTag({name: 'myTag'});
-console.log(tag);
+        // const r = await client.tag.createTag({name: 'myTag'});
+        const r = await client.access.renameEvent({});
+console.log(r);
     } catch (e) {
-console.error(e);
+// console.error(e);
+console.error(e.response.data.data.message);
     }
 
 
