@@ -203,7 +203,7 @@ export class WebClient {
             // transformRequest: [this.serializeApiCallOptions.bind(this)],
             // validateStatus: () => true, // all HTTP status codes should result in a resolved promise (as opposed to only 2xx)
             // maxRedirects: 0,
-            withCredentials: true,
+            // withCredentials: true,
             // timeout: 10000,
         });
         // this.axios.defaults.raxConfig = {
