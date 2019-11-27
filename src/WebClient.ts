@@ -1,4 +1,3 @@
-import FormData = require("form-data");
 import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // import { ApiCallOptions, ApiCallResult } from './apiCall';
 // @ts-ignore
