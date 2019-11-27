@@ -225,6 +225,7 @@ export class WebClient {
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
         if(response.data.access_token) this.token = response.data.access_token;
+        if(response.data.data.accessToken) this.token = response.data.data.accessToken;
         return response.data;
     }
 
