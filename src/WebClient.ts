@@ -1,3 +1,4 @@
+import FormData = require("form-data");
 import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // import { ApiCallOptions, ApiCallResult } from './apiCall';
 // @ts-ignore
@@ -181,14 +182,14 @@ export class WebClient {
 
     private logger: LoggerInterface;
 
-    private readonly token: string;
+    private token: string;
 
     private readonly apiUrl: string;
 
 
     // constructor({apiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
-    constructor(token: string, logger?: LoggerInterface, apiUrl?: string) {
-        this.token = token;
+    constructor(token?: string, logger?: LoggerInterface, apiUrl?: string) {
+        this.token = token || '';
         this.apiUrl = apiUrl || 'https://admin-api.ticketengine.io/';
         this.logger = logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
@@ -211,12 +212,18 @@ export class WebClient {
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
-        const url = 'http://auth.ticketengine.localhost:8000/token';
+        /*******************************************************************************
+         * START TEMP BLOCK
+         ******************************************************************************/
+        let url = 'http://auth.default.svc.cluster.local:8000/token';
+        /*******************************************************************************
+         * END TEMP BLOCK
+         ******************************************************************************/
         const headers = {
-            'Authentication': this.token,
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
+        if(response.data.access_token) this.token = response.data.access_token;
         return response.data;
     }
 
@@ -259,7 +266,7 @@ export class WebClient {
         }
 
         const headers = {
-            'Authentication': this.token,
+            'Authentication': 'Bearer ' + this.token,
             'X-Command': command,
             'Content-Type': 'application/json',
             'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
@@ -346,7 +353,8 @@ export class WebClient {
                 this.logger.debug('response received');
                 return response;
             } catch (error) {
-                this.logger.debug('request failed');
+                this.logger.debug('request failed with status: ' + error.response.status);
+                // this.logger.debug(error.response.body);
 
                 // abort retry, retries attempts exceeded
                 if (remainingTries === 1) throw error;
