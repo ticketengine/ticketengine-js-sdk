@@ -183,18 +183,21 @@ export class WebClient {
 
     private token: string;
 
-    private readonly apiUrl: string;
+    private readonly adminApiUrl: string;
+
+    private readonly graphApiUrl: string;
 
 
-    // constructor({apiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
-    constructor(token?: string, logger?: LoggerInterface, apiUrl?: string) {
+    // constructor({adminApiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
+    constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
         this.token = token || '';
-        this.apiUrl = apiUrl || 'https://admin-api.ticketengine.io/';
+        this.adminApiUrl = adminApiUrl || 'https://admin-api.ticketengine.io/';
+        this.graphApiUrl = graphApiUrl || 'https://graph-api.ticketengine.io/';
         this.logger = logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         this.requestQueue = new TaskQueue(Promise, 1);
         this.axios = axios.create({
-            // baseURL: apiUrl || 'https://ticketengine.com/api/',
+            // baseURL: adminApiUrl || 'https://ticketengine.com/api/',
             // headers: Object.assign({
             //     'User-Agent': getUserAgent(),
             // }, headers),
@@ -216,7 +219,8 @@ export class WebClient {
         /*******************************************************************************
          * START TEMP BLOCK
          ******************************************************************************/
-        let url = 'http://auth.default.svc.cluster.local:8000/token';
+        let url = this.adminApiUrl;
+        // let url = 'http://auth.default.svc.cluster.local:8000/token';
         /*******************************************************************************
          * END TEMP BLOCK
          ******************************************************************************/
@@ -236,36 +240,37 @@ export class WebClient {
         /*******************************************************************************
          * START TEMP BLOCK
          ******************************************************************************/
-        let url = 'http://access.default.svc.cluster.local:8000/';
-
-        const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder', 'CheckoutOrder', 'CompleteOrder'];
-        if(orderCommands.indexOf(command) !== -1) {
-            url = 'http://order.default.svc.cluster.local:8000/';
-        }
-        const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreatePinPayment', 'CreateAdyenPaymentSession'];
-        if(paymentCommands.indexOf(command) !== -1) {
-            url = 'http://payment.default.svc.cluster.local:8000/';
-        }
-        const emailCommands = ['AddMailgunClientSettings', 'EditMailgunClientSettings', 'SendEmail'];
-        if(emailCommands.indexOf(command) !== -1) {
-            url = 'http://email.default.svc.cluster.local:8000/';
-        }
-        const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'CreateRegister', 'RenameRegister', 'RemoveRegister', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
-        if(salesChannelCommands.indexOf(command) !== -1) {
-            url = 'http://sales-channel.default.svc.cluster.local:8000/';
-        }
-        const customerCommands = ['CreateCustomer', 'ChangeCustomer', 'RemoveCustomer'];
-        if(customerCommands.indexOf(command) !== -1) {
-            url = 'http://customer.default.svc.cluster.local:8000/';
-        }
-        const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
-        if(authCommands.indexOf(command) !== -1) {
-            url = 'http://auth.default.svc.cluster.local:8000/';
-        }
-        const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
-        if(tagCommands.indexOf(command) !== -1) {
-            url = 'http://tag.default.svc.cluster.local:8000/';
-        }
+        let url = this.adminApiUrl;
+        // let url = 'http://access.default.svc.cluster.local:8000/';
+        //
+        // const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder', 'CheckoutOrder', 'CompleteOrder'];
+        // if(orderCommands.indexOf(command) !== -1) {
+        //     url = 'http://order.default.svc.cluster.local:8000/';
+        // }
+        // const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreatePinPayment', 'CreateAdyenPaymentSession'];
+        // if(paymentCommands.indexOf(command) !== -1) {
+        //     url = 'http://payment.default.svc.cluster.local:8000/';
+        // }
+        // const emailCommands = ['AddMailgunClientSettings', 'EditMailgunClientSettings', 'SendEmail'];
+        // if(emailCommands.indexOf(command) !== -1) {
+        //     url = 'http://email.default.svc.cluster.local:8000/';
+        // }
+        // const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'CreateRegister', 'RenameRegister', 'RemoveRegister', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
+        // if(salesChannelCommands.indexOf(command) !== -1) {
+        //     url = 'http://sales-channel.default.svc.cluster.local:8000/';
+        // }
+        // const customerCommands = ['CreateCustomer', 'ChangeCustomer', 'RemoveCustomer'];
+        // if(customerCommands.indexOf(command) !== -1) {
+        //     url = 'http://customer.default.svc.cluster.local:8000/';
+        // }
+        // const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
+        // if(authCommands.indexOf(command) !== -1) {
+        //     url = 'http://auth.default.svc.cluster.local:8000/';
+        // }
+        // const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
+        // if(tagCommands.indexOf(command) !== -1) {
+        //     url = 'http://tag.default.svc.cluster.local:8000/';
+        // }
 
         const headers = {
             'Authentication': 'Bearer ' + this.token,
@@ -314,21 +319,21 @@ export class WebClient {
     private async sendQuery<T>(query: string): Promise<T> {
         this.logger.debug('send query :' + query);
 
-        /*******************************************************************************
-         * START TEMP BLOCK
-         ******************************************************************************/
+        // /*******************************************************************************
+        //  * START TEMP BLOCK
+        //  ******************************************************************************/
+        //
+        let url = this.graphApiUrl;
+        // url = 'http://graph-api.default.svc.cluster.local:8000';
+        //
+        // /*******************************************************************************
+        //  * END TEMP BLOCK
+        //  ******************************************************************************/
 
-        let url = this.apiUrl;
-        url = 'http://graph-api.default.svc.cluster.local:8000';
-
-        /*******************************************************************************
-         * END TEMP BLOCK
-         ******************************************************************************/
-
-        // const url = this.apiUrl;
+        // const url = this.adminApiUrl;
         const body = {query};
         const headers = {
-            'Authentication': this.token,
+            'Authentication': 'Bearer ' + this.token,
             'Content-Type': 'application/json'
         };
         const response = await this.request<T>(url, body, headers, 3);
