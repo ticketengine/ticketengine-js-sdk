@@ -287,12 +287,12 @@ export class WebClient {
         // }
 
         const headers = {
-            'Authentication': 'Bearer ' + this.getToken(),
+            'Authorization': 'Bearer ' + this.getToken(),
             'X-Command': command,
             'Content-Type': 'application/json',
-            'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
-            'X-Correlation-Id': '76053244-3b62-11e9-b210-d663bd873d23',
-            'X-User-Id': '650534e2-3b62-11e9-b210-d663bd873d93',
+            // 'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
+            // 'X-Correlation-Id': '76053244-3b62-11e9-b210-d663bd873d23',
+            // 'X-User-Id': '650534e2-3b62-11e9-b210-d663bd873d93',
         };
 
         const body = Object.assign(
@@ -347,7 +347,7 @@ export class WebClient {
         // const url = this.adminApiUrl;
         const body = {query};
         const headers = {
-            'Authentication': 'Bearer ' + this.getToken(),
+            'Authorization': 'Bearer ' + this.getToken(),
             'Content-Type': 'application/json'
         };
         const response = await this.request<T>(url, body, headers, 3);
