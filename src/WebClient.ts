@@ -223,6 +223,10 @@ export class WebClient {
         return localStorage.getItem("te-token") || '';
     }
 
+    private clearToken(): void {
+        localStorage.removeItem("te-token");
+    }
+
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
         /*******************************************************************************
          * START TEMP BLOCK
@@ -377,7 +381,10 @@ export class WebClient {
                 if (remainingTries === 1) throw error;
 
                 // abort retry, unauthorized
-                if(error.response.status === 401) throw error;
+                if(error.response.status === 401) {
+                    this.clearToken();
+                    throw error;
+                }
 
                 // abort retry, resource doesn't exist
                 if(error.response.status === 404) throw error;
