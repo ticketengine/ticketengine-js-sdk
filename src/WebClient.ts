@@ -215,6 +215,14 @@ export class WebClient {
         // attach(this.axios);
     }
 
+    private setToken(token: string): void {
+        localStorage.setItem("te-token", token);
+    }
+
+    private getToken(): string {
+        return localStorage.getItem("te-token") || '';
+    }
+
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
         /*******************************************************************************
          * START TEMP BLOCK
@@ -228,8 +236,10 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
-        if(response.data.access_token) this.token = response.data.access_token;
-        if(response.data && response.data.data && response.data.data.accessToken) this.token = response.data.data.accessToken;
+        // if(response.data.access_token) this.token = response.data.access_token;
+        // if(response.data && response.data.data && response.data.data.accessToken) this.token = response.data.data.accessToken;
+        if(response.data.access_token) this.setToken(response.data.access_token);
+        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken);
         return response.data;
     }
 
@@ -273,7 +283,7 @@ export class WebClient {
         // }
 
         const headers = {
-            'Authentication': 'Bearer ' + this.token,
+            'Authentication': 'Bearer ' + this.getToken(),
             'X-Command': command,
             'Content-Type': 'application/json',
             'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
@@ -333,7 +343,7 @@ export class WebClient {
         // const url = this.adminApiUrl;
         const body = {query};
         const headers = {
-            'Authentication': 'Bearer ' + this.token,
+            'Authentication': 'Bearer ' + this.getToken(),
             'Content-Type': 'application/json'
         };
         const response = await this.request<T>(url, body, headers, 3);
