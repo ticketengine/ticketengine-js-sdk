@@ -219,7 +219,7 @@ export class WebClient {
         /*******************************************************************************
          * START TEMP BLOCK
          ******************************************************************************/
-        let url = this.adminApiUrl;
+        let url = this.adminApiUrl + '/token';
         // let url = 'http://auth.default.svc.cluster.local:8000/token';
         /*******************************************************************************
          * END TEMP BLOCK
