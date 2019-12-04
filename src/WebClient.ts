@@ -189,11 +189,12 @@ export class WebClient {
 
 
     // constructor({adminApiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
-    constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
-        this.token = token || '';
-        this.adminApiUrl = adminApiUrl || 'https://admin-api.ticketengine.io/';
-        this.graphApiUrl = graphApiUrl || 'https://graph-api.ticketengine.io/';
-        this.logger = logger || new Logger();
+    // constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
+    constructor(options: WebClientOptions) {
+        this.token = options.token || '';
+        this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io/';
+        this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io/';
+        this.logger = options.logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         this.requestQueue = new TaskQueue(Promise, 1);
         this.axios = axios.create({
@@ -597,4 +598,11 @@ export class WebClient {
     };
 }
 
+
+export interface WebClientOptions {
+    adminApiUrl?: string;
+    graphApiUrl?: string;
+    token?: string;
+    logger?: any;
+}
 

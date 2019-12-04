@@ -1,5 +1,6 @@
 export {
-    WebClient
+    WebClient,
+    WebClientOptions
 } from './WebClient';
 
 
