@@ -3,6 +3,7 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios';
 // @ts-ignore
 // const PQueue = require('p-queue');
 import * as Promise from 'bluebird';
+import * as moment from 'moment';
 import {TaskQueue} from 'cwait';
 // import {attach, RaxConfig} from 'retry-axios';
 import {LoggerInterface} from './LoggerInterface';
@@ -228,6 +229,18 @@ export class WebClient {
         localStorage.removeItem("te-token");
     }
 
+    private setTokenExpireDate(expiresIn: number): void {
+        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
+    }
+
+    public isTokenExpired(): boolean {
+        const expiresOn = localStorage.getItem("te-token-expires-on");
+        if(expiresOn !== null) {
+            return moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment())
+        }
+        return true;
+    }
+
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
         /*******************************************************************************
          * START TEMP BLOCK
@@ -241,10 +254,10 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
-        // if(response.data.access_token) this.token = response.data.access_token;
-        // if(response.data && response.data.data && response.data.data.accessToken) this.token = response.data.data.accessToken;
-        if(response.data.access_token) this.setToken(response.data.access_token);
+        // if(response.data.access_token) this.setToken(response.data.access_token);
+        // if(response.data.expires_in) this.setTokenExpireDate(response.data.expires_in);
         if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken);
+        if(response.data && response.data.expiresIn && response.data.data.expiresIn) this.setTokenExpireDate(response.data.data.expiresIn);
         return response.data;
     }
 
