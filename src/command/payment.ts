@@ -80,6 +80,7 @@ export interface CreateMolliePaymentArguments extends CommandData {
     amount: number;
     paymentMethod?: string;
     issuer?: string;
+    locale?: string;
 }
 
 

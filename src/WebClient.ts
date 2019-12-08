@@ -322,7 +322,7 @@ export class WebClient {
          * END TEMP BLOCK
          ******************************************************************************/
 
-        const response = await this.request<T>(url, body, headers, 3);
+        const response = await this.request<T>(url, body, headers, 5);
         return response.data;
 
 //         try {
