@@ -257,7 +257,7 @@ export class WebClient {
         // if(response.data.access_token) this.setToken(response.data.access_token);
         // if(response.data.expires_in) this.setTokenExpireDate(response.data.expires_in);
         if(response.data && response.data.accessToken) this.setToken(response.data.accessToken);
-        if(response.data && response.data.expiresIn) this.setTokenExpireDate(response.data.expiresIn);
+        if(response.data && response.data.expiresIn) this.setTokenExpireDate(parseInt(response.data.expiresIn));
         if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken);
         if(response.data && response.data.expiresIn && response.data.data.expiresIn) this.setTokenExpireDate(response.data.data.expiresIn);
         return response.data;
