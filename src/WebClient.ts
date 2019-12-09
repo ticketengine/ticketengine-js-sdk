@@ -240,9 +240,13 @@ console.log(expiresIn);
 
     public isTokenExpired(): boolean {
         const expiresOn = localStorage.getItem("te-token-expires-on");
+console.log('check token expiration');
+console.log(expiresOn);
         if(expiresOn !== null) {
-            return moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment())
+console.log(moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment()));
+            return moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment());
         }
+console.log(true);
         return true;
     }
 
@@ -260,12 +264,8 @@ console.log(expiresIn);
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
 console.log(response.data);
-        // if(response.data.access_token) this.setToken(response.data.access_token);
-        // if(response.data.expires_in) this.setTokenExpireDate(response.data.expires_in);
         if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn);
-        // if(response.data && response.data.expiresIn) this.setTokenExpireDate(parseInt(response.data.expiresIn));
         if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn);
-        // if(response.data && response.data.expiresIn && response.data.data.expiresIn) this.setTokenExpireDate(response.data.data.expiresIn);
         return response.data;
     }
 
