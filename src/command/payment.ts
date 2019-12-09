@@ -115,5 +115,6 @@ export interface CreateAdyenPaymentSessionResponse extends ApiResponse {
 
 export interface CreateMolliePaymentResponse extends ApiResponse {
     paymentId: string;
+    paymentUrl: string;
 }
 
