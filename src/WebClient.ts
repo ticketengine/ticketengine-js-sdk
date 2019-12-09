@@ -218,6 +218,7 @@ export class WebClient {
     }
 
     private setToken(token: string): void {
+console.log(token);
         localStorage.setItem("te-token", token);
     }
 
@@ -256,6 +257,7 @@ console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
+console.log(response.data);
         // if(response.data.access_token) this.setToken(response.data.access_token);
         // if(response.data.expires_in) this.setTokenExpireDate(response.data.expires_in);
         if(response.data && response.data.accessToken) this.setToken(response.data.accessToken);
