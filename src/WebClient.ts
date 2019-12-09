@@ -230,6 +230,8 @@ export class WebClient {
     }
 
     private setTokenExpireDate(expiresIn: number): void {
+console.log(expiresIn);
+console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
         localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
     }
 
