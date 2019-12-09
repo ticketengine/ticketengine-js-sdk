@@ -221,7 +221,7 @@ export class WebClient {
 console.log(token);
 console.log(expiresIn);
         localStorage.setItem("te-token", token);
-        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
+        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 's').format('YYYY-MM-DD HH:mm'));
     }
 
     private getToken(): string {
@@ -244,7 +244,7 @@ console.log('check token expiration');
 console.log(expiresOn);
         if(expiresOn !== null) {
 console.log(moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment()));
-            return moment(expiresOn, 'YYYY-MM-DD HH:mm').isAfter(moment());
+            return moment(expiresOn, 'YYYY-MM-DD HH:mm').isBefore(moment());
         }
 console.log(true);
         return true;
