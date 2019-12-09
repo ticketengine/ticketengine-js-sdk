@@ -217,9 +217,11 @@ export class WebClient {
         // attach(this.axios);
     }
 
-    private setToken(token: string): void {
+    private setToken(token: string, expiresIn: number): void {
 console.log(token);
+console.log(expiresIn);
         localStorage.setItem("te-token", token);
+        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
     }
 
     private getToken(): string {
@@ -230,11 +232,11 @@ console.log(token);
         localStorage.removeItem("te-token");
     }
 
-    private setTokenExpireDate(expiresIn: number): void {
-console.log(expiresIn);
-console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
-        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
-    }
+//     private setTokenExpireDate(expiresIn: number): void {
+// console.log(expiresIn);
+// console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
+//         localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
+//     }
 
     public isTokenExpired(): boolean {
         const expiresOn = localStorage.getItem("te-token-expires-on");
@@ -260,10 +262,10 @@ console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
 console.log(response.data);
         // if(response.data.access_token) this.setToken(response.data.access_token);
         // if(response.data.expires_in) this.setTokenExpireDate(response.data.expires_in);
-        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken);
-        if(response.data && response.data.expiresIn) this.setTokenExpireDate(parseInt(response.data.expiresIn));
-        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken);
-        if(response.data && response.data.expiresIn && response.data.data.expiresIn) this.setTokenExpireDate(response.data.data.expiresIn);
+        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn);
+        // if(response.data && response.data.expiresIn) this.setTokenExpireDate(parseInt(response.data.expiresIn));
+        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn);
+        // if(response.data && response.data.expiresIn && response.data.data.expiresIn) this.setTokenExpireDate(response.data.data.expiresIn);
         return response.data;
     }
 
