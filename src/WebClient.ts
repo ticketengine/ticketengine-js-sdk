@@ -228,13 +228,8 @@ export class WebClient {
 
     private clearToken(): void {
         localStorage.removeItem("te-token");
+        localStorage.removeItem("te-token-expires-on");
     }
-
-//     private setTokenExpireDate(expiresIn: number): void {
-// console.log(expiresIn);
-// console.log(moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
-//         localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 'm').format('YYYY-MM-DD HH:mm'));
-//     }
 
     public isTokenExpired(): boolean {
         const expiresOn = localStorage.getItem("te-token-expires-on");
@@ -245,14 +240,7 @@ export class WebClient {
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
-        /*******************************************************************************
-         * START TEMP BLOCK
-         ******************************************************************************/
         let url = this.adminApiUrl + '/token';
-        // let url = 'http://auth.default.svc.cluster.local:8000/token';
-        /*******************************************************************************
-         * END TEMP BLOCK
-         ******************************************************************************/
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -265,101 +253,25 @@ export class WebClient {
 
     private async sendCommand<T>(command: string, commandData: any): Promise<T> {
         this.logger.debug('send command: ' + command);
-
-        /*******************************************************************************
-         * START TEMP BLOCK
-         ******************************************************************************/
         let url = this.adminApiUrl;
-        // let url = 'http://access.default.svc.cluster.local:8000/';
-        //
-        // const orderCommands = ['CreateOrder', 'AddAccessToCart', 'AddProductToCart', 'ReserveAccessInCart', 'ReserveProductInCart', 'CompleteItemInCart', 'RemoveItemFromCart', 'CancelOrder', 'CheckoutOrder', 'CompleteOrder'];
-        // if(orderCommands.indexOf(command) !== -1) {
-        //     url = 'http://order.default.svc.cluster.local:8000/';
-        // }
-        // const paymentCommands = ['AddAdyenClientSettings', 'EditAdyenClientSettings', 'CreateCashPayment', 'CreatePinPayment', 'CreateAdyenPaymentSession'];
-        // if(paymentCommands.indexOf(command) !== -1) {
-        //     url = 'http://payment.default.svc.cluster.local:8000/';
-        // }
-        // const emailCommands = ['AddMailgunClientSettings', 'EditMailgunClientSettings', 'SendEmail'];
-        // if(emailCommands.indexOf(command) !== -1) {
-        //     url = 'http://email.default.svc.cluster.local:8000/';
-        // }
-        // const salesChannelCommands = ['CreateSalesChannel', 'RenameSalesChannel', 'CreateRegister', 'RenameRegister', 'RemoveRegister', 'AddDeliveryDefinition', 'ChangeDeliveryDefinitionCondition', 'ChangeDeliveryDefinitionContent', 'RenameDeliveryDefinition', 'CreateEmailDelivery'];
-        // if(salesChannelCommands.indexOf(command) !== -1) {
-        //     url = 'http://sales-channel.default.svc.cluster.local:8000/';
-        // }
-        // const customerCommands = ['CreateCustomer', 'ChangeCustomer', 'RemoveCustomer'];
-        // if(customerCommands.indexOf(command) !== -1) {
-        //     url = 'http://customer.default.svc.cluster.local:8000/';
-        // }
-        // const authCommands = ['CreateUser', 'ChangeUserScope', 'ChangeUserPassword', 'EnableUser', 'DisableUser'];
-        // if(authCommands.indexOf(command) !== -1) {
-        //     url = 'http://auth.default.svc.cluster.local:8000/';
-        // }
-        // const tagCommands = ['CreateTag', 'RenameTag', 'RemoveTag'];
-        // if(tagCommands.indexOf(command) !== -1) {
-        //     url = 'http://tag.default.svc.cluster.local:8000/';
-        // }
-
         const headers = {
             'Authorization': 'Bearer ' + this.getToken(),
             'X-Command': command,
             'Content-Type': 'application/json',
-            // 'X-Client-Id': '650533a2-3b62-11e9-b210-d663bd873d93',
-            // 'X-Correlation-Id': '76053244-3b62-11e9-b210-d663bd873d23',
-            // 'X-User-Id': '650534e2-3b62-11e9-b210-d663bd873d93',
         };
-
         const body = Object.assign(
-            {
-                // command,
-                // 'correlationId': '76053244-3b62-11e9-b210-d663bd873d23',
-                // 'clientId': '650533a2-3b62-11e9-b210-d663bd873d93',
-                // 'userId': '650534e2-3b62-11e9-b210-d663bd873d93',
-            },
+            {},
             commandData
         );
-        /*******************************************************************************
-         * END TEMP BLOCK
-         ******************************************************************************/
 
         const response = await this.request<T>(url, body, headers, 5);
         return response.data;
-
-//         try {
-//             const response = await this.request<T>(url, body, headers);
-//             return response.data;
-//         } catch (e) {
-// console.error(e);
-//         }
-
-        // const response = await this.requesturl, body, headers);
-        // const result = this.buildResult(response);
-
-        // if (!result.ok) {
-        //     throw new Error(result.error);
-        // }
-
-        // return result;
-
     }
 
 
     private async sendQuery<T>(query: string): Promise<T> {
-        // this.logger.debug('send query :' + query);
-
-        // /*******************************************************************************
-        //  * START TEMP BLOCK
-        //  ******************************************************************************/
-        //
+        this.logger.debug('send query :' + query);
         let url = this.graphApiUrl;
-        // url = 'http://graph-api.default.svc.cluster.local:8000';
-        //
-        // /*******************************************************************************
-        //  * END TEMP BLOCK
-        //  ******************************************************************************/
-
-        // const url = this.adminApiUrl;
         const body = {query};
         const headers = {
             'Authorization': 'Bearer ' + this.getToken(),
@@ -407,10 +319,6 @@ export class WebClient {
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
         // });
-
-
-
-
         // return pRetry(task, {retries: 5});
     }
 
