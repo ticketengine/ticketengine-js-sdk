@@ -184,6 +184,8 @@ export class WebClient {
 
     private token: string;
 
+    private readonly authUrl: string;
+
     private readonly adminApiUrl: string;
 
     private readonly graphApiUrl: string;
@@ -193,6 +195,7 @@ export class WebClient {
     // constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
     constructor(options: WebClientOptions) {
         this.token = options.token || '';
+        this.authUrl = options.authUrl || 'https://auth.ticketengine.io/';
         this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io/';
         this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io/';
         this.logger = options.logger || new Logger();
@@ -240,7 +243,7 @@ export class WebClient {
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments): Promise<GetAuthTokenResponse> {
-        let url = this.adminApiUrl + '/token';
+        let url = this.authUrl + '/token';
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -522,6 +525,7 @@ export class WebClient {
 
 
 export interface WebClientOptions {
+    authUrl?: string;
     adminApiUrl?: string;
     graphApiUrl?: string;
     token?: string;
