@@ -33,7 +33,7 @@ async function run() {
         const r = await client.user.createUser({username: 'test', password: 'test', scopes: ['customer:write', 'event_manager:write']});
 console.log(r);
     } catch (e) {
-// console.error(e);
+console.error(e);
 console.error(e.response);
     }
 

@@ -221,21 +221,31 @@ export class WebClient {
     }
 
     private setToken(token: string, expiresIn: number): void {
-        localStorage.setItem("te-token", token);
-        localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 's').format('YYYY-MM-DD HH:mm'));
+        if(localStorage) {
+            localStorage.setItem("te-token", token);
+            localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 's').format('YYYY-MM-DD HH:mm'));
+        }
     }
 
     private getToken(): string {
-        return localStorage.getItem("te-token") || '';
+        if(localStorage) {
+            return localStorage.getItem("te-token") || '';
+        }
+        return '';
     }
 
     private clearToken(): void {
-        localStorage.removeItem("te-token");
-        localStorage.removeItem("te-token-expires-on");
+        if(localStorage) {
+            localStorage.removeItem("te-token");
+            localStorage.removeItem("te-token-expires-on");
+        }
     }
 
     public isTokenExpired(): boolean {
-        const expiresOn = localStorage.getItem("te-token-expires-on");
+        let expiresOn = null;
+        if(localStorage) {
+            expiresOn = localStorage.getItem("te-token-expires-on");
+        }
         if(expiresOn !== null) {
             return moment(expiresOn, 'YYYY-MM-DD HH:mm').isBefore(moment());
         }
@@ -258,7 +268,8 @@ export class WebClient {
         this.logger.debug('send command: ' + command);
         let url = this.adminApiUrl;
         const headers = {
-            'Authorization': 'Bearer ' + this.getToken(),
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ0aWNrZXRfZW5naW5lX2JhY2tfb2ZmaWNlIiwianRpIjoiOGYyNDEzYTZiYTAwMWM0ZTJmMzRlNjg1YzFiZWE5NmQ0ZWJmYzYyNTJhNTQ4YmY1YzZiMzFlODI2MTBlMDkxMzUwMDYzYzJhODNlYzkwOTkiLCJpYXQiOjE1NzYyNDk4NTUsIm5iZiI6MTU3NjI0OTg1NSwiZXhwIjoxNTc2MjUzNDU0LCJzdWIiOiJhMzVkOWNhYS0xY2Y1LTExZWEtOGE0Yi0wMjQyYWMxNTAwMDgiLCJzY29wZXMiOlsiZXZlbnRfbWFuYWdlcjp3cml0ZSIsImV2ZW50OndyaXRlIiwiY3VzdG9tZXI6d3JpdGUiLCJ1c2VyOndyaXRlIiwib3JkZXI6d3JpdGUiLCJ0YWc6d3JpdGUiLCJzYWxlc19jaGFuZWw6d3JpdGUiLCJhY2Nlc3NfZGVmaW5pdGlvbjp3cml0ZSIsImFjY2Vzczp3cml0ZSIsImNhcGFjaXR5OndyaXRlIiwicGF5bWVudDp3cml0ZSIsImVtYWlsOndyaXRlIiwiYWRtaW4uZXZlbnQ6d3JpdGUiLCJhZG1pbi5vcmRlcjp3cml0ZSIsImFkbWluLnBheW1lbnQ6d3JpdGUiLCJhZG1pbi5lbWFpbDp3cml0ZSJdfQ.tI8UcNs5e3iFMLee257gm1DCu8BviQMuzypAofQOsjFvN_29PZGKbozCcLgoUs4PCBbM2ZGOkfs2YG4XtYPiiQWlzj0256iHvddO1dSWlwg5Trxhtb4NjFSFc59deczddOuMQkKDcrWUIYY7kHWcWBe5wgT-Wswf4BHWmFDuU1qYRxlSOdsKD270Hy02L-vEDbBjK0MSW9p1ITb67X0K68ii0Os-71KzoQkbM_cGmGj_fn-RaDai0Z4N6dmfYl4p40tkz1IASbFcmLUITaD4Qp75R8w84oz1J5JaDtZ9sef7XyyLBPWAa5ZDxtlQXlx4Gf0Z_zOKepIrObqzkYOpwA',
+            // 'Authorization': 'Bearer ' + this.getToken(),
             'X-Command': command,
             'Content-Type': 'application/json',
         };
@@ -309,16 +320,19 @@ export class WebClient {
                 // this.logger.debug(error.response.body);
 
                 // abort retry, retries attempts exceeded
-                if (remainingTries === 1) throw new Error('Retry attempts exceeded');
+                // if (remainingTries === 1) throw new Error('Retry attempts exceeded');
+                if (remainingTries === 1) throw error;
 
                 // abort retry, unauthorized
                 if(responseStatus === 401) {
                     this.clearToken();
-                    throw new Error('Unauthorized');
+                    // throw new Error('Unauthorized');
+                    throw error;
                 }
 
                 // abort retry, resource doesn't exist
-                if(responseStatus === 404) throw new Error('Resource doesn\'t exist');
+                // if(responseStatus === 404) throw new Error('Resource doesn\'t exist');
+                if(responseStatus === 404) throw error;
 
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
