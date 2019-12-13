@@ -304,20 +304,21 @@ export class WebClient {
                 this.logger.debug('response received');
                 return response;
             } catch (error) {
-                this.logger.debug('request failed with status: ' + error.response.status);
+                const responseStatus = (error && error.response && error.response.status) ? error.response.status : null;
+                this.logger.debug('request failed with status: ' + responseStatus);
                 // this.logger.debug(error.response.body);
 
                 // abort retry, retries attempts exceeded
                 if (remainingTries === 1) throw new Error('Retry attempts exceeded');
 
                 // abort retry, unauthorized
-                if(error.response.status === 401) {
+                if(responseStatus === 401) {
                     this.clearToken();
                     throw new Error('Unauthorized');
                 }
 
                 // abort retry, resource doesn't exist
-                if(error.response.status === 404) throw new Error('Resource doesn\'t exist');
+                if(responseStatus === 404) throw new Error('Resource doesn\'t exist');
 
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
