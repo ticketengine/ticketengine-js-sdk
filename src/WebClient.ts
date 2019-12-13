@@ -308,16 +308,16 @@ export class WebClient {
                 // this.logger.debug(error.response.body);
 
                 // abort retry, retries attempts exceeded
-                if (remainingTries === 1) throw error;
+                if (remainingTries === 1) throw new Error('Retry attempts exceeded');
 
                 // abort retry, unauthorized
                 if(error.response.status === 401) {
                     this.clearToken();
-                    throw error;
+                    throw new Error('Unauthorized');
                 }
 
                 // abort retry, resource doesn't exist
-                if(error.response.status === 404) throw error;
+                if(error.response.status === 404) throw new Error('Resource doesn\'t exist');
 
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
