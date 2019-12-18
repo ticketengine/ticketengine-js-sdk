@@ -324,7 +324,7 @@ export class WebClient {
                 if (remainingTries === 1) throw error;
 
                 // abort retry, unauthorized
-                if(responseStatus === 401) {
+                if(responseStatus === 401 || responseStatus === 403) {
                     this.clearToken();
                     // throw new Error('Unauthorized');
                     throw error;
