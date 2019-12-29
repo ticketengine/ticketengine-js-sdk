@@ -195,9 +195,9 @@ export class WebClient {
     // constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
     constructor(options: WebClientOptions) {
         this.token = options.token || '';
-        this.authUrl = options.authUrl || 'https://auth.ticketengine.io/';
-        this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io/';
-        this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io/';
+        this.authUrl = options.authUrl || 'https://auth.ticketengine.io';
+        this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io';
+        this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
         this.logger = options.logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         this.requestQueue = new TaskQueue(Promise, 1);
