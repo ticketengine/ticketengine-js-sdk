@@ -39,7 +39,7 @@ export interface UseTokenArguments extends CommandData {
 
 
 export interface CreateCouponResponse extends ApiResponse {
-    tagId: string;
+    couponId: string;
 }
 
 export interface ChangeCouponResponse extends ApiResponse {}
