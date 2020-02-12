@@ -23,7 +23,8 @@ export interface CreateTokensArguments extends CommandData {
 }
 
 export interface RemoveTokenArguments extends CommandData {
-    token: string;
+    id?: string;
+    token?: string;
 }
 
 export interface UseTokenArguments extends CommandData {
