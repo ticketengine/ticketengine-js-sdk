@@ -91,7 +91,7 @@ import {
     CheckoutOrderArguments,
     CheckoutOrderResponse,
     CompleteOrderArguments,
-    CompleteOrderResponse
+    CompleteOrderResponse, AddOrderTokenArguments, AddOrderTokenResponse
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -117,7 +117,15 @@ import {
     EditMailgunClientSettingsArguments,
     EditMailgunClientSettingsResponse,
     SendEmailArguments,
-    SendEmailResponse
+    SendEmailResponse,
+    AddEmailTemplateArguments,
+    AddEmailTemplateResponse,
+    EditEmailTemplateArguments,
+    EditEmailTemplateResponse,
+    RemoveEmailTemplateArguments,
+    RemoveEmailTemplateResponse,
+    SendEmailTemplateArguments,
+    SendEmailTemplateResponse
 } from './command/email';
 // import {Access, AccessDefinition, Event, Order, QueryResponse, Search} from "./query";
 import {QueryResponse, Search} from "./query";
@@ -167,6 +175,18 @@ import {
     RenameTagArguments,
     RenameTagResponse
 } from "./command/tag";
+import {
+    CreateCouponArguments,
+    CreateCouponResponse,
+    ChangeCouponArguments,
+    ChangeCouponResponse,
+    CreateTokensArguments,
+    CreateTokensResponse,
+    RemoveTokenArguments,
+    RemoveTokenResponse,
+    UseTokenArguments,
+    UseTokenResponse
+} from "./command/token";
 // import * as apiResponse from './Responses';
 
 
@@ -447,6 +467,8 @@ export class WebClient {
             this.sendCommand<CheckoutOrderResponse>('CheckoutOrder', data),
         completeOrder: async (data: CompleteOrderArguments): Promise<CompleteOrderResponse> =>
             this.sendCommand<CompleteOrderResponse>('CompleteOrder', data),
+        addOrderToken: async (data: AddOrderTokenArguments): Promise<AddOrderTokenResponse> =>
+            this.sendCommand<AddOrderTokenResponse>('AddOrderToken', data),
         // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
         //     this.sendQuery<QueryResponse<Order>>(query),
         // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
@@ -488,6 +510,14 @@ export class WebClient {
             this.sendCommand<EditMailgunClientSettingsResponse>('EditMailgunClientSettings', data),
         sendEmail: async (data: SendEmailArguments): Promise<SendEmailResponse> =>
             this.sendCommand<SendEmailResponse>('SendEmail', data),
+        addEmailTemplate: async (data: AddEmailTemplateArguments): Promise<AddEmailTemplateResponse> =>
+            this.sendCommand<AddEmailTemplateResponse>('AddEmailTemplate', data),
+        editEmailTemplate: async (data: EditEmailTemplateArguments): Promise<EditEmailTemplateResponse> =>
+            this.sendCommand<EditEmailTemplateResponse>('EditEmailTemplate', data),
+        removeEmailTemplate: async (data: RemoveEmailTemplateArguments): Promise<RemoveEmailTemplateResponse> =>
+            this.sendCommand<RemoveEmailTemplateResponse>('RemoveEmailTemplate', data),
+        sendEmailTemplate: async (data: SendEmailTemplateArguments): Promise<SendEmailTemplateResponse> =>
+            this.sendCommand<SendEmailTemplateResponse>('SendEmailTemplate', data),
     };
 
     public readonly salesChannel = {
@@ -535,6 +565,19 @@ export class WebClient {
             this.sendCommand<RenameTagResponse>('RenameTag', data),
         removeTag: async (data: RemoveTagArguments): Promise<RemoveTagResponse> =>
             this.sendCommand<RemoveTagResponse>('RemoveTag', data),
+    };
+
+    public readonly tokens = {
+        createCoupon: async (data: CreateCouponArguments): Promise<CreateCouponResponse> =>
+            this.sendCommand<CreateCouponResponse>('CreateCoupon', data),
+        changeCoupon: async (data: ChangeCouponArguments): Promise<ChangeCouponResponse> =>
+            this.sendCommand<ChangeCouponResponse>('ChangeCoupon', data),
+        createTokens: async (data: CreateTokensArguments): Promise<CreateTokensResponse> =>
+            this.sendCommand<CreateTokensResponse>('CreateTokens', data),
+        removeToken: async (data: RemoveTokenArguments): Promise<RemoveTokenResponse> =>
+            this.sendCommand<RemoveTokenResponse>('RemoveToken', data),
+        useToken: async (data: UseTokenArguments): Promise<UseTokenResponse> =>
+            this.sendCommand<UseTokenResponse>('UseToken', data),
     };
 }
 

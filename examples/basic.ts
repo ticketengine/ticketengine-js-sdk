@@ -11,8 +11,8 @@ async function run() {
     const token = 'some token';
     const logger = new Logger();
     // const client = new WebClient(token, logger, "http://127.0.0.1:8000", "http://127.0.0.1:8000/graph");
-    // const client = new WebClient({logger, adminApiUrl: 'http://127.0.0.1:8000', graphApiUrl: 'http://127.0.0.1:8000/graph'});
-    const client = new WebClient({logger, adminApiUrl: 'https://t-admin-api.ticketengine.io', graphApiUrl: 'https://t-graph-api.ticketengine.io', authUrl: 'https://t-auth.ticketengine.io'});
+    const client = new WebClient({logger, adminApiUrl: 'http://127.0.0.1:8000', graphApiUrl: 'http://127.0.0.1:8000/graph'});
+    // const client = new WebClient({logger, adminApiUrl: 'https://t-admin-api.ticketengine.io', graphApiUrl: 'https://t-graph-api.ticketengine.io', authUrl: 'https://t-auth.ticketengine.io'});
 
     //
     // const r = await client.access.createEventManager({capacityAllocation: CapacityAllocation.static});
@@ -30,7 +30,8 @@ async function run() {
         //     username: 'admin',
         //     password: 'AdfRvNNYZZbWy2xuU6KWnaNWunELEPh297r4mxWjvQ'
         // });
-        const r = await client.user.createUser({username: 'test', password: 'test', scopes: ['customer:write', 'event_manager:write']});
+        // const r = await client.user.createUser({username: 'test', password: 'test', scopes: ['customer:write', 'event_manager:write']});
+        const r = await client.tokens.createCoupon({name: 'test', description: 'lorum ipsum', useLimit: 1});
 console.log(r);
     } catch (e) {
 console.error(e);

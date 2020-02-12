@@ -33,6 +33,47 @@ export interface SendEmailArguments extends CommandData {
     attachment?: string;
 }
 
+export interface AddEmailTemplateArguments extends CommandData {
+    name: string;
+    from: string;
+    subject: string;
+    template: string;
+    senderName?: string;
+    cc?: string;
+    bcc?: string;
+    tracking?: boolean;
+    attachment?: Array<EmailTemplateAttachment>;
+}
+
+export interface EditEmailTemplateArguments extends CommandData {
+    id: string;
+    name: string;
+    from: string;
+    subject: string;
+    template: string;
+    senderName?: string;
+    cc?: string;
+    bcc?: string;
+    tracking?: boolean;
+    attachment?: Array<EmailTemplateAttachment>;
+}
+
+export interface RemoveEmailTemplateArguments extends CommandData {
+    id: string;
+}
+
+export interface SendEmailTemplateArguments extends CommandData {
+    templateId: string;
+    email: string;
+    orderId?: string;
+    customerId?: string;
+}
+
+export interface EmailTemplateAttachment {
+    filename: string;
+    template: string;
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,4 +90,15 @@ export interface SendEmailResponse extends ApiResponse {
     emailId: string;
 }
 
+export interface AddEmailTemplateResponse extends ApiResponse {
+    templateId: string;
+}
 
+export interface EditEmailTemplateResponse extends ApiResponse {
+}
+
+export interface RemoveEmailTemplateResponse extends ApiResponse {
+}
+
+export interface SendEmailTemplateResponse extends ApiResponse {
+}

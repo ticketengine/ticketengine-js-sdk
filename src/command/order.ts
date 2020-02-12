@@ -61,6 +61,10 @@ export interface CompleteOrderArguments extends CommandData {
     aggregateId: string;
 }
 
+export interface AddOrderTokenArguments extends CommandData {
+    aggregateId: string;
+    token: string;
+}
 
 
 
@@ -99,6 +103,9 @@ export interface CheckoutOrderResponse extends ApiResponse {
 }
 
 export interface CompleteOrderResponse extends ApiResponse {
+}
+
+export interface AddOrderTokenResponse extends ApiResponse {
 }
 
 
