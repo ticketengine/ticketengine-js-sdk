@@ -240,10 +240,11 @@ export class WebClient {
         // attach(this.axios);
     }
 
-    private setToken(token: string, expiresIn: number): void {
+    private setToken(token: string, expiresIn: number, refreshToken: string): void {
         if(localStorage) {
             localStorage.setItem("te-token", token);
             localStorage.setItem("te-token-expires-on", moment().add(expiresIn, 's').format('YYYY-MM-DD HH:mm'));
+            localStorage.setItem("te-refresh-token", refreshToken);
         }
     }
 
@@ -254,10 +255,18 @@ export class WebClient {
         return '';
     }
 
+    private getRefreshToken(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-refresh-token") || '';
+        }
+        return '';
+    }
+
     private clearToken(): void {
         if(localStorage) {
             localStorage.removeItem("te-token");
             localStorage.removeItem("te-token-expires-on");
+            localStorage.removeItem("te-refresh-token");
         }
     }
 
@@ -278,8 +287,8 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
-        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn);
-        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn);
+        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
+        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
         return response.data;
     }
 
