@@ -441,7 +441,7 @@ export class WebClient {
         returnAccess: async (data: ReturnAccessArguments): Promise<ReturnAccessResponse> =>
             this.sendCommand<ReturnAccessResponse>('ReturnAccess', data),
         useAccess: async (data: UseAccessArguments): Promise<UseAccessResponse> =>
-            this.sendCommand<UseAccessResponse>('UseAccess', data),
+            this.sendCommand<UseAccessResponse>('UseAccess', data, 1),
         // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
         //     this.sendQuery<QueryResponse<Event>>(query),
         // getEvents: async (query: string): Promise<QueryResponse<Array<Event>>> =>
