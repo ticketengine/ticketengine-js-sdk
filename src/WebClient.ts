@@ -293,7 +293,7 @@ export class WebClient {
     }
 
 
-    private async sendCommand<T>(command: string, commandData: any): Promise<T> {
+    private async sendCommand<T>(command: string, commandData: any, tries: number = 5): Promise<T> {
         this.logger.debug('send command: ' + command);
         let url = this.adminApiUrl;
         const headers = {
@@ -307,12 +307,12 @@ export class WebClient {
             commandData
         );
 
-        const response = await this.request<T>(url, body, headers, 5);
+        const response = await this.request<T>(url, body, headers, tries);
         return response.data;
     }
 
 
-    private async sendQuery<T>(query: string): Promise<T> {
+    private async sendQuery<T>(query: string, tries: number = 3): Promise<T> {
         this.logger.debug('send query :' + query);
         let url = this.graphApiUrl;
         const body = {query};
@@ -320,7 +320,7 @@ export class WebClient {
             'Authorization': 'Bearer ' + this.getToken(),
             'Content-Type': 'application/json'
         };
-        const response = await this.request<T>(url, body, headers, 3);
+        const response = await this.request<T>(url, body, headers, tries);
         return response.data;
     }
 
@@ -353,7 +353,8 @@ export class WebClient {
                 if (remainingTries === 1) throw error;
 
                 // abort retry, unauthorized
-                if(responseStatus === 401 || responseStatus === 403) {
+                // if(responseStatus === 401 || responseStatus === 403) {
+                if(responseStatus === 401) {
                     this.clearToken();
                     // throw new Error('Unauthorized');
                     throw error;
