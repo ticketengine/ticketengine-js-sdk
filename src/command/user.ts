@@ -58,9 +58,9 @@ export interface EnableUserResponse extends ApiResponse {}
 export interface DisableUserResponse extends ApiResponse {}
 
 export interface GetAuthTokenResponse extends ApiResponse {
-    token_type: string;
-    expires_in: string;
-    access_token: string;
-    refresh_token: string;
+    tokenType: string;
+    expiresTn: string;
+    accessToken: string;
+    refreshToken: string;
 }
 

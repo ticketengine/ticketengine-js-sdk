@@ -198,7 +198,7 @@ export class WebClient {
     // private requestQueue: PQueue;
 
     // private requestQueue: TaskQueue<Promise<AxiosResponse>>;
-    private requestQueue: TaskQueue<Promise>;
+    // private requestQueue: TaskQueue<Promise>;
 
     private logger: LoggerInterface;
 
@@ -220,7 +220,7 @@ export class WebClient {
         this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
         this.logger = options.logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
-        this.requestQueue = new TaskQueue(Promise, 1);
+        // this.requestQueue = new TaskQueue(Promise, 1);
         this.axios = axios.create({
             // baseURL: adminApiUrl || 'https://ticketengine.com/api/',
             // headers: Object.assign({
@@ -288,7 +288,7 @@ export class WebClient {
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
         if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
-        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+        // if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
         return response.data;
     }
 
