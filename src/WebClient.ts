@@ -362,7 +362,7 @@ export class WebClient {
 
                 // abort retry, resource doesn't exist
                 // if(responseStatus === 404) throw new Error('Resource doesn\'t exist');
-                if(responseStatus === 404) throw error;
+                // if(responseStatus === 404) throw error;
 
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
