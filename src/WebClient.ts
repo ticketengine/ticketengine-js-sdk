@@ -69,7 +69,45 @@ import {
     ChangeEventExternalIdsResponse,
     ChangeAccessDefinitionTagsArguments,
     ChangeAccessDefinitionTagsResponse,
-    ChangeAccessDefinitionCapacityLocationsArguments, ChangeAccessDefinitionCapacityLocationsResponse
+    ChangeAccessDefinitionCapacityLocationsArguments,
+    ChangeAccessDefinitionCapacityLocationsResponse,
+    PublishEventArguments,
+    PublishEventResponse,
+    DraftEventArguments,
+    DraftEventResponse,
+    RelocateEventArguments,
+    RelocateEventResponse,
+    RemoveAccessDefinitionArguments,
+    RemoveAccessDefinitionResponse,
+    ApplyEventTemplateArguments,
+    ApplyEventTemplateResponse,
+    CreateEventManagerAndPlanEventArguments,
+    CreateEventManagerAndPlanEventResponse,
+    CreateEventTemplateArguments,
+    CreateEventTemplateResponse,
+    RenameEventTemplateArguments,
+    RenameEventTemplateResponse,
+    AddEventTemplateCapacityArguments,
+    AddEventTemplateCapacityResponse,
+    ChangeEventTemplateCapacityArguments,
+    ChangeEventTemplateCapacityResponse,
+    AddEventTemplateAccessDefinitionArguments,
+    AddEventTemplateAccessDefinitionResponse,
+    RemoveEventTemplateAccessDefinitionArguments,
+    RemoveEventTemplateAccessDefinitionResponse,
+    RescheduleEventTemplateAccessDefinitionArguments,
+    RescheduleEventTemplateAccessDefinitionResponse,
+    RenameEventTemplateAccessDefinitionArguments,
+    RenameEventTemplateAccessDefinitionResponse,
+    ChangeEventTemplateAccessDefinitionCapacityLocationAllocationArguments,
+    ChangeEventTemplateAccessDefinitionCapacityLocationAllocationResponse,
+    ChangeEventTemplateAccessDefinitionConditionsArguments,
+    ChangeEventTemplateAccessDefinitionConditionsResponse,
+    ChangeEventTemplateAccessDefinitionTagsArguments,
+    ChangeEventTemplateAccessDefinitionTagsResponse,
+    ChangeEventTemplateAccessDefinitionUseLimitArguments,
+    ChangeEventTemplateAccessDefinitionUseLimitResponse,
+    AssignEventTemplateAccessDefinitionLocationArguments, AssignEventTemplateAccessDefinitionLocationResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -187,6 +225,7 @@ import {
     UseTokenArguments,
     UseTokenResponse
 } from "./command/token";
+import {StartBatchOperationArguments, StartBatchOperationResponse} from "./command/batchOperation";
 // import * as apiResponse from './Responses';
 
 
@@ -386,14 +425,24 @@ export class WebClient {
     public readonly access = {
         createEventManager: async (data: CreateEventManagerArguments): Promise<CreateEventManagerResponse> =>
             this.sendCommand<CreateEventManagerResponse>('CreateEventManager', data),
+        createEventManagerAndPlanEvent: async (data: CreateEventManagerAndPlanEventArguments): Promise<CreateEventManagerAndPlanEventResponse> =>
+            this.sendCommand<CreateEventManagerAndPlanEventResponse>('CreateEventManagerAndPlanEvent', data),
+
+        // event
         planEvent: async (data: PlanEventArguments): Promise<PlanEventResponse> =>
             this.sendCommand<PlanEventResponse>('PlanEvent', data),
         renameEvent: async (data: RenameEventArguments): Promise<RenameEventResponse> =>
             this.sendCommand<RenameEventResponse>('RenameEvent', data),
         rescheduleEvent: async (data: RescheduleEventArguments): Promise<RescheduleEventResponse> =>
             this.sendCommand<RescheduleEventResponse>('RescheduleEvent', data),
+        relocateEvent: async (data: RelocateEventArguments): Promise<RelocateEventResponse> =>
+            this.sendCommand<RelocateEventResponse>('RelocateEvent', data),
         cancelEvent: async (data: CancelEventArguments): Promise<CancelEventResponse> =>
             this.sendCommand<CancelEventResponse>('CancelEvent', data),
+        publishEvent: async (data: PublishEventArguments): Promise<PublishEventResponse> =>
+            this.sendCommand<PublishEventResponse>('PublishEvent', data),
+        draftEvent: async (data: DraftEventArguments): Promise<DraftEventResponse> =>
+            this.sendCommand<DraftEventResponse>('DraftEvent', data),
         assignEventTag: async (data: AssignEventTagArguments): Promise<AssignEventTagResponse> =>
             this.sendCommand<AssignEventTagResponse>('AssignEventTag', data),
         revokeEventTag: async (data: RevokeEventTagArguments): Promise<RevokeEventTagResponse> =>
@@ -406,12 +455,20 @@ export class WebClient {
             this.sendCommand<RemoveEventExternalIdResponse>('RemoveEventExternalId', data),
         changeEventExternalIds: async (data: ChangeEventExternalIdsArguments): Promise<ChangeEventExternalIdsResponse> =>
             this.sendCommand<ChangeEventExternalIdsResponse>('ChangeEventExternalIds', data),
+        applyEventTemplate: async (data: ApplyEventTemplateArguments): Promise<ApplyEventTemplateResponse> =>
+            this.sendCommand<ApplyEventTemplateResponse>('ApplyEventTemplate', data),
+
+        // capacity
         addCapacity: async (data: AddCapacityArguments): Promise<AddCapacityResponse> =>
             this.sendCommand<AddCapacityResponse>('AddCapacity', data),
         changeCapacity: async (data: ChangeCapacityArguments): Promise<ChangeCapacityResponse> =>
             this.sendCommand<ChangeCapacityResponse>('ChangeCapacity', data),
+
+        // access definition
         addAccessDefinition: async (data: AddAccessDefinitionArguments): Promise<AddAccessDefinitionResponse> =>
             this.sendCommand<AddAccessDefinitionResponse>('AddAccessDefinition', data),
+        removeAccessDefinition: async (data: RemoveAccessDefinitionArguments): Promise<RemoveAccessDefinitionResponse> =>
+            this.sendCommand<RemoveAccessDefinitionResponse>('RemoveAccessDefinition', data),
         renameAccessDefinition: async (data: RenameAccessDefinitionArguments): Promise<RenameAccessDefinitionResponse> =>
             this.sendCommand<RenameAccessDefinitionResponse>('RenameAccessDefinition', data),
         rescheduleAccessDefinition: async (data: RescheduleAccessDefinitionArguments): Promise<RescheduleAccessDefinitionResponse> =>
@@ -436,6 +493,8 @@ export class WebClient {
             this.sendCommand<ChangeAccessDefinitionTagsResponse>('ChangeAccessDefinitionTags', data),
         markAccessDefinitionAsTemplate: async (data: MarkAccessDefinitionAsTemplateArguments): Promise<MarkAccessDefinitionAsTemplateResponse> =>
             this.sendCommand<MarkAccessDefinitionAsTemplateResponse>('MarkAccessDefinitionAsTemplate', data),
+
+        // access
         reserveAccess: async (data: ReserveAccessArguments): Promise<ReserveAccessResponse> =>
             this.sendCommand<ReserveAccessResponse>('ReserveAccess', data),
         grantAccess: async (data: GrantAccessArguments): Promise<GrantAccessResponse> =>
@@ -444,6 +503,35 @@ export class WebClient {
             this.sendCommand<ReturnAccessResponse>('ReturnAccess', data),
         useAccess: async (data: UseAccessArguments): Promise<UseAccessResponse> =>
             this.sendCommand<UseAccessResponse>('UseAccess', data, 1),
+
+        // event template
+        createEventTemplate: async (data: CreateEventTemplateArguments): Promise<CreateEventTemplateResponse> =>
+            this.sendCommand<CreateEventTemplateResponse>('CreateEventTemplate', data),
+        renameEventTemplate: async (data: RenameEventTemplateArguments): Promise<RenameEventTemplateResponse> =>
+            this.sendCommand<RenameEventTemplateResponse>('RenameEventTemplate', data),
+        addEventTemplateCapacity: async (data: AddEventTemplateCapacityArguments): Promise<AddEventTemplateCapacityResponse> =>
+            this.sendCommand<AddEventTemplateCapacityResponse>('AddEventTemplateCapacity', data),
+        changeEventTemplateCapacity: async (data: ChangeEventTemplateCapacityArguments): Promise<ChangeEventTemplateCapacityResponse> =>
+            this.sendCommand<ChangeEventTemplateCapacityResponse>('ChangeEventTemplateCapacity', data),
+        addEventTemplateAccessDefinition: async (data: AddEventTemplateAccessDefinitionArguments): Promise<AddEventTemplateAccessDefinitionResponse> =>
+            this.sendCommand<AddEventTemplateAccessDefinitionResponse>('AddEventTemplateAccessDefinition', data),
+        removeEventTemplateAccessDefinition: async (data: RemoveEventTemplateAccessDefinitionArguments): Promise<RemoveEventTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RemoveEventTemplateAccessDefinitionResponse>('RemoveEventTemplateAccessDefinition', data),
+        rescheduleEventTemplateAccessDefinition: async (data: RescheduleEventTemplateAccessDefinitionArguments): Promise<RescheduleEventTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RescheduleEventTemplateAccessDefinitionResponse>('RescheduleEventTemplateAccessDefinition', data),
+        renameEventTemplateAccessDefinition: async (data: RenameEventTemplateAccessDefinitionArguments): Promise<RenameEventTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RenameEventTemplateAccessDefinitionResponse>('RenameEventTemplateAccessDefinition', data),
+        changeEventTemplateAccessDefinitionCapacityLocationAllocation: async (data: ChangeEventTemplateAccessDefinitionCapacityLocationAllocationArguments): Promise<ChangeEventTemplateAccessDefinitionCapacityLocationAllocationResponse> =>
+            this.sendCommand<ChangeEventTemplateAccessDefinitionCapacityLocationAllocationResponse>('ChangeEventTemplateAccessDefinitionCapacityLocationAllocation', data),
+        changeEventTemplateAccessDefinitionConditions: async (data: ChangeEventTemplateAccessDefinitionConditionsArguments): Promise<ChangeEventTemplateAccessDefinitionConditionsResponse> =>
+            this.sendCommand<ChangeEventTemplateAccessDefinitionConditionsResponse>('ChangeEventTemplateAccessDefinitionConditions', data),
+        changeEventTemplateAccessDefinitionTags: async (data: ChangeEventTemplateAccessDefinitionTagsArguments): Promise<ChangeEventTemplateAccessDefinitionTagsResponse> =>
+            this.sendCommand<ChangeEventTemplateAccessDefinitionTagsResponse>('ChangeEventTemplateAccessDefinitionTags', data),
+        changeEventTemplateAccessDefinitionUseLimit: async (data: ChangeEventTemplateAccessDefinitionUseLimitArguments): Promise<ChangeEventTemplateAccessDefinitionUseLimitResponse> =>
+            this.sendCommand<ChangeEventTemplateAccessDefinitionUseLimitResponse>('ChangeEventTemplateAccessDefinitionUseLimit', data),
+        assignEventTemplateAccessDefinitionLocation: async (data: AssignEventTemplateAccessDefinitionLocationArguments): Promise<AssignEventTemplateAccessDefinitionLocationResponse> =>
+            this.sendCommand<AssignEventTemplateAccessDefinitionLocationResponse>('AssignEventTemplateAccessDefinitionLocation', data),
+
         // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
         //     this.sendQuery<QueryResponse<Event>>(query),
         // getEvents: async (query: string): Promise<QueryResponse<Array<Event>>> =>
@@ -590,6 +678,11 @@ export class WebClient {
             this.sendCommand<RemoveTokenResponse>('RemoveToken', data),
         useToken: async (data: UseTokenArguments): Promise<UseTokenResponse> =>
             this.sendCommand<UseTokenResponse>('UseToken', data),
+    };
+
+    public readonly batchOperation = {
+        startBatchOperation: async (data: StartBatchOperationArguments): Promise<StartBatchOperationResponse> =>
+            this.sendCommand<StartBatchOperationResponse>('StartBatchOperation', data),
     };
 }
 

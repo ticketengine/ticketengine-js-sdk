@@ -1,0 +1,38 @@
+import {ApiResponse, CommandData} from "../call";
+
+
+export interface Operation {
+    reference?: string;
+}
+
+export interface CommandOperation extends Operation {
+    command: string;
+    body: any;
+}
+
+export interface QueryOperation extends Operation {
+    query: string;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Command arguments
+///////////////////////////////////////////////////////////////////////////////////////////////////
+export interface StartBatchOperationArguments extends CommandData {
+    username: string;
+    password: string;
+    scopes: Array<Operation>;
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Command responses
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+export interface StartBatchOperationResponse extends ApiResponse {
+    userId: string;
+}
+
