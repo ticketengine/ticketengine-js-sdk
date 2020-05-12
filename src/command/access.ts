@@ -130,6 +130,11 @@ export interface ApplyEventTemplateArguments extends CommandData {
     eventId: string;
     templateId: string;
 }
+export interface DetachEventTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    templateId: string;
+}
 
 
 // capacity
@@ -366,6 +371,7 @@ export interface AddEventExternalIdResponse extends ApiResponse {}
 export interface RemoveEventExternalIdResponse extends ApiResponse {}
 export interface ChangeEventExternalIdsResponse extends ApiResponse {}
 export interface ApplyEventTemplateResponse extends ApiResponse {}
+export interface DetachEventTemplateResponse extends ApiResponse {}
 
 
 // capacity

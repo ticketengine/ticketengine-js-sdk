@@ -107,7 +107,9 @@ import {
     ChangeEventTemplateAccessDefinitionTagsResponse,
     ChangeEventTemplateAccessDefinitionUseLimitArguments,
     ChangeEventTemplateAccessDefinitionUseLimitResponse,
-    AssignEventTemplateAccessDefinitionLocationArguments, AssignEventTemplateAccessDefinitionLocationResponse
+    AssignEventTemplateAccessDefinitionLocationArguments,
+    AssignEventTemplateAccessDefinitionLocationResponse,
+    DetachEventTemplateArguments, DetachEventTemplateResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -457,6 +459,8 @@ export class WebClient {
             this.sendCommand<ChangeEventExternalIdsResponse>('ChangeEventExternalIds', data),
         applyEventTemplate: async (data: ApplyEventTemplateArguments): Promise<ApplyEventTemplateResponse> =>
             this.sendCommand<ApplyEventTemplateResponse>('ApplyEventTemplate', data),
+        detachEventTemplate: async (data: DetachEventTemplateArguments): Promise<DetachEventTemplateResponse> =>
+            this.sendCommand<DetachEventTemplateResponse>('DetachEventTemplate', data),
 
         // capacity
         addCapacity: async (data: AddCapacityArguments): Promise<AddCapacityResponse> =>
