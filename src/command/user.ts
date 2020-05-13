@@ -20,6 +20,10 @@ export interface ChangeUserPasswordArguments extends CommandData {
     password: string;
 }
 
+export interface ResetUserPasswordArguments extends CommandData {
+    password: string;
+}
+
 export interface EnableUserArguments extends CommandData {
     id: string;
 }
@@ -50,15 +54,11 @@ export interface GetAuthTokenArguments extends CommandData {
 export interface CreateUserResponse extends ApiResponse {
     userId: string;
 }
-
 export interface ChangeUserScopeResponse extends ApiResponse {}
-
 export interface ChangeUserPasswordResponse extends ApiResponse {}
-
+export interface ResetUserPasswordResponse extends ApiResponse {}
 export interface EnableUserResponse extends ApiResponse {}
-
 export interface DisableUserResponse extends ApiResponse {}
-
 export interface GetAuthTokenResponse extends ApiResponse {
     tokenType: string;
     expiresTn: string;

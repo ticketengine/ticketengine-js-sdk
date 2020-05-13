@@ -205,7 +205,11 @@ import {
     EnableUserArguments,
     EnableUserResponse,
     DisableUserArguments,
-    DisableUserResponse, GetAuthTokenArguments, GetAuthTokenResponse
+    DisableUserResponse,
+    GetAuthTokenArguments,
+    GetAuthTokenResponse,
+    ResetUserPasswordResponse,
+    ResetUserPasswordArguments
 } from "./command/user";
 import {
     CreateTagArguments,
@@ -654,6 +658,8 @@ export class WebClient {
             this.sendCommand<ChangeUserScopeResponse>('ChangeUserScope', data),
         changeUserPassword: async (data: ChangeUserPasswordArguments): Promise<ChangeUserPasswordResponse> =>
             this.sendCommand<ChangeUserPasswordResponse>('ChangeUserPassword', data),
+        resetUserPassword: async (data: ResetUserPasswordArguments): Promise<ResetUserPasswordResponse> =>
+            this.sendCommand<ResetUserPasswordResponse>('ResetUserPassword', data),
         enableUser: async (data: EnableUserArguments): Promise<EnableUserResponse> =>
             this.sendCommand<EnableUserResponse>('EnableUser', data),
         disableUser: async (data: DisableUserArguments): Promise<DisableUserResponse> =>
