@@ -31,7 +31,7 @@ export interface RenameSalesChannelArguments extends CommandData {
     description?: string;
 }
 
-export interface CreateRegisterArguments extends CommandData {
+export interface AddRegisterArguments extends CommandData {
     aggregateId: string;
     name: string;
     description?: string;
@@ -95,7 +95,7 @@ export interface RenameSalesChannelResponse extends ApiResponse {
 
 }
 
-export interface CreateRegisterResponse extends ApiResponse {}
+export interface AddRegisterResponse extends ApiResponse {}
 
 export interface RenameRegisterResponse extends ApiResponse {}
 

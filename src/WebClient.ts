@@ -185,7 +185,7 @@ import {
     RenameRegisterArguments,
     RenameRegisterResponse,
     RemoveRegisterArguments,
-    RemoveRegisterResponse
+    RemoveRegisterResponse, AddRegisterArguments, AddRegisterResponse
 } from "./command/salesChannel";
 import {
     ChangeCustomerArguments,
@@ -411,6 +411,9 @@ export class WebClient {
                 // if(responseStatus === 404) throw new Error('Resource doesn\'t exist');
                 // if(responseStatus === 404) throw error;
 
+                // domain in invalid state, do not retry
+                if(responseStatus === 409) throw error;
+
                 return await self.request<T>(url, body, headers, remainingTries - 1);
             }
         // });
@@ -633,8 +636,8 @@ export class WebClient {
             this.sendCommand<CreateSalesChannelResponse>('CreateSalesChannel', data),
         renameSalesChannel: async (data: RenameSalesChannelArguments): Promise<RenameSalesChannelResponse> =>
             this.sendCommand<RenameSalesChannelResponse>('RenameSalesChannel', data),
-        createRegister: async (data: CreateRegisterArguments): Promise<CreateRegisterResponse> =>
-            this.sendCommand<CreateRegisterResponse>('CreateRegister', data),
+        addRegister: async (data: AddRegisterArguments): Promise<AddRegisterResponse> =>
+            this.sendCommand<AddRegisterResponse>('AddRegister', data),
         renameRegister: async (data: RenameRegisterArguments): Promise<RenameRegisterResponse> =>
             this.sendCommand<RenameRegisterResponse>('RenameRegister', data),
         removeRegister: async (data: RemoveRegisterArguments): Promise<RemoveRegisterResponse> =>
