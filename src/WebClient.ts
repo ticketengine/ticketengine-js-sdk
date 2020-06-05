@@ -180,8 +180,6 @@ import {
     CreateSalesChannelResponse, RenameDeliveryDefinitionArguments, RenameDeliveryDefinitionResponse,
     RenameSalesChannelArguments,
     RenameSalesChannelResponse,
-    CreateRegisterArguments,
-    CreateRegisterResponse,
     RenameRegisterArguments,
     RenameRegisterResponse,
     RemoveRegisterArguments,
