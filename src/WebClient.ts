@@ -338,6 +338,8 @@ export class WebClient {
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, 3);
         // @ts-ignore
+        if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
+        // @ts-ignore
         if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
         // @ts-ignore
         if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
