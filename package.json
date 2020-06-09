@@ -1,6 +1,6 @@
 {
   "name": "ticketengine-sdk",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "JavaScript SDK with a web client for TicketEngine",
   "dependencies": {
     "@types/form-data": "^2.2.1",
