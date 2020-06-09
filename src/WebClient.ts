@@ -131,7 +131,14 @@ import {
     CheckoutOrderArguments,
     CheckoutOrderResponse,
     CompleteOrderArguments,
-    CompleteOrderResponse, AddOrderTokenArguments, AddOrderTokenResponse
+    CompleteOrderResponse,
+    AddOrderTokenArguments,
+    AddOrderTokenResponse,
+    AddTimeoutSettingArguments,
+    AddTimeoutSettingResponse,
+    ChangeTimeoutSettingResponse,
+    ChangeTimeoutSettingArguments,
+    RemoveTimeoutSettingArguments, RemoveTimeoutSettingResponse
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -172,18 +179,18 @@ import {QueryResponse, Search} from "./query";
 import {
     AddDeliveryDefinitionArguments,
     AddDeliveryDefinitionResponse,
-    ChangeDeliveryDefinitionConditionArguments,
-    ChangeDeliveryDefinitionConditionResponse,
-    ChangeDeliveryDefinitionContentArguments,
-    ChangeDeliveryDefinitionContentResponse, CreateEmailDeliveryArguments, CreateEmailDeliveryResponse,
     CreateSalesChannelArguments,
-    CreateSalesChannelResponse, RenameDeliveryDefinitionArguments, RenameDeliveryDefinitionResponse,
+    CreateSalesChannelResponse,
     RenameSalesChannelArguments,
     RenameSalesChannelResponse,
     RenameRegisterArguments,
     RenameRegisterResponse,
     RemoveRegisterArguments,
-    RemoveRegisterResponse, AddRegisterArguments, AddRegisterResponse
+    RemoveRegisterResponse,
+    AddRegisterArguments,
+    AddRegisterResponse,
+    EditDeliveryDefinitionArguments,
+    EditDeliveryDefinitionResponse, RemoveDeliveryDefinitionArguments, RemoveDeliveryDefinitionResponse
 } from "./command/salesChannel";
 import {
     ChangeCustomerArguments,
@@ -582,6 +589,12 @@ export class WebClient {
         //     this.sendQuery<QueryResponse<Order>>(query),
         // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
         //     this.sendQuery<QueryResponse<Array<Order>>>(query),
+        addTimeoutSetting: async (data: AddTimeoutSettingArguments): Promise<AddTimeoutSettingResponse> =>
+            this.sendCommand<AddTimeoutSettingResponse>('AddTimeoutSetting', data),
+        changeTimeoutSetting: async (data: ChangeTimeoutSettingArguments): Promise<ChangeTimeoutSettingResponse> =>
+            this.sendCommand<ChangeTimeoutSettingResponse>('ChangeTimeoutSetting', data),
+        removeTimeoutSetting: async (data: RemoveTimeoutSettingArguments): Promise<RemoveTimeoutSettingResponse> =>
+            this.sendCommand<RemoveTimeoutSettingResponse>('RemoveTimeoutSetting', data),
     };
 
     public readonly payment = {
@@ -642,14 +655,18 @@ export class WebClient {
             this.sendCommand<RemoveRegisterResponse>('RemoveRegister', data),
         addDeliveryDefinition: async (data: AddDeliveryDefinitionArguments): Promise<AddDeliveryDefinitionResponse> =>
             this.sendCommand<AddDeliveryDefinitionResponse>('AddDeliveryDefinition', data),
-        changeDeliveryDefinitionCondition: async (data: ChangeDeliveryDefinitionConditionArguments): Promise<ChangeDeliveryDefinitionConditionResponse> =>
-            this.sendCommand<ChangeDeliveryDefinitionConditionResponse>('ChangeDeliveryDefinitionCondition', data),
-        changeDeliveryDefinitionContent: async (data: ChangeDeliveryDefinitionContentArguments): Promise<ChangeDeliveryDefinitionContentResponse> =>
-            this.sendCommand<ChangeDeliveryDefinitionContentResponse>('ChangeDeliveryDefinitionContent', data),
-        renameDeliveryDefinition: async (data: RenameDeliveryDefinitionArguments): Promise<RenameDeliveryDefinitionResponse> =>
-            this.sendCommand<RenameDeliveryDefinitionResponse>('RenameDeliveryDefinition', data),
-        createEmailDelivery: async (data: CreateEmailDeliveryArguments): Promise<CreateEmailDeliveryResponse> =>
-            this.sendCommand<CreateEmailDeliveryResponse>('CreateEmailDelivery', data),
+        editDeliveryDefinition: async (data: EditDeliveryDefinitionArguments): Promise<EditDeliveryDefinitionResponse> =>
+            this.sendCommand<EditDeliveryDefinitionResponse>('EditDeliveryDefinition', data),
+        removeDeliveryDefinition: async (data: RemoveDeliveryDefinitionArguments): Promise<RemoveDeliveryDefinitionResponse> =>
+            this.sendCommand<RemoveDeliveryDefinitionResponse>('RemoveDeliveryDefinition', data),
+        // changeDeliveryDefinitionCondition: async (data: ChangeDeliveryDefinitionConditionArguments): Promise<ChangeDeliveryDefinitionConditionResponse> =>
+        //     this.sendCommand<ChangeDeliveryDefinitionConditionResponse>('ChangeDeliveryDefinitionCondition', data),
+        // changeDeliveryDefinitionContent: async (data: ChangeDeliveryDefinitionContentArguments): Promise<ChangeDeliveryDefinitionContentResponse> =>
+        //     this.sendCommand<ChangeDeliveryDefinitionContentResponse>('ChangeDeliveryDefinitionContent', data),
+        // renameDeliveryDefinition: async (data: RenameDeliveryDefinitionArguments): Promise<RenameDeliveryDefinitionResponse> =>
+        //     this.sendCommand<RenameDeliveryDefinitionResponse>('RenameDeliveryDefinition', data),
+        // createEmailDelivery: async (data: CreateEmailDeliveryArguments): Promise<CreateEmailDeliveryResponse> =>
+        //     this.sendCommand<CreateEmailDeliveryResponse>('CreateEmailDelivery', data),
     };
 
     public readonly user = {
