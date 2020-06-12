@@ -102,19 +102,27 @@ export interface EditMollieClientSettingsResponse extends ApiResponse {
 }
 
 export interface CreateCashPaymentResponse extends ApiResponse {
-    paymentId: string;
+    data: {
+        paymentId: string;
+    }
 }
 
 export interface CreatePinPaymentResponse extends ApiResponse {
-    paymentId: string;
+    data: {
+        paymentId: string;
+    }
 }
 
 export interface CreateAdyenPaymentSessionResponse extends ApiResponse {
-    paymentId: string;
+    data: {
+        paymentId: string;
+    }
 }
 
 export interface CreateMolliePaymentResponse extends ApiResponse {
-    paymentId: string;
-    paymentUrl: string;
+    data: {
+        paymentId: string;
+        paymentUrl: string;
+    }
 }
 

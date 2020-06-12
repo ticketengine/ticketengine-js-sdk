@@ -107,14 +107,18 @@ export interface RemoveDeliveryDefinitionArguments extends CommandData {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 export interface CreateSalesChannelResponse extends ApiResponse {
-    salesChannelId: string;
+    data: {
+        salesChannelId: string;
+    }
 }
 export interface RenameSalesChannelResponse extends ApiResponse {}
 export interface AddRegisterResponse extends ApiResponse {}
 export interface RenameRegisterResponse extends ApiResponse {}
 export interface RemoveRegisterResponse extends ApiResponse {}
 export interface AddDeliveryDefinitionResponse extends ApiResponse {
-    deliveryDefinitionId: string;
+    data: {
+        deliveryDefinitionId: string;
+    }
 }
 export interface EditDeliveryDefinitionResponse extends ApiResponse {}
 export interface RemoveDeliveryDefinitionResponse extends ApiResponse {}

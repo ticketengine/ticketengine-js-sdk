@@ -40,7 +40,9 @@ export interface UseTokenArguments extends CommandData {
 
 
 export interface CreateCouponResponse extends ApiResponse {
-    couponId: string;
+    data: {
+        couponId: string;
+    }
 }
 
 export interface ChangeCouponResponse extends ApiResponse {}
@@ -50,9 +52,11 @@ export interface CreateTokensResponse extends ApiResponse {}
 export interface RemoveTokenResponse extends ApiResponse {}
 
 export interface UseTokenResponse extends ApiResponse {
-    tokenId: string;
-    tokenTypeId: string;
-    type: string;
-    token: string;
+    data: {
+        tokenId: string;
+        tokenTypeId: string;
+        type: string;
+        token: string;
+    }
 }
 

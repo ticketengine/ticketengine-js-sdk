@@ -35,7 +35,9 @@ export interface RemoveCustomerArguments extends CommandData {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 export interface CreateCustomerResponse extends ApiResponse {
-    customerId: string;
+    data: {
+        customerId: string;
+    }
 }
 
 export interface ChangeCustomerResponse extends ApiResponse {

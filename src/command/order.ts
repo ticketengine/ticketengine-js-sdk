@@ -81,13 +81,19 @@ export interface RemoveTimeoutSettingArguments extends CommandData {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 export interface CreateOrderResponse extends ApiResponse {
-    orderId: string;
+    data: {
+        orderId: string;
+    }
 }
 export interface AddAccessToCartResponse extends ApiResponse {
-    orderLineItemId: string;
+    data: {
+        orderLineItemId: string;
+    }
 }
 export interface AddProductToCartResponse extends ApiResponse {
-    orderLineItemId: string;
+    data: {
+        orderLineItemId: string;
+    }
 }
 export interface ReserveAccessInCartResponse extends ApiResponse {}
 export interface ReserveProductInCartResponse extends ApiResponse {}
@@ -99,7 +105,9 @@ export interface CompleteOrderResponse extends ApiResponse {}
 export interface AddOrderTokenResponse extends ApiResponse {}
 
 export interface AddTimeoutSettingResponse extends ApiResponse {
-    id: string;
+    data: {
+        id: string;
+    }
 }
 export interface ChangeTimeoutSettingResponse extends ApiResponse {}
 export interface RemoveTimeoutSettingResponse extends ApiResponse {}

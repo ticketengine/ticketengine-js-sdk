@@ -26,7 +26,9 @@ export interface RemoveTagArguments extends CommandData {
 
 
 export interface CreateTagResponse extends ApiResponse {
-    tagId: string;
+    data: {
+        tagId: string;
+    }
 }
 
 export interface RenameTagResponse extends ApiResponse {}

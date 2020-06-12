@@ -349,14 +349,20 @@ export interface AssignEventTemplateAccessDefinitionLocationArguments extends Co
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 export interface CreateEventManagerResponse extends ApiResponse {
-    eventManagerId: string;
+    data: {
+        eventManagerId: string;
+    }
 }
 export interface PlanEventResponse extends ApiResponse {
-    eventId: string;
+    data: {
+        eventId: string;
+    }
 }
 export interface CreateEventManagerAndPlanEventResponse extends ApiResponse {
-    eventManagerId: string;
-    eventId: string;
+    data: {
+        eventManagerId: string;
+        eventId: string;
+    }
 }
 export interface RenameEventResponse extends ApiResponse {}
 export interface RescheduleEventResponse extends ApiResponse {}
@@ -376,14 +382,19 @@ export interface DetachEventTemplateResponse extends ApiResponse {}
 
 // capacity
 export interface AddCapacityResponse extends ApiResponse {
-    capacityId: string;
+    data: {
+        capacityId: string;
+    }
 }
 export interface ChangeCapacityResponse extends ApiResponse {}
 
 
 // access definition
 export interface AddAccessDefinitionResponse extends ApiResponse {
-    accessDefinitionId: string;
+    data: {
+        accessDefinitionId: string;
+    }
+
 }
 export interface RemoveAccessDefinitionResponse extends ApiResponse {}
 export interface RenameAccessDefinitionResponse extends ApiResponse {}
@@ -402,10 +413,12 @@ export interface MarkAccessDefinitionAsTemplateResponse extends ApiResponse {}
 
 // access
 export interface ReserveAccessResponse extends ApiResponse {
-    access: Array<{
-        accessId: string;
-        status: string;
-    }>;
+    data: {
+        access: Array<{
+            accessId: string;
+            status: string;
+        }>;
+    };
 }
 export interface GrantAccessResponse extends ApiResponse {}
 export interface ReturnAccessResponse extends ApiResponse {}
@@ -414,15 +427,21 @@ export interface UseAccessResponse extends ApiResponse {}
 
 // event template
 export interface CreateEventTemplateResponse extends ApiResponse {
-    eventTemplateId: string;
+    data: {
+        eventTemplateId: string;
+    };
 }
 export interface RenameEventTemplateResponse extends ApiResponse {}
 export interface AddEventTemplateCapacityResponse extends ApiResponse {
-    capacityId: string;
+    data: {
+        capacityId: string;
+    }
 }
 export interface ChangeEventTemplateCapacityResponse extends ApiResponse {}
 export interface AddEventTemplateAccessDefinitionResponse extends ApiResponse {
-    accessDefinitionId: string;
+    data: {
+        accessDefinitionId: string;
+    }
 }
 export interface RemoveEventTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RenameEventTemplateAccessDefinitionResponse extends ApiResponse {}

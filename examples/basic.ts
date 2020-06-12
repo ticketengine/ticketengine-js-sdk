@@ -16,7 +16,8 @@ async function run() {
 
     //
     // const r = await client.access.createEventManager({capacityAllocation: CapacityAllocation.static});
-    
+    // const r = await client.order.createOrder({});
+
 
 
     try {

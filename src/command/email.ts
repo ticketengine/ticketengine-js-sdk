@@ -87,11 +87,15 @@ export interface EditMailgunClientSettingsResponse extends ApiResponse {
 }
 
 export interface SendEmailResponse extends ApiResponse {
-    emailId: string;
+    data: {
+        emailId: string;
+    }
 }
 
 export interface AddEmailTemplateResponse extends ApiResponse {
-    templateId: string;
+    data: {
+        templateId: string;
+    }
 }
 
 export interface EditEmailTemplateResponse extends ApiResponse {

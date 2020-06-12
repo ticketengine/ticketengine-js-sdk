@@ -33,6 +33,8 @@ export interface StartBatchOperationArguments extends CommandData {
 
 
 export interface StartBatchOperationResponse extends ApiResponse {
-    userId: string;
+    data: {
+        userId: string;
+    }
 }
 
