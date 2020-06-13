@@ -298,6 +298,19 @@ export class WebClient {
         }
     }
 
+    private setScope(scope: string): void {
+        if(localStorage) {
+            localStorage.setItem("te-scope", scope);
+        }
+    }
+
+    private setClient(id: string, secret: string): void {
+        if(localStorage) {
+            localStorage.setItem("te-client-id", id);
+            localStorage.setItem("te-client-secret", secret);
+        }
+    }
+
     private getToken(): string {
         if(localStorage) {
             return localStorage.getItem("te-token") || '';
@@ -308,6 +321,27 @@ export class WebClient {
     private getRefreshToken(): string {
         if(localStorage) {
             return localStorage.getItem("te-refresh-token") || '';
+        }
+        return '';
+    }
+
+    private getScope(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-scope") || '';
+        }
+        return '';
+    }
+
+    private getClientId(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-client-id") || '';
+        }
+        return '';
+    }
+
+    private getClientSecret(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-client-secret") || '';
         }
         return '';
     }
@@ -337,6 +371,30 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, retryPolicy);
+        // @ts-ignore
+        if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
+        // @ts-ignore
+        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
+        // @ts-ignore
+        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+        this.setScope(data.scope);
+        this.setClient(data.clientId, data.clientSecret);
+        return response.data;
+    }
+
+    private async refreshAuthToken<GetAuthTokenResponse>(): Promise<GetAuthTokenResponse> {
+        let url = this.authUrl + '/token';
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        const data = {
+            grantType: 'refresh_token',
+            clientId: this.getClientId(),
+            clientSecret: this.getClientSecret(),
+            scope: this.getScope(),
+            refreshToken: this.getRefreshToken()
+        };
+        const response = await this.request<GetAuthTokenResponse>(url, data, headers, [0, 0, 0]);
         // @ts-ignore
         if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
         // @ts-ignore
@@ -691,6 +749,8 @@ export class WebClient {
             this.sendCommand<DisableUserResponse>('DisableUser', data, retryPolicy),
         getAuthToken: async (data: GetAuthTokenArguments, retryPolicy?: Array<number>): Promise<GetAuthTokenResponse> =>
             this.getAuthToken<GetAuthTokenResponse>(data, retryPolicy),
+        refreshAuthToken: async (): Promise<GetAuthTokenResponse> =>
+            this.refreshAuthToken<GetAuthTokenResponse>(),
     };
 
     public readonly tag = {

@@ -15,8 +15,9 @@ export interface AddAccessToCartArguments extends CommandData {
     eventManagerId: string;
     eventId: string;
     accessDefinitionId: string;
-    capacityLocationPath: string;
+    capacityLocationPath?: Array<string>;
     requestedConditionPath: Array<string>;
+    // requestedConditionPath: string;
 }
 export interface AddProductToCartArguments extends CommandData {
     aggregateId: string;
