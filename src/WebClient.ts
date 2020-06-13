@@ -423,7 +423,7 @@ export class WebClient {
     }
 
 
-    private async sendQuery<T>(query: string, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
+    public async sendQuery<T>(query: string, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
         this.logger.debug('send query :' + query);
         let url = this.graphApiUrl;
         const body = {query};
