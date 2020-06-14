@@ -48,21 +48,21 @@ export interface EditMollieClientSettingsArguments extends CommandData {
 
 export interface CreateCashPaymentArguments extends CommandData {
     orderId: string;
-    customerId: string;
+    customerId?: string;
     currency: string;
     amount: number;
 }
 
 export interface CreatePinPaymentArguments extends CommandData {
     orderId: string;
-    customerId: string;
+    customerId?: string;
     currency: string;
     amount: number;
 }
 
 export interface CreateAdyenPaymentSessionArguments extends CommandData {
     orderId: string;
-    customerId: string;
+    customerId?: string;
     currency: string;
     amount: number;
     countryCode?: number;
@@ -75,7 +75,7 @@ export interface CreateAdyenPaymentSessionArguments extends CommandData {
 
 export interface CreateMolliePaymentArguments extends CommandData {
     orderId: string;
-    customerId: string;
+    customerId?: string;
     currency: string;
     amount: number;
     paymentMethod?: string;
