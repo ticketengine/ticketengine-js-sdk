@@ -436,7 +436,7 @@ export class WebClient {
     }
 
 
-    private async sleep(ms: number): Promise<null> {
+    private async sleep(ms: number): Promise<any> {
         return new Promise((resolve: any) => setTimeout(resolve, ms))
     }
 
