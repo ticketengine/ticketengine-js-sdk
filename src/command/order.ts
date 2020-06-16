@@ -46,7 +46,7 @@ export interface CancelOrderArguments extends CommandData {
 }
 export interface CheckoutOrderArguments extends CommandData {
     aggregateId: string;
-    customerEmail: string;
+    customerEmail?: string;
 }
 export interface CompleteOrderArguments extends CommandData {
     aggregateId: string;
