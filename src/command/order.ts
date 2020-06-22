@@ -69,7 +69,6 @@ export interface AssignOrderToCustomerArguments extends CommandData {
 }
 export interface UnassignOrderFromCustomerArguments extends CommandData {
     aggregateId: string;
-    customerId: string;
 }
 
 
