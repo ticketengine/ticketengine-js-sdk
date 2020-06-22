@@ -662,9 +662,9 @@ export class WebClient {
             this.sendCommand<ReserveOrderResponse>('ReserveOrder', data, retryPolicy),
         addOrderToken: async (data: AddOrderTokenArguments, retryPolicy?: Array<number>): Promise<AddOrderTokenResponse> =>
             this.sendCommand<AddOrderTokenResponse>('AddOrderToken', data, retryPolicy),
-        assignOrderToCustomer: async (data: AssignOrderToCustomerArguments, retryPolicy?: Array<number>): Promise<AssignOrderToCustomerResponse> =>
+        assignToCustomer: async (data: AssignOrderToCustomerArguments, retryPolicy?: Array<number>): Promise<AssignOrderToCustomerResponse> =>
             this.sendCommand<AssignOrderToCustomerResponse>('AssignOrderToCustomer', data, retryPolicy),
-        unassignOrderFromCustomer: async (data: UnassignOrderFromCustomerArguments, retryPolicy?: Array<number>): Promise<UnassignOrderFromCustomerResponse> =>
+        unassignFromCustomer: async (data: UnassignOrderFromCustomerArguments, retryPolicy?: Array<number>): Promise<UnassignOrderFromCustomerResponse> =>
             this.sendCommand<UnassignOrderFromCustomerResponse>('UnassignOrderFromCustomer', data, retryPolicy),
         // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
         //     this.sendQuery<QueryResponse<Order>>(query),
