@@ -138,7 +138,15 @@ import {
     AddTimeoutSettingResponse,
     ChangeTimeoutSettingResponse,
     ChangeTimeoutSettingArguments,
-    RemoveTimeoutSettingArguments, RemoveTimeoutSettingResponse
+    RemoveTimeoutSettingArguments,
+    RemoveTimeoutSettingResponse,
+    ReturnItemInCartResponse,
+    ReturnItemInCartArguments,
+    ReserveOrderArguments,
+    ReserveOrderResponse,
+    AssignOrderToCustomerArguments,
+    AssignOrderToCustomerResponse,
+    UnassignOrderFromCustomerArguments, UnassignOrderFromCustomerResponse
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -642,14 +650,23 @@ export class WebClient {
             this.sendCommand<CompleteItemInCartResponse>('CompleteItemInCart', data, retryPolicy),
         removeItemFromCart: async (data: RemoveItemFromCartArguments, retryPolicy?: Array<number>): Promise<RemoveItemFromCartResponse> =>
             this.sendCommand<RemoveItemFromCartResponse>('RemoveItemFromCart', data, retryPolicy),
+        returnItemInCart: async (data: ReturnItemInCartArguments, retryPolicy?: Array<number>): Promise<ReturnItemInCartResponse> =>
+            this.sendCommand<ReturnItemInCartResponse>('ReturnItemInCart', data, retryPolicy),
         cancelOrder: async (data: CancelOrderArguments, retryPolicy?: Array<number>): Promise<CancelOrderResponse> =>
             this.sendCommand<CancelOrderResponse>('CancelOrder', data, retryPolicy),
         checkoutOrder: async (data: CheckoutOrderArguments, retryPolicy?: Array<number>): Promise<CheckoutOrderResponse> =>
             this.sendCommand<CheckoutOrderResponse>('CheckoutOrder', data, retryPolicy),
         completeOrder: async (data: CompleteOrderArguments, retryPolicy?: Array<number>): Promise<CompleteOrderResponse> =>
             this.sendCommand<CompleteOrderResponse>('CompleteOrder', data, retryPolicy),
+        reserveOrder: async (data: ReserveOrderArguments, retryPolicy?: Array<number>): Promise<ReserveOrderResponse> =>
+            this.sendCommand<ReserveOrderResponse>('ReserveOrder', data, retryPolicy),
         addOrderToken: async (data: AddOrderTokenArguments, retryPolicy?: Array<number>): Promise<AddOrderTokenResponse> =>
             this.sendCommand<AddOrderTokenResponse>('AddOrderToken', data, retryPolicy),
+        assignOrderToCustomer: async (data: AssignOrderToCustomerArguments, retryPolicy?: Array<number>): Promise<AssignOrderToCustomerResponse> =>
+            this.sendCommand<AssignOrderToCustomerResponse>('AssignOrderToCustomer', data, retryPolicy),
+        unassignOrderFromCustomer: async (data: UnassignOrderFromCustomerArguments, retryPolicy?: Array<number>): Promise<UnassignOrderFromCustomerResponse> =>
+            this.sendCommand<UnassignOrderFromCustomerResponse>('UnassignOrderFromCustomer', data, retryPolicy),
+
         // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
         //     this.sendQuery<QueryResponse<Order>>(query),
         // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>

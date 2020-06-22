@@ -41,6 +41,10 @@ export interface RemoveItemFromCartArguments extends CommandData {
     aggregateId: string;
     orderLineItemId: string;
 }
+export interface ReturnItemInCartArguments extends CommandData {
+    aggregateId: string;
+    orderLineItemId: string;
+}
 export interface CancelOrderArguments extends CommandData {
     aggregateId: string;
 }
@@ -51,9 +55,21 @@ export interface CheckoutOrderArguments extends CommandData {
 export interface CompleteOrderArguments extends CommandData {
     aggregateId: string;
 }
+export interface ReserveOrderArguments extends CommandData {
+    aggregateId: string;
+    timeoutOn: string;
+}
 export interface AddOrderTokenArguments extends CommandData {
     aggregateId: string;
     token: string;
+}
+export interface AssignOrderToCustomerArguments extends CommandData {
+    aggregateId: string;
+    customerId: string;
+}
+export interface UnassignOrderFromCustomerArguments extends CommandData {
+    aggregateId: string;
+    customerId: string;
 }
 
 
@@ -100,10 +116,14 @@ export interface ReserveAccessInCartResponse extends ApiResponse {}
 export interface ReserveProductInCartResponse extends ApiResponse {}
 export interface CompleteItemInCartResponse extends ApiResponse {}
 export interface RemoveItemFromCartResponse extends ApiResponse {}
+export interface ReturnItemInCartResponse extends ApiResponse {}
 export interface CancelOrderResponse extends ApiResponse {}
 export interface CheckoutOrderResponse extends ApiResponse {}
 export interface CompleteOrderResponse extends ApiResponse {}
+export interface ReserveOrderResponse extends ApiResponse {}
 export interface AddOrderTokenResponse extends ApiResponse {}
+export interface AssignOrderToCustomerResponse extends ApiResponse {}
+export interface UnassignOrderFromCustomerResponse extends ApiResponse {}
 
 export interface AddTimeoutSettingResponse extends ApiResponse {
     data: {
