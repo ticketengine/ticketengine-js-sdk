@@ -57,7 +57,8 @@ export interface CompleteOrderArguments extends CommandData {
 }
 export interface ReserveOrderArguments extends CommandData {
     aggregateId: string;
-    timeoutOn: string;
+    timeoutOn?: string;
+    customerEmail?: string;
 }
 export interface AddOrderTokenArguments extends CommandData {
     aggregateId: string;
