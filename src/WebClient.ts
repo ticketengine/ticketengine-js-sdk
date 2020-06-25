@@ -306,6 +306,17 @@ export class WebClient {
         }
     }
 
+    private setTokenFromResponse(response: AxiosResponse): void {
+        // // @ts-ignore
+        // if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
+        // @ts-ignore
+        if(response.data.access_token) this.setToken(response.data.access_token, response.data.expires_in, response.data.refresh_token);
+        // @ts-ignore
+        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
+        // @ts-ignore
+        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+    }
+
     private setScope(scope: string): void {
         if(localStorage) {
             localStorage.setItem("te-scope", scope);
@@ -379,12 +390,13 @@ export class WebClient {
             'Content-Type': 'application/json'
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, retryPolicy);
-        // @ts-ignore
-        if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
-        // @ts-ignore
-        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
-        // @ts-ignore
-        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+        // // @ts-ignore
+        // if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
+        // // @ts-ignore
+        // if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
+        // // @ts-ignore
+        // if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+        this.setTokenFromResponse(response);
         this.setScope(data.scope);
         this.setClient(data.clientId, data.clientSecret);
         return response.data;
@@ -403,12 +415,13 @@ export class WebClient {
             refreshToken: this.getRefreshToken()
         };
         const response = await this.request<GetAuthTokenResponse>(url, data, headers, [0, 0, 0]);
-        // @ts-ignore
-        if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
-        // @ts-ignore
-        if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
-        // @ts-ignore
-        if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
+        this.setTokenFromResponse(response);
+        // // @ts-ignore
+        // if(response.access_token) this.setToken(response.access_token, response.expires_in, response.refresh_token);
+        // // @ts-ignore
+        // if(response.data && response.data.accessToken) this.setToken(response.data.accessToken, response.data.expiresIn, response.data.refreshToken);
+        // // @ts-ignore
+        // if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
         return response.data;
     }
 
