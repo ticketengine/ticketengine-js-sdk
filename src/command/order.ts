@@ -8,10 +8,11 @@ export enum CartOperationType {
 
 export interface CartOperation {
     operation: CartOperationType;
+    data: any;
 }
 
 export interface AddAccessItem extends CartOperation {
-    operation: CartOperationType;
+    // operation: CartOperationType;
     data: {
         eventManagerId: string;
         eventId: string;
@@ -22,7 +23,7 @@ export interface AddAccessItem extends CartOperation {
 }
 
 export interface RemoveItem extends CartOperation {
-    operation: CartOperationType;
+    // operation: CartOperationType;
     data: {
         orderLineItemId: string;
     };
