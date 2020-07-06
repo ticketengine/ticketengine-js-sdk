@@ -11,6 +11,7 @@ export interface CartOperation {
 }
 
 export interface AddAccessItem extends CartOperation {
+    operation: CartOperationType;
     data: {
         eventManagerId: string;
         eventId: string;
@@ -21,6 +22,7 @@ export interface AddAccessItem extends CartOperation {
 }
 
 export interface RemoveItem extends CartOperation {
+    operation: CartOperationType;
     data: {
         orderLineItemId: string;
     };
