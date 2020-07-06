@@ -155,7 +155,11 @@ export interface ReserveOrderResponse extends ApiResponse {}
 export interface AddOrderTokenResponse extends ApiResponse {}
 export interface AssignOrderToCustomerResponse extends ApiResponse {}
 export interface UnassignOrderFromCustomerResponse extends ApiResponse {}
-export interface CartBatchOperationResponse extends ApiResponse {}
+export interface CartBatchOperationResponse extends ApiResponse {
+    data: {
+        orderLineItemIds: string[];
+    }
+}
 
 export interface AddTimeoutSettingResponse extends ApiResponse {
     data: {
