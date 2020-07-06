@@ -2,6 +2,7 @@ import {WebClient} from '../src/WebClient';
 import {Logger} from '../src/Logger';
 // const WebClient = require("../src/WebClient");
 // const Logger = require("../src/Logger");
+import 'localstorage-polyfill'
 
 
 
@@ -32,7 +33,8 @@ async function run() {
         //     password: 'AdfRvNNYZZbWy2xuU6KWnaNWunELEPh297r4mxWjvQ'
         // });
         // const r = await client.user.createUser({username: 'test', password: 'test', scopes: ['customer:write', 'event_manager:write']});
-        const r = await client.tokens.createCoupon({name: 'test', description: 'lorum ipsum', useLimit: 1});
+        // const r = await client.tokens.createCoupon({name: 'test', description: 'lorum ipsum', useLimit: 1});
+        const r = await client.sendQuery('query { order(id: "4cb877d6-8f8b-11ea-8aa6-6eca742c7980"){id,status,customer{id,fullName},paymentStatus,paymentUrl,payments{id,currency,amount,status},totalPrice,totalTax,createDate,expiresOn,tokens{id,typeId,token},requiredPayments{currency,amount},lineItems{ ... on AccessLineItem {id,type,status,price,tax,currency,limit,name,accessDefinition{id},capacityLocationPath,requestedConditionPath,accessId,event{id,eventManagerId,name,location,start,end,availableCapacity}} }} }', []);
 console.log(r);
     } catch (e) {
 console.error(e);

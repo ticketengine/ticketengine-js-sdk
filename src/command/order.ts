@@ -1,6 +1,31 @@
 import {ApiResponse, CommandData} from "../call";
 
 
+export enum CartOperationType {
+    AddAccessItem = 'AddAccessItem',
+    RemoveItem = 'RemoveItem',
+}
+
+export interface CartOperation {
+    operation: CartOperationType;
+}
+
+export interface AddAccessItem extends CartOperation {
+    data: {
+        eventManagerId: string;
+        eventId: string;
+        accessDefinitionId: string;
+        requestedConditionPath: Array<string>;
+        capacityLocationPath?: Array<string>;
+    };
+}
+
+export interface RemoveItem extends CartOperation {
+    data: {
+        orderLineItemId: string;
+    };
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command arguments
@@ -71,6 +96,12 @@ export interface AssignOrderToCustomerArguments extends CommandData {
 export interface UnassignOrderFromCustomerArguments extends CommandData {
     aggregateId: string;
 }
+export interface CartBatchOperationArguments extends CommandData {
+    aggregateId: string;
+    operations: Array<CartOperation>;
+}
+
+
 
 
 export interface AddTimeoutSettingArguments extends CommandData {
@@ -124,6 +155,7 @@ export interface ReserveOrderResponse extends ApiResponse {}
 export interface AddOrderTokenResponse extends ApiResponse {}
 export interface AssignOrderToCustomerResponse extends ApiResponse {}
 export interface UnassignOrderFromCustomerResponse extends ApiResponse {}
+export interface CartBatchOperationResponse extends ApiResponse {}
 
 export interface AddTimeoutSettingResponse extends ApiResponse {
     data: {

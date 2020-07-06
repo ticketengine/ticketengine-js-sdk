@@ -146,7 +146,10 @@ import {
     ReserveOrderResponse,
     AssignOrderToCustomerArguments,
     AssignOrderToCustomerResponse,
-    UnassignOrderFromCustomerArguments, UnassignOrderFromCustomerResponse
+    UnassignOrderFromCustomerArguments,
+    UnassignOrderFromCustomerResponse,
+    CartBatchOperationArguments,
+    CartBatchOperationResponse
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -679,6 +682,8 @@ export class WebClient {
             this.sendCommand<AssignOrderToCustomerResponse>('AssignOrderToCustomer', data, retryPolicy),
         unassignFromCustomer: async (data: UnassignOrderFromCustomerArguments, retryPolicy?: Array<number>): Promise<UnassignOrderFromCustomerResponse> =>
             this.sendCommand<UnassignOrderFromCustomerResponse>('UnassignOrderFromCustomer', data, retryPolicy),
+        cartBatchOperation: async (data: CartBatchOperationArguments, retryPolicy?: Array<number>): Promise<CartBatchOperationResponse> =>
+            this.sendCommand<CartBatchOperationResponse>('CartBatchOperation', data, retryPolicy),
         // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
         //     this.sendQuery<QueryResponse<Order>>(query),
         // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
