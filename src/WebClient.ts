@@ -299,6 +299,9 @@ export class WebClient {
         //     instance: this.axios
         // };
         // attach(this.axios);
+
+        if(options.oauthClientId && options.oauthClientSecret) this.setClient(options.oauthClientId, options.oauthClientSecret);
+        if(options.oauthScope) this.setScope(options.oauthScope);
     }
 
     private setToken(token: string, expiresIn: number, refreshToken: string): void {
@@ -320,48 +323,48 @@ export class WebClient {
         if(response.data && response.data.data && response.data.data.accessToken) this.setToken(response.data.data.accessToken, response.data.data.expiresIn, response.data.data.refreshToken);
     }
 
-    private setScope(scope: string): void {
+    public setScope(scope: string): void {
         if(localStorage) {
             localStorage.setItem("te-scope", scope);
         }
     }
 
-    private setClient(id: string, secret: string): void {
+    public setClient(id: string, secret: string): void {
         if(localStorage) {
             localStorage.setItem("te-client-id", id);
             localStorage.setItem("te-client-secret", secret);
         }
     }
 
-    private getToken(): string {
+    public getToken(): string {
         if(localStorage) {
             return localStorage.getItem("te-token") || '';
         }
         return '';
     }
 
-    private getRefreshToken(): string {
+    public getRefreshToken(): string {
         if(localStorage) {
             return localStorage.getItem("te-refresh-token") || '';
         }
         return '';
     }
 
-    private getScope(): string {
+    public getScope(): string {
         if(localStorage) {
             return localStorage.getItem("te-scope") || '';
         }
         return '';
     }
 
-    private getClientId(): string {
+    public getClientId(): string {
         if(localStorage) {
             return localStorage.getItem("te-client-id") || '';
         }
         return '';
     }
 
-    private getClientSecret(): string {
+    public getClientSecret(): string {
         if(localStorage) {
             return localStorage.getItem("te-client-secret") || '';
         }
@@ -820,6 +823,9 @@ export interface WebClientOptions {
     authUrl?: string;
     adminApiUrl?: string;
     graphApiUrl?: string;
+    oauthClientId?: string;
+    oauthClientSecret?: string;
+    oauthScope?: string;
     token?: string;
     logger?: any;
 }
