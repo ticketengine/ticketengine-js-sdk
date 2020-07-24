@@ -265,20 +265,18 @@ export class WebClient {
 
     private token: string;
 
-    private readonly authUrl: string;
-
-    private readonly adminApiUrl: string;
-
-    private readonly graphApiUrl: string;
+    // private readonly authUrl: string;
+    // private readonly adminApiUrl: string;
+    // private readonly graphApiUrl: string;
 
 
     // constructor({adminApiUrl = 'https://ticketengine.com/api/'}: WebClientOptions) {
     // constructor(token?: string, logger?: LoggerInterface, adminApiUrl?: string, graphApiUrl?: string) {
     constructor(options: WebClientOptions) {
         this.token = options.token || '';
-        this.authUrl = options.authUrl || 'https://auth.ticketengine.io';
-        this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io';
-        this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
+        // this.authUrl = options.authUrl || 'https://auth.ticketengine.io';
+        // this.adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io';
+        // this.graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
         this.logger = options.logger || new Logger();
         // this.requestQueue = new PQueue({concurrency: 1});
         // this.requestQueue = new TaskQueue(Promise, 1);
@@ -300,8 +298,32 @@ export class WebClient {
         // };
         // attach(this.axios);
 
+        const adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io';
+        const graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
+        const authUrl = options.authUrl || 'https://auth.ticketengine.io';
+        this.setAdminApiUrl(adminApiUrl);
+        this.setGraphApiUrl(graphApiUrl);
+        this.setAuthApiUrl(authUrl);
         if(options.oauthClientId && options.oauthClientSecret) this.setClient(options.oauthClientId, options.oauthClientSecret);
         if(options.oauthScope) this.setScope(options.oauthScope);
+    }
+
+    private setAdminApiUrl(url: string): void {
+        if(localStorage) {
+            localStorage.setItem("te-admin-api-url", url);
+        }
+    }
+
+    private setGraphApiUrl(url: string): void {
+        if(localStorage) {
+            localStorage.setItem("te-graph-api-url", url);
+        }
+    }
+
+    private setAuthApiUrl(url: string): void {
+        if(localStorage) {
+            localStorage.setItem("te-auth-api-url", url);
+        }
     }
 
     private setToken(token: string, expiresIn: number, refreshToken: string): void {
@@ -334,6 +356,27 @@ export class WebClient {
             localStorage.setItem("te-client-id", id);
             localStorage.setItem("te-client-secret", secret);
         }
+    }
+
+    private getAdminApiUrl(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-admin-api-url") || '';
+        }
+        return '';
+    }
+
+    private getGraphApiUrl(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-graph-api-url") || '';
+        }
+        return '';
+    }
+
+    private getAuthApiUrl(): string {
+        if(localStorage) {
+            return localStorage.getItem("te-auth-api-url") || '';
+        }
+        return '';
     }
 
     public getToken(): string {
@@ -391,7 +434,8 @@ export class WebClient {
     }
 
     private async getAuthToken<GetAuthTokenResponse>(data: GetAuthTokenArguments, retryPolicy: Array<number> = [0, 0, 0]): Promise<GetAuthTokenResponse> {
-        let url = this.authUrl + '/token';
+        // let url = this.authUrl + '/token';
+        let url = this.getAuthApiUrl() + '/token';
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -409,7 +453,8 @@ export class WebClient {
     }
 
     private async refreshAuthToken<GetAuthTokenResponse>(): Promise<GetAuthTokenResponse> {
-        let url = this.authUrl + '/token';
+        // let url = this.authUrl + '/token';
+        let url = this.getAuthApiUrl() + '/token';
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -434,7 +479,8 @@ export class WebClient {
 
     private async sendCommand<T>(name: string, data: any, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
         this.logger.debug('send command: ' + name);
-        let url = this.adminApiUrl;
+        // let url = this.adminApiUrl;
+        let url = this.getAdminApiUrl();
         const headers = {
             'Authorization': 'Bearer ' + this.getToken(),
             'X-Command': name,
@@ -452,7 +498,8 @@ export class WebClient {
 
     public async sendQuery<T>(query: string, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
         this.logger.debug('send query :' + query);
-        let url = this.graphApiUrl;
+        // let url = this.graphApiUrl;
+        let url = this.getGraphApiUrl();
         const body = {query};
         const headers = {
             'Authorization': 'Bearer ' + this.getToken(),
