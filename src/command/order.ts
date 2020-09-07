@@ -3,6 +3,7 @@ import {ApiResponse, CommandData} from "../call";
 
 export enum CartOperationType {
     AddAccessItem = 'AddAccessItem',
+    AddProductItem = 'AddProductItem',
     RemoveItem = 'RemoveItem',
 }
 
@@ -18,6 +19,14 @@ export interface AddAccessItem extends CartOperation {
         accessDefinitionId: string;
         requestedConditionPath: Array<string>;
         capacityLocationPath?: Array<string>;
+    };
+}
+
+export interface AddProductItem extends CartOperation {
+    data: {
+        productDefinitionId: string;
+        requestedConditionPath: Array<string>;
+        productVariantId?: string;
     };
 }
 
@@ -47,8 +56,9 @@ export interface AddAccessToCartArguments extends CommandData {
 }
 export interface AddProductToCartArguments extends CommandData {
     aggregateId: string;
-    productId: string;
-    productVariantId: string;
+    productDefinitionId: string;
+    requestedConditionPath: Array<string>;
+    productVariantId?: string;
 }
 export interface ReserveAccessInCartArguments extends CommandData {
     aggregateId: string;
@@ -58,6 +68,7 @@ export interface ReserveAccessInCartArguments extends CommandData {
 export interface ReserveProductInCartArguments extends CommandData {
     aggregateId: string;
     orderLineItemId: string;
+    productId: string;
 }
 export interface CompleteItemInCartArguments extends CommandData {
     aggregateId: string;

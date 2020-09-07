@@ -10,7 +10,7 @@
     "bluebird": "^3.5.4",
     "cwait": "^1.1.2",
     "form-data": "^2.3.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.22.2"
   },
   "devDependencies": {

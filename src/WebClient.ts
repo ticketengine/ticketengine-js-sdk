@@ -248,8 +248,48 @@ import {
     UseTokenResponse
 } from "./command/token";
 import {StartBatchOperationArguments, StartBatchOperationResponse} from "./command/batchOperation";
+import {
+    ChangeProductDefinitionConditionsArguments,
+    ChangeProductDefinitionConditionsResponse,
+    ChangeProductDefinitionTagsArguments,
+    ChangeProductDefinitionTagsResponse,
+    CreateProductDefinitionArguments,
+    CreateProductDefinitionResponse,
+    DraftProductDefinitionArguments,
+    DraftProductDefinitionResponse,
+    GrantProductArguments,
+    GrantProductResponse,
+    PublishProductDefinitionArguments,
+    PublishProductDefinitionResponse,
+    ReconfigureProductDefinitionArguments,
+    ReconfigureProductDefinitionResponse,
+    RenameProductDefinitionArguments,
+    RenameProductDefinitionResponse,
+    ReserveProductArguments,
+    ReserveProductResponse,
+    ReturnProductArguments,
+    ReturnProductResponse
+} from "./command/product";
+import {
+    AssignAccountHolderArguments,
+    AssignAccountHolderResponse, CloseAccountAndWithdrawCreditArguments, CloseAccountAndWithdrawCreditResponse,
+    CloseAccountArguments,
+    CloseAccountResponse, CreateAccountCurrencyArguments, CreateAccountCurrencyResponse,
+    DepositCreditArguments,
+    DepositCreditResponse, OpenAccountAndDepositCreditArguments, OpenAccountAndDepositCreditResponse,
+    OpenAccountArguments,
+    OpenAccountResponse,
+    PayWithCreditArguments, PayWithCreditResponse,
+    RefundCreditArguments,
+    RefundCreditResponse, RenameAccountCurrencyArguments, RenameAccountCurrencyResponse,
+    TransferCreditArguments,
+    TransferCreditResponse
+} from "./command/credit";
 // import * as apiResponse from './Responses';
 
+
+class Arguments {
+}
 
 export class WebClient {
 
@@ -865,6 +905,54 @@ export class WebClient {
     public readonly batchOperation = {
         startBatchOperation: async (data: StartBatchOperationArguments, retryPolicy?: Array<number>): Promise<StartBatchOperationResponse> =>
             this.sendCommand<StartBatchOperationResponse>('StartBatchOperation', data, retryPolicy),
+    };
+
+    public readonly product = {
+        createProductDefinition: async (data: CreateProductDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateProductDefinitionResponse> =>
+            this.sendCommand<CreateProductDefinitionResponse>('CreateProductDefinition', data, retryPolicy),
+        publishProductDefinition: async (data: PublishProductDefinitionArguments, retryPolicy?: Array<number>): Promise<PublishProductDefinitionResponse> =>
+            this.sendCommand<PublishProductDefinitionResponse>('PublishProductDefinition', data, retryPolicy),
+        draftProductDefinition: async (data: DraftProductDefinitionArguments, retryPolicy?: Array<number>): Promise<DraftProductDefinitionResponse> =>
+            this.sendCommand<DraftProductDefinitionResponse>('DraftProductDefinition', data, retryPolicy),
+        renameProductDefinition: async (data: RenameProductDefinitionArguments, retryPolicy?: Array<number>): Promise<RenameProductDefinitionResponse> =>
+            this.sendCommand<RenameProductDefinitionResponse>('RenameProductDefinition', data, retryPolicy),
+        reconfigureProductDefinition: async (data: ReconfigureProductDefinitionArguments, retryPolicy?: Array<number>): Promise<ReconfigureProductDefinitionResponse> =>
+            this.sendCommand<ReconfigureProductDefinitionResponse>('ReconfigureProductDefinition', data, retryPolicy),
+        changeProductDefinitionConditions: async (data: ChangeProductDefinitionConditionsArguments, retryPolicy?: Array<number>): Promise<ChangeProductDefinitionConditionsResponse> =>
+            this.sendCommand<ChangeProductDefinitionConditionsResponse>('ChangeProductDefinitionConditions', data, retryPolicy),
+        changeProductDefinitionTags: async (data: ChangeProductDefinitionTagsArguments, retryPolicy?: Array<number>): Promise<ChangeProductDefinitionTagsResponse> =>
+            this.sendCommand<ChangeProductDefinitionTagsResponse>('ChangeProductDefinitionTags', data, retryPolicy),
+        reserveProduct: async (data: ReserveProductArguments, retryPolicy?: Array<number>): Promise<ReserveProductResponse> =>
+            this.sendCommand<ReserveProductResponse>('ReserveProduct', data, retryPolicy),
+        grantProduct: async (data: GrantProductArguments, retryPolicy?: Array<number>): Promise<GrantProductResponse> =>
+            this.sendCommand<GrantProductResponse>('GrantProduct', data, retryPolicy),
+        returnProduct: async (data: ReturnProductArguments, retryPolicy?: Array<number>): Promise<ReturnProductResponse> =>
+            this.sendCommand<ReturnProductResponse>('ReturnProduct', data, retryPolicy),
+    };
+
+    public readonly credit = {
+        openAccount: async (data: OpenAccountArguments, retryPolicy?: Array<number>): Promise<OpenAccountResponse> =>
+            this.sendCommand<OpenAccountResponse>('OpenAccount', data, retryPolicy),
+        closeAccount: async (data: CloseAccountArguments, retryPolicy?: Array<number>): Promise<CloseAccountResponse> =>
+            this.sendCommand<CloseAccountResponse>('CloseAccount', data, retryPolicy),
+        assignAccountHolder: async (data: AssignAccountHolderArguments, retryPolicy?: Array<number>): Promise<AssignAccountHolderResponse> =>
+            this.sendCommand<AssignAccountHolderResponse>('AssignAccountHolder', data, retryPolicy),
+        depositCredit: async (data: DepositCreditArguments, retryPolicy?: Array<number>): Promise<DepositCreditResponse> =>
+            this.sendCommand<DepositCreditResponse>('DepositCredit', data, retryPolicy),
+        transferCredit: async (data: TransferCreditArguments, retryPolicy?: Array<number>): Promise<TransferCreditResponse> =>
+            this.sendCommand<TransferCreditResponse>('TransferCredit', data, retryPolicy),
+        refundCredit: async (data: RefundCreditArguments, retryPolicy?: Array<number>): Promise<RefundCreditResponse> =>
+            this.sendCommand<RefundCreditResponse>('RefundCredit', data, retryPolicy),
+        payWithCredit: async (data: PayWithCreditArguments, retryPolicy?: Array<number>): Promise<PayWithCreditResponse> =>
+            this.sendCommand<PayWithCreditResponse>('PayWithCredit', data, retryPolicy),
+        openAccountAndDepositCredit: async (data: OpenAccountAndDepositCreditArguments, retryPolicy?: Array<number>): Promise<OpenAccountAndDepositCreditResponse> =>
+            this.sendCommand<OpenAccountAndDepositCreditResponse>('OpenAccountAndDepositCredit', data, retryPolicy),
+        closeAccountAndWithdrawCredit: async (data: CloseAccountAndWithdrawCreditArguments, retryPolicy?: Array<number>): Promise<CloseAccountAndWithdrawCreditResponse> =>
+            this.sendCommand<CloseAccountAndWithdrawCreditResponse>('CloseAccountAndWithdrawCredit', data, retryPolicy),
+        createAccountCurrency: async (data: CreateAccountCurrencyArguments, retryPolicy?: Array<number>): Promise<CreateAccountCurrencyResponse> =>
+            this.sendCommand<CreateAccountCurrencyResponse>('CreateAccountCurrency', data, retryPolicy),
+        renameAccountCurrency: async (data: RenameAccountCurrencyArguments, retryPolicy?: Array<number>): Promise<RenameAccountCurrencyResponse> =>
+            this.sendCommand<RenameAccountCurrencyResponse>('RenameAccountCurrency', data, retryPolicy),
     };
 }
 
