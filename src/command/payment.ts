@@ -83,6 +83,17 @@ export interface CreateMolliePaymentArguments extends CommandData {
     locale?: string;
 }
 
+export interface CreatePaymentArguments extends CommandData {
+    orderId: string;
+    customerId?: string;
+    currency: string;
+    amount: number;
+    token?: string;
+    paymentMethod?: string;
+    issuer?: string;
+    locale?: string;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command responses
@@ -120,6 +131,13 @@ export interface CreateAdyenPaymentSessionResponse extends ApiResponse {
 }
 
 export interface CreateMolliePaymentResponse extends ApiResponse {
+    data: {
+        paymentId: string;
+        paymentUrl: string;
+    }
+}
+
+export interface CreatePaymentResponse extends ApiResponse {
     data: {
         paymentId: string;
         paymentUrl: string;

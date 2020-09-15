@@ -167,7 +167,7 @@ import {
     CreatePinPaymentArguments,
     CreatePinPaymentResponse,
     CreateMolliePaymentArguments,
-    CreateMolliePaymentResponse
+    CreateMolliePaymentResponse, CreatePaymentArguments, CreatePaymentResponse
 } from './command/payment';
 import {
     AddMailgunClientSettingsArguments,
@@ -806,6 +806,8 @@ export class WebClient {
             this.sendCommand<CreateAdyenPaymentSessionResponse>('CreateAdyenPaymentSession', data, retryPolicy),
         createMolliePayment: async (data: CreateMolliePaymentArguments, retryPolicy?: Array<number>): Promise<CreateMolliePaymentResponse> =>
             this.sendCommand<CreateMolliePaymentResponse>('CreateMolliePayment', data, retryPolicy),
+        createPayment: async (data: CreatePaymentArguments, retryPolicy?: Array<number>): Promise<CreatePaymentResponse> =>
+            this.sendCommand<CreatePaymentResponse>('CreatePayment', data, retryPolicy),
     };
 
     public readonly customer = {
