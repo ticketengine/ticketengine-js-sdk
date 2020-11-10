@@ -285,6 +285,22 @@ import {
     TransferCreditArguments,
     TransferCreditResponse
 } from "./command/credit";
+import {
+    ChangeMembershipDefinitionTagsArguments,
+    ChangeMembershipDefinitionTagsResponse,
+    CreateMembershipDefinitionArguments,
+    CreateMembershipDefinitionResponse,
+    GrantMembershipArguments,
+    GrantMembershipResponse,
+    RenameMembershipDefinitionArguments,
+    RenameMembershipDefinitionResponse,
+    RescheduleMembershipDefinitionValidityArguments,
+    RescheduleMembershipDefinitionValidityResponse,
+    ReserveMembershipArguments,
+    ReserveMembershipResponse,
+    ReturnMembershipArguments,
+    ReturnMembershipResponse
+} from "./command/membership";
 // import * as apiResponse from './Responses';
 
 
@@ -955,6 +971,23 @@ export class WebClient {
             this.sendCommand<CreateAccountCurrencyResponse>('CreateAccountCurrency', data, retryPolicy),
         renameAccountCurrency: async (data: RenameAccountCurrencyArguments, retryPolicy?: Array<number>): Promise<RenameAccountCurrencyResponse> =>
             this.sendCommand<RenameAccountCurrencyResponse>('RenameAccountCurrency', data, retryPolicy),
+    };
+
+    public readonly membership = {
+        createMembershipDefinition: async (data: CreateMembershipDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateMembershipDefinitionResponse> =>
+            this.sendCommand<CreateMembershipDefinitionResponse>('CreateMembershipDefinition', data, retryPolicy),
+        renameMembershipDefinition: async (data: RenameMembershipDefinitionArguments, retryPolicy?: Array<number>): Promise<RenameMembershipDefinitionResponse> =>
+            this.sendCommand<RenameMembershipDefinitionResponse>('RenameMembershipDefinition', data, retryPolicy),
+        rescheduleMembershipDefinitionValidity: async (data: RescheduleMembershipDefinitionValidityArguments, retryPolicy?: Array<number>): Promise<RescheduleMembershipDefinitionValidityResponse> =>
+            this.sendCommand<RescheduleMembershipDefinitionValidityResponse>('RescheduleMembershipDefinitionValidity', data, retryPolicy),
+        changeMembershipDefinitionTags: async (data: ChangeMembershipDefinitionTagsArguments, retryPolicy?: Array<number>): Promise<ChangeMembershipDefinitionTagsResponse> =>
+            this.sendCommand<ChangeMembershipDefinitionTagsResponse>('ChangeMembershipDefinitionTags', data, retryPolicy),
+        reserveMembership: async (data: ReserveMembershipArguments, retryPolicy?: Array<number>): Promise<ReserveMembershipResponse> =>
+            this.sendCommand<ReserveMembershipResponse>('ReserveMembership', data, retryPolicy),
+        grantMembership: async (data: GrantMembershipArguments, retryPolicy?: Array<number>): Promise<GrantMembershipResponse> =>
+            this.sendCommand<GrantMembershipResponse>('GrantMembership', data, retryPolicy),
+        returnMembership: async (data: ReturnMembershipArguments, retryPolicy?: Array<number>): Promise<ReturnMembershipResponse> =>
+            this.sendCommand<ReturnMembershipResponse>('ReturnMembership', data, retryPolicy),
     };
 }
 
