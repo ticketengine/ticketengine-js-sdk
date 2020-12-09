@@ -569,17 +569,32 @@ export class WebClient {
     }
 
 
+    public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: string = 'post'): Promise<T> {
+        this.logger.debug('call facade :' + path);
+
+        let url = this.getAdminApiUrl() + '/' + path;
+        const defaultHeaders = {
+            'Authorization': 'Bearer ' + this.getToken(),
+            'Content-Type': 'application/json'
+        };
+        const h = Object.assign(defaultHeaders, headers);
+        const response = await this.request<T>(url, data, h, retryPolicy, method);
+        return response.data;
+    }
+
+
     private async sleep(ms: number): Promise<any> {
         return new Promise((resolve: any) => setTimeout(resolve, ms))
     }
 
 
-    private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = []): Promise<AxiosResponse<T>> {
+    private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: string = 'post'): Promise<AxiosResponse<T>> {
         const self = this;
         this.logger.debug('make request');
         try {
             const response = await this.axios.request({
-                method: 'post',
+                // method: 'post',
+                method: method,
                 url: url,
                 data: body,
                 headers: headers
