@@ -1004,6 +1004,12 @@ export class WebClient {
         returnMembership: async (data: ReturnMembershipArguments, retryPolicy?: Array<number>): Promise<ReturnMembershipResponse> =>
             this.sendCommand<ReturnMembershipResponse>('ReturnMembership', data, retryPolicy),
     };
+
+    // public readonly fionaIntegration = {
+    //     createMembershipDefinition: async (data: CreateMembershipDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateMembershipDefinitionResponse> =>
+    //         this.callAdminApi<CreateMembershipDefinitionResponse>('/integration/fiona/sync/accreditation', data, retryPolicy),
+    //
+    // };
 }
 
 
