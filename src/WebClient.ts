@@ -379,7 +379,7 @@ export class WebClient {
     private setAuthApiUrl(url: string): void {
         if(localStorage) {
             if(url !== this.getAuthApiUrl()) {
-                this.clearToken();
+                // this.clearToken();
                 localStorage.setItem("te-auth-api-url", url);
             }
         }
