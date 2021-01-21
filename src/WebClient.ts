@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse} from 'axios';
+import axios, {AxiosInstance, AxiosResponse, Method} from 'axios';
 // import { ApiCallOptions, ApiCallResult } from './apiCall';
 // @ts-ignore
 // const PQueue = require('p-queue');
@@ -379,7 +379,7 @@ export class WebClient {
     private setAuthApiUrl(url: string): void {
         if(localStorage) {
             if(url !== this.getAuthApiUrl()) {
-                // this.clearToken();
+                this.clearToken();
                 localStorage.setItem("te-auth-api-url", url);
             }
         }
@@ -569,7 +569,8 @@ export class WebClient {
     }
 
 
-    public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: string = 'post'): Promise<T> {
+    // public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: string = 'post'): Promise<T> {
+    public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: Method = 'post'): Promise<T> {
         this.logger.debug('call facade :' + path);
 
         let url = this.getAdminApiUrl() + '/' + path;
@@ -588,7 +589,8 @@ export class WebClient {
     }
 
 
-    private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: string = 'post'): Promise<AxiosResponse<T>> {
+    // private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: string = 'post'): Promise<AxiosResponse<T>> {
+    private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: Method = 'post'): Promise<AxiosResponse<T>> {
         const self = this;
         this.logger.debug('make request');
         try {
