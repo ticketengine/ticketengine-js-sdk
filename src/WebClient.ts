@@ -109,7 +109,38 @@ import {
     ChangeEventTemplateAccessDefinitionUseLimitResponse,
     AssignEventTemplateAccessDefinitionLocationArguments,
     AssignEventTemplateAccessDefinitionLocationResponse,
-    DetachEventTemplateArguments, DetachEventTemplateResponse
+    DetachEventTemplateArguments,
+    DetachEventTemplateResponse,
+    CreateEventCapacityTemplateArguments,
+    CreateEventCapacityTemplateResponse,
+    RenameEventCapacityTemplateArguments,
+    RenameEventCapacityTemplateResponse,
+    AddEventCapacityTemplateCapacityArguments,
+    AddEventCapacityTemplateCapacityResponse,
+    ChangeEventCapacityTemplateCapacityArguments,
+    ChangeEventCapacityTemplateCapacityResponse,
+    AssignEventAccessTemplateAccessDefinitionLocationResponse,
+    AssignEventAccessTemplateAccessDefinitionLocationArguments,
+    ChangeEventAccessTemplateAccessDefinitionUseLimitResponse,
+    ChangeEventAccessTemplateAccessDefinitionUseLimitArguments,
+    ChangeEventAccessTemplateAccessDefinitionTagsResponse,
+    ChangeEventAccessTemplateAccessDefinitionTagsArguments,
+    ChangeEventAccessTemplateAccessDefinitionConditionsResponse,
+    ChangeEventAccessTemplateAccessDefinitionConditionsArguments,
+    ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationResponse,
+    ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationArguments,
+    RenameEventAccessTemplateAccessDefinitionResponse,
+    RenameEventAccessTemplateAccessDefinitionArguments,
+    RescheduleEventAccessTemplateAccessDefinitionResponse,
+    RescheduleEventAccessTemplateAccessDefinitionArguments,
+    RemoveEventAccessTemplateAccessDefinitionResponse,
+    RemoveEventAccessTemplateAccessDefinitionArguments,
+    AddEventAccessTemplateAccessDefinitionResponse,
+    AddEventAccessTemplateAccessDefinitionArguments,
+    RenameEventAccessTemplateResponse,
+    RenameEventAccessTemplateArguments,
+    CreateEventAccessTemplateResponse,
+    CreateEventAccessTemplateArguments
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -762,6 +793,40 @@ export class WebClient {
             this.sendCommand<ChangeEventTemplateAccessDefinitionUseLimitResponse>('ChangeEventTemplateAccessDefinitionUseLimit', data, retryPolicy),
         assignEventTemplateAccessDefinitionLocation: async (data: AssignEventTemplateAccessDefinitionLocationArguments, retryPolicy?: Array<number>): Promise<AssignEventTemplateAccessDefinitionLocationResponse> =>
             this.sendCommand<AssignEventTemplateAccessDefinitionLocationResponse>('AssignEventTemplateAccessDefinitionLocation', data, retryPolicy),
+
+        // event capacity template
+        createEventCapacityTemplate: async (data: CreateEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<CreateEventCapacityTemplateResponse> =>
+            this.sendCommand<CreateEventCapacityTemplateResponse>('CreateEventCapacityTemplate', data, retryPolicy),
+        renameEventCapacityTemplate: async (data: RenameEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<RenameEventCapacityTemplateResponse> =>
+            this.sendCommand<RenameEventCapacityTemplateResponse>('RenameEventCapacityTemplate', data, retryPolicy),
+        addEventCapacityTemplateCapacity: async (data: AddEventCapacityTemplateCapacityArguments, retryPolicy?: Array<number>): Promise<AddEventCapacityTemplateCapacityResponse> =>
+            this.sendCommand<AddEventCapacityTemplateCapacityResponse>('AddEventCapacityTemplateCapacity', data, retryPolicy),
+        changeEventCapacityTemplateCapacity: async (data: ChangeEventCapacityTemplateCapacityArguments, retryPolicy?: Array<number>): Promise<ChangeEventCapacityTemplateCapacityResponse> =>
+            this.sendCommand<ChangeEventCapacityTemplateCapacityResponse>('ChangeEventCapacityTemplateCapacity', data, retryPolicy),
+
+        // event access template
+        createEventAccessTemplate: async (data: CreateEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<CreateEventAccessTemplateResponse> =>
+            this.sendCommand<CreateEventAccessTemplateResponse>('CreateEventAccessTemplate', data, retryPolicy),
+        renameEventAccessTemplate: async (data: RenameEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<RenameEventAccessTemplateResponse> =>
+            this.sendCommand<RenameEventAccessTemplateResponse>('RenameEventAccessTemplate', data, retryPolicy),
+        addEventAccessTemplateAccessDefinition: async (data: AddEventAccessTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<AddEventAccessTemplateAccessDefinitionResponse> =>
+            this.sendCommand<AddEventAccessTemplateAccessDefinitionResponse>('AddEventAccessTemplateAccessDefinition', data, retryPolicy),
+        removeEventAccessTemplateAccessDefinition: async (data: RemoveEventAccessTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<RemoveEventAccessTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RemoveEventAccessTemplateAccessDefinitionResponse>('RemoveEventAccessTemplateAccessDefinition', data, retryPolicy),
+        rescheduleEventAccessTemplateAccessDefinition: async (data: RescheduleEventAccessTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<RescheduleEventAccessTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RescheduleEventAccessTemplateAccessDefinitionResponse>('RescheduleEventAccessTemplateAccessDefinition', data, retryPolicy),
+        renameEventAccessTemplateAccessDefinition: async (data: RenameEventAccessTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<RenameEventAccessTemplateAccessDefinitionResponse> =>
+            this.sendCommand<RenameEventAccessTemplateAccessDefinitionResponse>('RenameEventAccessTemplateAccessDefinition', data, retryPolicy),
+        changeEventAccessTemplateAccessDefinitionCapacityLocationAllocation: async (data: ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationArguments, retryPolicy?: Array<number>): Promise<ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationResponse> =>
+            this.sendCommand<ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationResponse>('ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocation', data, retryPolicy),
+        changeEventAccessTemplateAccessDefinitionConditions: async (data: ChangeEventAccessTemplateAccessDefinitionConditionsArguments, retryPolicy?: Array<number>): Promise<ChangeEventAccessTemplateAccessDefinitionConditionsResponse> =>
+            this.sendCommand<ChangeEventAccessTemplateAccessDefinitionConditionsResponse>('ChangeEventAccessTemplateAccessDefinitionConditions', data, retryPolicy),
+        changeEventAccessTemplateAccessDefinitionTags: async (data: ChangeEventAccessTemplateAccessDefinitionTagsArguments, retryPolicy?: Array<number>): Promise<ChangeEventAccessTemplateAccessDefinitionTagsResponse> =>
+            this.sendCommand<ChangeEventAccessTemplateAccessDefinitionTagsResponse>('ChangeEventAccessTemplateAccessDefinitionTags', data, retryPolicy),
+        changeEventAccessTemplateAccessDefinitionUseLimit: async (data: ChangeEventAccessTemplateAccessDefinitionUseLimitArguments, retryPolicy?: Array<number>): Promise<ChangeEventAccessTemplateAccessDefinitionUseLimitResponse> =>
+            this.sendCommand<ChangeEventAccessTemplateAccessDefinitionUseLimitResponse>('ChangeEventAccessTemplateAccessDefinitionUseLimit', data, retryPolicy),
+        assignEventAccessTemplateAccessDefinitionLocation: async (data: AssignEventAccessTemplateAccessDefinitionLocationArguments, retryPolicy?: Array<number>): Promise<AssignEventAccessTemplateAccessDefinitionLocationResponse> =>
+            this.sendCommand<AssignEventAccessTemplateAccessDefinitionLocationResponse>('AssignEventAccessTemplateAccessDefinitionLocation', data, retryPolicy),
 
         // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
         //     this.sendQuery<QueryResponse<Event>>(query),

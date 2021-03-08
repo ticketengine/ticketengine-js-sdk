@@ -135,6 +135,26 @@ export interface DetachEventTemplateArguments extends CommandData {
     eventId: string;
     templateId: string;
 }
+export interface ApplyEventCapacityTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    templateId: string;
+}
+export interface DetachEventCapacityTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    templateId: string;
+}
+export interface ApplyEventAccessTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    templateId: string;
+}
+export interface DetachEventAccessTemplateArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    templateId: string;
+}
 
 
 // capacity
@@ -343,6 +363,94 @@ export interface AssignEventTemplateAccessDefinitionLocationArguments extends Co
 }
 
 
+// event capacity template
+export interface CreateEventCapacityTemplateArguments extends CommandData {
+    aggregateId: string;
+    name: string;
+    description?: string;
+}
+export interface RenameEventCapacityTemplateArguments extends CommandData {
+    aggregateId: string;
+    name?: string;
+    description?: string;
+}
+export interface AddEventCapacityTemplateCapacityArguments extends CommandData {
+    aggregateId: string;
+    capacity: any;
+}
+export interface ChangeEventCapacityTemplateCapacityArguments extends CommandData {
+    aggregateId: string;
+    capacity: any;
+}
+
+
+// event access template
+export interface CreateEventAccessTemplateArguments extends CommandData {
+    aggregateId: string;
+    name: string;
+    description?: string;
+}
+export interface RenameEventAccessTemplateArguments extends CommandData {
+    aggregateId: string;
+    name?: string;
+    description?: string;
+}
+export interface AddEventAccessTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    name: string;
+    description?: string;
+    start?: Date;
+    end?: Date;
+    accessConditions: any;
+    capacityLocations: Array<string>;
+    capacityLocationAllocation: CapacityLocationAllocation;
+    tags?: Array<string>;
+    limit?: number;
+}
+export interface RemoveEventAccessTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+}
+export interface RenameEventAccessTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    name?: string;
+    description?: string;
+}
+export interface RescheduleEventAccessTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    start: Date;
+    end: Date;
+}
+export interface ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    capacityLocationAllocation: CapacityLocationAllocation;
+}
+export interface ChangeEventAccessTemplateAccessDefinitionConditionsArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    accessConditions: any;
+}
+export interface ChangeEventAccessTemplateAccessDefinitionTagsArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    tags: Array<string>;
+}
+export interface ChangeEventAccessTemplateAccessDefinitionUseLimitArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    limit: number;
+}
+export interface AssignEventAccessTemplateAccessDefinitionLocationArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+    capacityLocations: Array<string>;
+}
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command responses
@@ -378,7 +486,10 @@ export interface RemoveEventExternalIdResponse extends ApiResponse {}
 export interface ChangeEventExternalIdsResponse extends ApiResponse {}
 export interface ApplyEventTemplateResponse extends ApiResponse {}
 export interface DetachEventTemplateResponse extends ApiResponse {}
-
+export interface ApplyEventCapacityTemplateResponse extends ApiResponse {}
+export interface DetachEventCapacityTemplateResponse extends ApiResponse {}
+export interface ApplyEventAccessTemplateResponse extends ApiResponse {}
+export interface DetachEventAccessTemplateResponse extends ApiResponse {}
 
 // capacity
 export interface AddCapacityResponse extends ApiResponse {
@@ -451,6 +562,43 @@ export interface ChangeEventTemplateAccessDefinitionConditionsResponse extends A
 export interface ChangeEventTemplateAccessDefinitionTagsResponse extends ApiResponse {}
 export interface ChangeEventTemplateAccessDefinitionUseLimitResponse extends ApiResponse {}
 export interface AssignEventTemplateAccessDefinitionLocationResponse extends ApiResponse {}
+
+
+// event capacity template
+export interface CreateEventCapacityTemplateResponse extends ApiResponse {
+    data: {
+        eventCapacityTemplateId: string;
+    };
+}
+export interface RenameEventCapacityTemplateResponse extends ApiResponse {}
+export interface AddEventCapacityTemplateCapacityResponse extends ApiResponse {
+    data: {
+        capacityId: string;
+    }
+}
+export interface ChangeEventCapacityTemplateCapacityResponse extends ApiResponse {}
+
+
+// event access template
+export interface CreateEventAccessTemplateResponse extends ApiResponse {
+    data: {
+        eventAccessTemplateId: string;
+    };
+}
+export interface RenameEventAccessTemplateResponse extends ApiResponse {}
+export interface AddEventAccessTemplateAccessDefinitionResponse extends ApiResponse {
+    data: {
+        accessDefinitionId: string;
+    }
+}
+export interface RemoveEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
+export interface RenameEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
+export interface RescheduleEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
+export interface ChangeEventAccessTemplateAccessDefinitionCapacityLocationAllocationResponse extends ApiResponse {}
+export interface ChangeEventAccessTemplateAccessDefinitionConditionsResponse extends ApiResponse {}
+export interface ChangeEventAccessTemplateAccessDefinitionTagsResponse extends ApiResponse {}
+export interface ChangeEventAccessTemplateAccessDefinitionUseLimitResponse extends ApiResponse {}
+export interface AssignEventAccessTemplateAccessDefinitionLocationResponse extends ApiResponse {}
 
 
 
