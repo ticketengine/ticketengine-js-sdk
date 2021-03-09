@@ -140,7 +140,13 @@ import {
     RenameEventAccessTemplateResponse,
     RenameEventAccessTemplateArguments,
     CreateEventAccessTemplateResponse,
-    CreateEventAccessTemplateArguments
+    CreateEventAccessTemplateArguments,
+    DetachEventAccessTemplateResponse,
+    DetachEventAccessTemplateArguments,
+    ApplyEventAccessTemplateResponse,
+    ApplyEventAccessTemplateArguments,
+    DetachEventCapacityTemplateResponse,
+    ApplyEventCapacityTemplateResponse, ApplyEventCapacityTemplateArguments
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -719,6 +725,14 @@ export class WebClient {
             this.sendCommand<ApplyEventTemplateResponse>('ApplyEventTemplate', data, retryPolicy),
         detachEventTemplate: async (data: DetachEventTemplateArguments, retryPolicy?: Array<number>): Promise<DetachEventTemplateResponse> =>
             this.sendCommand<DetachEventTemplateResponse>('DetachEventTemplate', data, retryPolicy),
+        applyEventCapacityTemplate: async (data: ApplyEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<ApplyEventCapacityTemplateResponse> =>
+            this.sendCommand<ApplyEventCapacityTemplateResponse>('ApplyEventCapacityTemplate', data, retryPolicy),
+        detachEventCapacityTemplate: async (data: DetachEventTemplateArguments, retryPolicy?: Array<number>): Promise<DetachEventCapacityTemplateResponse> =>
+            this.sendCommand<DetachEventCapacityTemplateResponse>('DetachEventCapacityTemplate', data, retryPolicy),
+        applyEventAccessTemplate: async (data: ApplyEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<ApplyEventAccessTemplateResponse> =>
+            this.sendCommand<ApplyEventAccessTemplateResponse>('ApplyEventAccessTemplate', data, retryPolicy),
+        detachEventAccessTemplate: async (data: DetachEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<DetachEventAccessTemplateResponse> =>
+            this.sendCommand<DetachEventAccessTemplateResponse>('DetachEventAccessTemplate', data, retryPolicy),
 
         // capacity
         addCapacity: async (data: AddCapacityArguments, retryPolicy?: Array<number>): Promise<AddCapacityResponse> =>
