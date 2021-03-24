@@ -338,6 +338,16 @@ import {
     ReturnMembershipArguments,
     ReturnMembershipResponse
 } from "./command/membership";
+import {
+    AddIntersolveApiConfigArguments,
+    AddIntersolveApiConfigResponse,
+    CreateLoyaltyCardTransactionArguments,
+    CreateLoyaltyCardTransactionResponse,
+    RemoveIntersolveApiConfigArguments,
+    RemoveIntersolveApiConfigResponse,
+    ValidateLoyaltyCardArguments,
+    ValidateLoyaltyCardResponse
+} from "./command/loyalty";
 // import * as apiResponse from './Responses';
 
 
@@ -1084,6 +1094,17 @@ export class WebClient {
             this.sendCommand<GrantMembershipResponse>('GrantMembership', data, retryPolicy),
         returnMembership: async (data: ReturnMembershipArguments, retryPolicy?: Array<number>): Promise<ReturnMembershipResponse> =>
             this.sendCommand<ReturnMembershipResponse>('ReturnMembership', data, retryPolicy),
+    };
+
+    public readonly loyalty = {
+        addIntersolveApiConfig: async (data: AddIntersolveApiConfigArguments, retryPolicy?: Array<number>): Promise<AddIntersolveApiConfigResponse> =>
+            this.sendCommand<AddIntersolveApiConfigResponse>('AddIntersolveApiConfig', data, retryPolicy),
+        removeIntersolveApiConfig: async (data: RemoveIntersolveApiConfigArguments, retryPolicy?: Array<number>): Promise<RemoveIntersolveApiConfigResponse> =>
+            this.sendCommand<RemoveIntersolveApiConfigResponse>('RemoveIntersolveApiConfig', data, retryPolicy),
+        validateLoyaltyCard: async (data: ValidateLoyaltyCardArguments, retryPolicy?: Array<number>): Promise<ValidateLoyaltyCardResponse> =>
+            this.sendCommand<ValidateLoyaltyCardResponse>('ValidateLoyaltyCard', data, retryPolicy),
+        createLoyaltyCardTransaction: async (data: CreateLoyaltyCardTransactionArguments, retryPolicy?: Array<number>): Promise<CreateLoyaltyCardTransactionResponse> =>
+            this.sendCommand<CreateLoyaltyCardTransactionResponse>('CreateLoyaltyCardTransaction', data, retryPolicy),
     };
 
     // public readonly fionaIntegration = {

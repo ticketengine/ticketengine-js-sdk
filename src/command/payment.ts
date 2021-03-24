@@ -92,6 +92,9 @@ export interface CreatePaymentArguments extends CommandData {
     paymentMethod?: string;
     issuer?: string;
     locale?: string;
+    loyaltyCardType?: string;
+    loyaltyCardId?: string;
+    loyaltyCardPin?: string;
 }
 
 
