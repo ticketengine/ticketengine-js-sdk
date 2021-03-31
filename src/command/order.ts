@@ -37,6 +37,31 @@ export interface RemoveItem extends CartOperation {
 }
 
 
+export enum Command {
+    CheckOutOrder = 'CheckOutOrder',
+    ReserveOrder = 'ReserveOrder',
+}
+
+export interface CommandOnItemsReserved {
+    operation: Command;
+    data: any;
+}
+
+export interface CheckOutOrder extends CommandOnItemsReserved {
+    data: {
+        customerEmail: string;
+        customerRemark: string;
+    };
+}
+
+export interface ReserveOrder extends CommandOnItemsReserved {
+    data: {
+        customerEmail: string;
+        timeout?: string;
+    };
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command arguments
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +137,13 @@ export interface CartBatchOperationArguments extends CommandData {
     aggregateId: string;
     operations: Array<CartOperation>;
 }
+export interface CreateOrderAndBatchAddItemArguments extends CommandData {
+    salesChannelId: string;
+    registerId: string;
+    customerId?: string;
+    operations: Array<CartOperation>;
+    commandOnItemsReserved: CommandOnItemsReserved;
+}
 
 
 
@@ -170,6 +202,11 @@ export interface UnassignOrderFromCustomerResponse extends ApiResponse {}
 export interface CartBatchOperationResponse extends ApiResponse {
     data: {
         orderLineItemIds: string[];
+    }
+}
+export interface CreateOrderAndBatchAddItemResponse extends ApiResponse {
+    data: {
+        orderId: string;
     }
 }
 

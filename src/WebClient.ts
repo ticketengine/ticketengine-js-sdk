@@ -146,7 +146,13 @@ import {
     ApplyEventAccessTemplateResponse,
     ApplyEventAccessTemplateArguments,
     DetachEventCapacityTemplateResponse,
-    ApplyEventCapacityTemplateResponse, ApplyEventCapacityTemplateArguments
+    ApplyEventCapacityTemplateResponse,
+    ApplyEventCapacityTemplateArguments,
+    DuplicateEventTemplateArguments,
+    DuplicateEventTemplateResponse,
+    DuplicateEventCapacityTemplateResponse,
+    DuplicateEventCapacityTemplateArguments,
+    DuplicateEventAccessTemplateResponse, DuplicateEventAccessTemplateArguments
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -186,7 +192,7 @@ import {
     UnassignOrderFromCustomerArguments,
     UnassignOrderFromCustomerResponse,
     CartBatchOperationArguments,
-    CartBatchOperationResponse
+    CartBatchOperationResponse, CreateOrderAndBatchAddItemResponse, CreateOrderAndBatchAddItemArguments
 } from './command/order';
 import {
     AddAdyenClientSettingsArguments,
@@ -817,6 +823,8 @@ export class WebClient {
             this.sendCommand<ChangeEventTemplateAccessDefinitionUseLimitResponse>('ChangeEventTemplateAccessDefinitionUseLimit', data, retryPolicy),
         assignEventTemplateAccessDefinitionLocation: async (data: AssignEventTemplateAccessDefinitionLocationArguments, retryPolicy?: Array<number>): Promise<AssignEventTemplateAccessDefinitionLocationResponse> =>
             this.sendCommand<AssignEventTemplateAccessDefinitionLocationResponse>('AssignEventTemplateAccessDefinitionLocation', data, retryPolicy),
+        duplicateEventTemplate: async (data: DuplicateEventTemplateArguments, retryPolicy?: Array<number>): Promise<DuplicateEventTemplateResponse> =>
+            this.sendCommand<DuplicateEventTemplateResponse>('DuplicateEventTemplate', data, retryPolicy),
 
         // event capacity template
         createEventCapacityTemplate: async (data: CreateEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<CreateEventCapacityTemplateResponse> =>
@@ -827,6 +835,8 @@ export class WebClient {
             this.sendCommand<AddEventCapacityTemplateCapacityResponse>('AddEventCapacityTemplateCapacity', data, retryPolicy),
         changeEventCapacityTemplateCapacity: async (data: ChangeEventCapacityTemplateCapacityArguments, retryPolicy?: Array<number>): Promise<ChangeEventCapacityTemplateCapacityResponse> =>
             this.sendCommand<ChangeEventCapacityTemplateCapacityResponse>('ChangeEventCapacityTemplateCapacity', data, retryPolicy),
+        duplicateEventCapacityTemplate: async (data: DuplicateEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<DuplicateEventCapacityTemplateResponse> =>
+            this.sendCommand<DuplicateEventCapacityTemplateResponse>('DuplicateEventCapacityTemplate', data, retryPolicy),
 
         // event access template
         createEventAccessTemplate: async (data: CreateEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<CreateEventAccessTemplateResponse> =>
@@ -851,6 +861,8 @@ export class WebClient {
             this.sendCommand<ChangeEventAccessTemplateAccessDefinitionUseLimitResponse>('ChangeEventAccessTemplateAccessDefinitionUseLimit', data, retryPolicy),
         assignEventAccessTemplateAccessDefinitionLocation: async (data: AssignEventAccessTemplateAccessDefinitionLocationArguments, retryPolicy?: Array<number>): Promise<AssignEventAccessTemplateAccessDefinitionLocationResponse> =>
             this.sendCommand<AssignEventAccessTemplateAccessDefinitionLocationResponse>('AssignEventAccessTemplateAccessDefinitionLocation', data, retryPolicy),
+        duplicateEventAccessTemplate: async (data: DuplicateEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<DuplicateEventAccessTemplateResponse> =>
+            this.sendCommand<DuplicateEventAccessTemplateResponse>('DuplicateEventAccessTemplate', data, retryPolicy),
 
         // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
         //     this.sendQuery<QueryResponse<Event>>(query),
@@ -899,6 +911,8 @@ export class WebClient {
             this.sendCommand<UnassignOrderFromCustomerResponse>('UnassignOrderFromCustomer', data, retryPolicy),
         cartBatchOperation: async (data: CartBatchOperationArguments, retryPolicy?: Array<number>): Promise<CartBatchOperationResponse> =>
             this.sendCommand<CartBatchOperationResponse>('CartBatchOperation', data, retryPolicy),
+        createOrderAndBatchAddItem: async (data: CreateOrderAndBatchAddItemArguments, retryPolicy?: Array<number>): Promise<CreateOrderAndBatchAddItemResponse> =>
+            this.sendCommand<CreateOrderAndBatchAddItemResponse>('CreateOrderAndBatchAddItem', data, retryPolicy),
         // getOrder: async (query: string): Promise<QueryResponse<Order>> =>
         //     this.sendQuery<QueryResponse<Order>>(query),
         // getOrders: async (query: string): Promise<QueryResponse<Array<Order>>> =>
