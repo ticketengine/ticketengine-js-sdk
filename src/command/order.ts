@@ -50,7 +50,7 @@ export interface CommandOnItemsReserved {
 export interface CheckOutOrder extends CommandOnItemsReserved {
     data: {
         customerEmail: string;
-        customerRemark: string;
+        customerRemark?: string;
     };
 }
 
@@ -113,6 +113,7 @@ export interface CancelOrderArguments extends CommandData {
 export interface CheckoutOrderArguments extends CommandData {
     aggregateId: string;
     customerEmail?: string;
+    customerRemark?: string;
 }
 export interface CompleteOrderArguments extends CommandData {
     aggregateId: string;
