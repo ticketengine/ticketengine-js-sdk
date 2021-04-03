@@ -109,6 +109,7 @@ export interface ReturnItemInCartArguments extends CommandData {
 }
 export interface CancelOrderArguments extends CommandData {
     aggregateId: string;
+    reason?: string;
 }
 export interface CheckoutOrderArguments extends CommandData {
     aggregateId: string;
