@@ -897,6 +897,8 @@ export class WebClient {
             this.sendCommand<ReturnItemInCartResponse>('ReturnItemInCart', data, retryPolicy),
         cancelOrder: async (data: CancelOrderArguments, retryPolicy?: Array<number>): Promise<CancelOrderResponse> =>
             this.sendCommand<CancelOrderResponse>('CancelOrder', data, retryPolicy),
+        cancelOrderReservation: async (data: CancelOrderArguments, retryPolicy?: Array<number>): Promise<CancelOrderResponse> =>
+            this.sendCommand<CancelOrderResponse>('CancelOrderReservation', data, retryPolicy),
         checkoutOrder: async (data: CheckoutOrderArguments, retryPolicy?: Array<number>): Promise<CheckoutOrderResponse> =>
             this.sendCommand<CheckoutOrderResponse>('CheckoutOrder', data, retryPolicy),
         completeOrder: async (data: CompleteOrderArguments, retryPolicy?: Array<number>): Promise<CompleteOrderResponse> =>
