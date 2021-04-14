@@ -97,6 +97,32 @@ export interface CreatePaymentArguments extends CommandData {
     loyaltyCardPin?: string|null;
 }
 
+export interface CreateAlternativePaymentMethodArguments extends CommandData {
+    name: string;
+    allowedRegisters: string[];
+}
+
+export interface RenameAlternativePaymentMethodArguments extends CommandData {
+    id: string;
+    name: string;
+}
+
+export interface SetAlternativePaymentMethodAllowedRegistersArguments extends CommandData {
+    id: string;
+    allowedRegisters: string[];
+}
+
+export interface AllowAlternativePaymentMethodRegisterArguments extends CommandData {
+    id: string;
+    registerId: string;
+}
+
+export interface DenyAlternativePaymentMethodRegisterArguments extends CommandData {
+    id: string;
+    registerId: string;
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Command responses
@@ -146,4 +172,16 @@ export interface CreatePaymentResponse extends ApiResponse {
         paymentUrl: string;
     }
 }
+
+export interface CreateAlternativePaymentMethodResponse extends ApiResponse {
+    data: {
+        paymentMethodId: string;
+    }
+}
+
+export interface RenameAlternativePaymentMethodResponse extends ApiResponse {}
+export interface SetAlternativePaymentMethodAllowedRegistersResponse extends ApiResponse {}
+export interface AllowAlternativePaymentMethodRegisterResponse extends ApiResponse {}
+export interface DenyAlternativePaymentMethodRegisterResponse extends ApiResponse {}
+
 

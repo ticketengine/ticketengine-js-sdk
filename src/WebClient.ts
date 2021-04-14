@@ -210,7 +210,18 @@ import {
     CreatePinPaymentArguments,
     CreatePinPaymentResponse,
     CreateMolliePaymentArguments,
-    CreateMolliePaymentResponse, CreatePaymentArguments, CreatePaymentResponse
+    CreateMolliePaymentResponse,
+    CreatePaymentArguments,
+    CreatePaymentResponse,
+    DenyAlternativePaymentMethodRegisterResponse,
+    DenyAlternativePaymentMethodRegisterArguments,
+    AllowAlternativePaymentMethodRegisterResponse,
+    AllowAlternativePaymentMethodRegisterArguments,
+    SetAlternativePaymentMethodAllowedRegistersResponse,
+    SetAlternativePaymentMethodAllowedRegistersArguments,
+    RenameAlternativePaymentMethodResponse,
+    RenameAlternativePaymentMethodArguments,
+    CreateAlternativePaymentMethodResponse, CreateAlternativePaymentMethodArguments
 } from './command/payment';
 import {
     AddMailgunClientSettingsArguments,
@@ -946,6 +957,16 @@ export class WebClient {
             this.sendCommand<CreateMolliePaymentResponse>('CreateMolliePayment', data, retryPolicy),
         createPayment: async (data: CreatePaymentArguments, retryPolicy?: Array<number>): Promise<CreatePaymentResponse> =>
             this.sendCommand<CreatePaymentResponse>('CreatePayment', data, retryPolicy),
+        createAlternativePaymentMethod: async (data: CreateAlternativePaymentMethodArguments, retryPolicy?: Array<number>): Promise<CreateAlternativePaymentMethodResponse> =>
+            this.sendCommand<CreateAlternativePaymentMethodResponse>('CreateAlternativePaymentMethod', data, retryPolicy),
+        renameAlternativePaymentMethod: async (data: RenameAlternativePaymentMethodArguments, retryPolicy?: Array<number>): Promise<RenameAlternativePaymentMethodResponse> =>
+            this.sendCommand<RenameAlternativePaymentMethodResponse>('RenameAlternativePaymentMethod', data, retryPolicy),
+        setAlternativePaymentMethodAllowedRegisters: async (data: SetAlternativePaymentMethodAllowedRegistersArguments, retryPolicy?: Array<number>): Promise<SetAlternativePaymentMethodAllowedRegistersResponse> =>
+            this.sendCommand<SetAlternativePaymentMethodAllowedRegistersResponse>('SetAlternativePaymentMethodAllowedRegisters', data, retryPolicy),
+        allowAlternativePaymentMethodRegister: async (data: AllowAlternativePaymentMethodRegisterArguments, retryPolicy?: Array<number>): Promise<AllowAlternativePaymentMethodRegisterResponse> =>
+            this.sendCommand<AllowAlternativePaymentMethodRegisterResponse>('AllowAlternativePaymentMethodRegister', data, retryPolicy),
+        denyAlternativePaymentMethodRegister: async (data: DenyAlternativePaymentMethodRegisterArguments, retryPolicy?: Array<number>): Promise<DenyAlternativePaymentMethodRegisterResponse> =>
+            this.sendCommand<DenyAlternativePaymentMethodRegisterResponse>('DenyAlternativePaymentMethodRegister', data, retryPolicy),
     };
 
     public readonly customer = {
