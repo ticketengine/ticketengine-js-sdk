@@ -9,20 +9,28 @@ import {ApiResponse, CommandData} from "../call";
 export interface CreateCustomerArguments extends CommandData {
     firstName?: string;
     lastName?: string;
+    company?: string;
     birthDate?: string;
     email?: string;
+    phone?: string;
     gender?: string;
     tags?: Array<string>;
+    imageUrl?: string;
+    preferredLanguage?: string;
 }
 
 export interface ChangeCustomerArguments extends CommandData {
     id: string;
     firstName?: string;
     lastName?: string;
+    company?: string;
     birthDate?: string;
     email?: string;
+    phone?: string;
     gender?: string;
     tags?: Array<string>;
+    imageUrl?: string;
+    preferredLanguage?: string;
 }
 
 export interface RemoveCustomerArguments extends CommandData {
