@@ -385,6 +385,8 @@ export class WebClient {
 
     private token: string;
 
+    private clearTokenOnSetAuthUrl: boolean = true;
+
     // private readonly authUrl: string;
     // private readonly adminApiUrl: string;
     // private readonly graphApiUrl: string;
@@ -418,6 +420,7 @@ export class WebClient {
         // };
         // attach(this.axios);
 
+        if(options.clearTokenOnSetAuthUrl !== undefined && options.clearTokenOnSetAuthUrl !== null) this.clearTokenOnSetAuthUrl = options.clearTokenOnSetAuthUrl;
         const adminApiUrl = options.adminApiUrl || 'https://admin-api.ticketengine.io';
         const graphApiUrl = options.graphApiUrl || 'https://graph-api.ticketengine.io';
         const authUrl = options.authUrl || 'https://auth.ticketengine.io';
@@ -443,7 +446,7 @@ export class WebClient {
     private setAuthApiUrl(url: string): void {
         if(localStorage) {
             if(url !== this.getAuthApiUrl()) {
-                this.clearToken();
+                if(this.clearTokenOnSetAuthUrl) this.clearToken();
                 localStorage.setItem("te-auth-api-url", url);
             }
         }
@@ -1161,5 +1164,6 @@ export interface WebClientOptions {
     oauthScope?: string;
     token?: string;
     logger?: any;
+    clearTokenOnSetAuthUrl?: boolean;
 }
 
