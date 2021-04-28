@@ -69,6 +69,7 @@ export interface CreateOrderArguments extends CommandData {
     salesChannelId: string;
     registerId: string;
     customerId?: string;
+    preferredLanguageCode?: string;
 }
 export interface AddAccessToCartArguments extends CommandData {
     aggregateId: string;
