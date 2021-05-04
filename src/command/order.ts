@@ -51,6 +51,7 @@ export interface CheckOutOrder extends CommandOnItemsReserved {
     data: {
         customerEmail: string;
         customerRemark?: string;
+        optInOn?: string[];
     };
 }
 

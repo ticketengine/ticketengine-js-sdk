@@ -365,6 +365,12 @@ import {
     ValidateLoyaltyCardArguments,
     ValidateLoyaltyCardResponse
 } from "./command/loyalty";
+import {
+    ChangeOptInDefinitionArguments,
+    ChangeOptInDefinitionResponse, CreateOptInDefinitionArguments, CreateOptInDefinitionResponse,
+    RemoveOptInDefinitionArguments,
+    RemoveOptInDefinitionResponse
+} from "./command/optIn";
 // import * as apiResponse from './Responses';
 
 
@@ -939,6 +945,8 @@ export class WebClient {
             this.sendCommand<ChangeTimeoutSettingResponse>('ChangeTimeoutSetting', data, retryPolicy),
         removeTimeoutSetting: async (data: RemoveTimeoutSettingArguments, retryPolicy?: Array<number>): Promise<RemoveTimeoutSettingResponse> =>
             this.sendCommand<RemoveTimeoutSettingResponse>('RemoveTimeoutSetting', data, retryPolicy),
+
+
     };
 
     public readonly payment = {
@@ -1145,6 +1153,15 @@ export class WebClient {
             this.sendCommand<ValidateLoyaltyCardResponse>('ValidateLoyaltyCard', data, retryPolicy),
         createLoyaltyCardTransaction: async (data: CreateLoyaltyCardTransactionArguments, retryPolicy?: Array<number>): Promise<CreateLoyaltyCardTransactionResponse> =>
             this.sendCommand<CreateLoyaltyCardTransactionResponse>('CreateLoyaltyCardTransaction', data, retryPolicy),
+    };
+
+    public readonly optIn = {
+        createOptInDefinition: async (data: CreateOptInDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateOptInDefinitionResponse> =>
+            this.sendCommand<CreateOptInDefinitionResponse>('CreateOptInDefinition', data, retryPolicy),
+        changeOptInDefinition: async (data: ChangeOptInDefinitionArguments, retryPolicy?: Array<number>): Promise<ChangeOptInDefinitionResponse> =>
+            this.sendCommand<ChangeOptInDefinitionResponse>('ChangeOptInDefinition', data, retryPolicy),
+        removeOptInDefinition: async (data: RemoveOptInDefinitionArguments, retryPolicy?: Array<number>): Promise<RemoveOptInDefinitionResponse> =>
+            this.sendCommand<RemoveOptInDefinitionResponse>('RemoveOptInDefinition', data, retryPolicy),
     };
 
     // public readonly fionaIntegration = {
