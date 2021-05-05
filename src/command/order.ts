@@ -117,6 +117,7 @@ export interface CheckoutOrderArguments extends CommandData {
     aggregateId: string;
     customerEmail?: string;
     customerRemark?: string;
+    optInOn?: string[];
 }
 export interface CompleteOrderArguments extends CommandData {
     aggregateId: string;
