@@ -15,6 +15,11 @@ export interface ChangeUserScopeArguments extends CommandData {
     scopes: Array<string>;
 }
 
+export interface ChangeUserAllowedRegistersArguments extends CommandData {
+    id: string;
+    allowedRegisters: Array<string>;
+}
+
 export interface ChangeUserPasswordArguments extends CommandData {
     id: string;
     password: string;
@@ -55,6 +60,7 @@ export interface CreateUserResponse extends ApiResponse {
     }
 }
 export interface ChangeUserScopeResponse extends ApiResponse {}
+export interface ChangeUserAllowedRegistersResponse extends ApiResponse {}
 export interface ChangeUserPasswordResponse extends ApiResponse {}
 export interface ResetUserPasswordResponse extends ApiResponse {}
 export interface EnableUserResponse extends ApiResponse {}

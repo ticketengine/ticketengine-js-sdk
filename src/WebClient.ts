@@ -279,7 +279,7 @@ import {
     GetAuthTokenArguments,
     GetAuthTokenResponse,
     ResetUserPasswordResponse,
-    ResetUserPasswordArguments
+    ResetUserPasswordArguments, ChangeUserAllowedRegistersResponse, ChangeUserAllowedRegistersArguments
 } from "./command/user";
 import {
     CreateTagArguments,
@@ -1038,6 +1038,8 @@ export class WebClient {
             this.sendCommand<CreateUserResponse>('CreateUser', data, retryPolicy),
         changeUserScope: async (data: ChangeUserScopeArguments, retryPolicy?: Array<number>): Promise<ChangeUserScopeResponse> =>
             this.sendCommand<ChangeUserScopeResponse>('ChangeUserScope', data, retryPolicy),
+        changeUserAllowedRegisters: async (data: ChangeUserAllowedRegistersArguments, retryPolicy?: Array<number>): Promise<ChangeUserAllowedRegistersResponse> =>
+            this.sendCommand<ChangeUserAllowedRegistersResponse>('ChangeUserAllowedRegisters', data, retryPolicy),
         changeUserPassword: async (data: ChangeUserPasswordArguments, retryPolicy?: Array<number>): Promise<ChangeUserPasswordResponse> =>
             this.sendCommand<ChangeUserPasswordResponse>('ChangeUserPassword', data, retryPolicy),
         resetUserPassword: async (data: ResetUserPasswordArguments, retryPolicy?: Array<number>): Promise<ResetUserPasswordResponse> =>
