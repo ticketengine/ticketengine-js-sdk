@@ -371,6 +371,24 @@ import {
     RemoveOptInDefinitionArguments,
     RemoveOptInDefinitionResponse
 } from "./command/optIn";
+import {
+    AddPackageDefinitionAccessArguments,
+    AddPackageDefinitionAccessResponse,
+    AddPackageDefinitionProductArguments,
+    AddPackageDefinitionProductResponse,
+    ChangePackageDefinitionTagsArguments,
+    ChangePackageDefinitionTagsResponse,
+    CreatePackageDefinitionArguments,
+    CreatePackageDefinitionResponse,
+    RemovePackageDefinitionAccessArguments,
+    RemovePackageDefinitionAccessResponse,
+    RemovePackageDefinitionContentArguments,
+    RemovePackageDefinitionContentResponse,
+    RemovePackageDefinitionProductArguments,
+    RemovePackageDefinitionProductResponse,
+    RenamePackageDefinitionArguments,
+    RenamePackageDefinitionResponse
+} from "./command/package";
 // import * as apiResponse from './Responses';
 
 
@@ -1166,6 +1184,25 @@ export class WebClient {
             this.sendCommand<RemoveOptInDefinitionResponse>('RemoveOptInDefinition', data, retryPolicy),
     };
 
+    public readonly package = {
+        createPackageDefinition: async (data: CreatePackageDefinitionArguments, retryPolicy?: Array<number>): Promise<CreatePackageDefinitionResponse> =>
+            this.sendCommand<CreatePackageDefinitionResponse>('CreatePackageDefinition', data, retryPolicy),
+        renamePackageDefinition: async (data: RenamePackageDefinitionArguments, retryPolicy?: Array<number>): Promise<RenamePackageDefinitionResponse> =>
+            this.sendCommand<RenamePackageDefinitionResponse>('RenamePackageDefinition', data, retryPolicy),
+        changePackageDefinitionTags: async (data: ChangePackageDefinitionTagsArguments, retryPolicy?: Array<number>): Promise<ChangePackageDefinitionTagsResponse> =>
+            this.sendCommand<ChangePackageDefinitionTagsResponse>('ChangePackageDefinitionTags', data, retryPolicy),
+        addPackageDefinitionAccess: async (data: AddPackageDefinitionAccessArguments, retryPolicy?: Array<number>): Promise<AddPackageDefinitionAccessResponse> =>
+            this.sendCommand<AddPackageDefinitionAccessResponse>('AddPackageDefinitionAccess', data, retryPolicy),
+        addPackageDefinitionProduct: async (data: AddPackageDefinitionProductArguments, retryPolicy?: Array<number>): Promise<AddPackageDefinitionProductResponse> =>
+            this.sendCommand<AddPackageDefinitionProductResponse>('AddPackageDefinitionProduct', data, retryPolicy),
+        removePackageDefinitionAccess: async (data: RemovePackageDefinitionAccessArguments, retryPolicy?: Array<number>): Promise<RemovePackageDefinitionAccessResponse> =>
+            this.sendCommand<RemovePackageDefinitionAccessResponse>('RemovePackageDefinitionAccess', data, retryPolicy),
+        removePackageDefinitionProduct: async (data: RemovePackageDefinitionProductArguments, retryPolicy?: Array<number>): Promise<RemovePackageDefinitionProductResponse> =>
+            this.sendCommand<RemovePackageDefinitionProductResponse>('RemovePackageDefinitionProduct', data, retryPolicy),
+        removePackageDefinitionContent: async (data: RemovePackageDefinitionContentArguments, retryPolicy?: Array<number>): Promise<RemovePackageDefinitionContentResponse> =>
+            this.sendCommand<RemovePackageDefinitionContentResponse>('RemovePackageDefinitionContent', data, retryPolicy),
+    };
+    
     // public readonly fionaIntegration = {
     //     createMembershipDefinition: async (data: CreateMembershipDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateMembershipDefinitionResponse> =>
     //         this.callAdminApi<CreateMembershipDefinitionResponse>('/integration/fiona/sync/accreditation', data, retryPolicy),
