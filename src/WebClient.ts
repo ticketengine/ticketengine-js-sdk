@@ -152,7 +152,10 @@ import {
     DuplicateEventTemplateResponse,
     DuplicateEventCapacityTemplateResponse,
     DuplicateEventCapacityTemplateArguments,
-    DuplicateEventAccessTemplateResponse, DuplicateEventAccessTemplateArguments
+    DuplicateEventAccessTemplateResponse,
+    DuplicateEventAccessTemplateArguments,
+    RescheduleEventDoorsOpenResponse,
+    RescheduleEventDoorsOpenArguments
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -755,6 +758,8 @@ export class WebClient {
             this.sendCommand<RenameEventResponse>('RenameEvent', data, retryPolicy),
         rescheduleEvent: async (data: RescheduleEventArguments, retryPolicy?: Array<number>): Promise<RescheduleEventResponse> =>
             this.sendCommand<RescheduleEventResponse>('RescheduleEvent', data, retryPolicy),
+        rescheduleEventDoorsOpen: async (data: RescheduleEventDoorsOpenArguments, retryPolicy?: Array<number>): Promise<RescheduleEventDoorsOpenResponse> =>
+            this.sendCommand<RescheduleEventDoorsOpenResponse>('RescheduleEventDoorsOpen', data, retryPolicy),
         relocateEvent: async (data: RelocateEventArguments, retryPolicy?: Array<number>): Promise<RelocateEventResponse> =>
             this.sendCommand<RelocateEventResponse>('RelocateEvent', data, retryPolicy),
         cancelEvent: async (data: CancelEventArguments, retryPolicy?: Array<number>): Promise<CancelEventResponse> =>

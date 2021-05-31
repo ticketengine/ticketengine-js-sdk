@@ -77,6 +77,12 @@ export interface RescheduleEventArguments extends CommandData {
     start: Date;
     end: Date;
 }
+export interface RescheduleEventDoorsOpenArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    doorsOpen: Date;
+    doorsClose: Date;
+}
 export interface RelocateEventArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -483,6 +489,7 @@ export interface CreateEventManagerAndPlanEventResponse extends ApiResponse {
 }
 export interface RenameEventResponse extends ApiResponse {}
 export interface RescheduleEventResponse extends ApiResponse {}
+export interface RescheduleEventDoorsOpenResponse extends ApiResponse {}
 export interface RelocateEventResponse extends ApiResponse {}
 export interface CancelEventResponse extends ApiResponse {}
 export interface PublishEventResponse extends ApiResponse {}
