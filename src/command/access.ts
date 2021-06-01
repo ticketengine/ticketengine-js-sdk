@@ -190,6 +190,11 @@ export interface AddAccessDefinitionArguments extends CommandData {
     limit?: number;
     isTemplate?: boolean;
 }
+export interface DuplicateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    eventId: string;
+    accessDefinitionId: string;
+}
 export interface RemoveAccessDefinitionArguments extends CommandData {
     aggregateId: string;
     eventId: string;
@@ -326,6 +331,10 @@ export interface AddEventTemplateAccessDefinitionArguments extends CommandData {
     tags?: Array<string>;
     limit?: number;
 }
+export interface DuplicateEventTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
+}
 export interface RemoveEventTemplateAccessDefinitionArguments extends CommandData {
     aggregateId: string;
     accessDefinitionId: string;
@@ -369,6 +378,10 @@ export interface AssignEventTemplateAccessDefinitionLocationArguments extends Co
 }
 export interface DuplicateEventTemplateArguments extends CommandData {
     aggregateId: string;
+}
+export interface DuplicateEventTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
 }
 
 
@@ -418,6 +431,10 @@ export interface AddEventAccessTemplateAccessDefinitionArguments extends Command
     capacityLocationAllocation: CapacityLocationAllocation;
     tags?: Array<string>;
     limit?: number;
+}
+export interface DuplicateEventAccessTemplateAccessDefinitionArguments extends CommandData {
+    aggregateId: string;
+    accessDefinitionId: string;
 }
 export interface RemoveEventAccessTemplateAccessDefinitionArguments extends CommandData {
     aggregateId: string;
@@ -521,8 +538,8 @@ export interface AddAccessDefinitionResponse extends ApiResponse {
     data: {
         accessDefinitionId: string;
     }
-
 }
+export interface DuplicateAccessDefinitionResponse extends ApiResponse {}
 export interface RemoveAccessDefinitionResponse extends ApiResponse {}
 export interface RenameAccessDefinitionResponse extends ApiResponse {}
 export interface RescheduleAccessDefinitionResponse extends ApiResponse {}
@@ -570,6 +587,7 @@ export interface AddEventTemplateAccessDefinitionResponse extends ApiResponse {
         accessDefinitionId: string;
     }
 }
+export interface DuplicateEventTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RemoveEventTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RenameEventTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RescheduleEventTemplateAccessDefinitionResponse extends ApiResponse {}
@@ -617,6 +635,7 @@ export interface AddEventAccessTemplateAccessDefinitionResponse extends ApiRespo
         accessDefinitionId: string;
     }
 }
+export interface DuplicateEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RemoveEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RenameEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}
 export interface RescheduleEventAccessTemplateAccessDefinitionResponse extends ApiResponse {}

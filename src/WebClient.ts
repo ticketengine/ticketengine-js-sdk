@@ -155,7 +155,12 @@ import {
     DuplicateEventAccessTemplateResponse,
     DuplicateEventAccessTemplateArguments,
     RescheduleEventDoorsOpenResponse,
-    RescheduleEventDoorsOpenArguments
+    RescheduleEventDoorsOpenArguments,
+    DuplicateAccessDefinitionArguments,
+    DuplicateAccessDefinitionResponse,
+    DuplicateEventTemplateAccessDefinitionArguments,
+    DuplicateEventTemplateAccessDefinitionResponse,
+    DuplicateEventAccessTemplateAccessDefinitionArguments, DuplicateEventAccessTemplateAccessDefinitionResponse
 } from './command/access'; // tslint:disable-line:import-name
 import {
     CreateOrderArguments,
@@ -802,6 +807,8 @@ export class WebClient {
         // access definition
         addAccessDefinition: async (data: AddAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<AddAccessDefinitionResponse> =>
             this.sendCommand<AddAccessDefinitionResponse>('AddAccessDefinition', data, retryPolicy),
+        duplicateAccessDefinition: async (data: DuplicateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<DuplicateAccessDefinitionResponse> =>
+            this.sendCommand<DuplicateAccessDefinitionResponse>('DuplicateAccessDefinition', data, retryPolicy),
         removeAccessDefinition: async (data: RemoveAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<RemoveAccessDefinitionResponse> =>
             this.sendCommand<RemoveAccessDefinitionResponse>('RemoveAccessDefinition', data, retryPolicy),
         renameAccessDefinition: async (data: RenameAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<RenameAccessDefinitionResponse> =>
@@ -868,6 +875,8 @@ export class WebClient {
             this.sendCommand<AssignEventTemplateAccessDefinitionLocationResponse>('AssignEventTemplateAccessDefinitionLocation', data, retryPolicy),
         duplicateEventTemplate: async (data: DuplicateEventTemplateArguments, retryPolicy?: Array<number>): Promise<DuplicateEventTemplateResponse> =>
             this.sendCommand<DuplicateEventTemplateResponse>('DuplicateEventTemplate', data, retryPolicy),
+        duplicateEventTemplateAccessDefinition: async (data: DuplicateEventTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<DuplicateEventTemplateAccessDefinitionResponse> =>
+            this.sendCommand<DuplicateEventTemplateAccessDefinitionResponse>('DuplicateEventTemplateAccessDefinition', data, retryPolicy),
 
         // event capacity template
         createEventCapacityTemplate: async (data: CreateEventCapacityTemplateArguments, retryPolicy?: Array<number>): Promise<CreateEventCapacityTemplateResponse> =>
@@ -906,6 +915,8 @@ export class WebClient {
             this.sendCommand<AssignEventAccessTemplateAccessDefinitionLocationResponse>('AssignEventAccessTemplateAccessDefinitionLocation', data, retryPolicy),
         duplicateEventAccessTemplate: async (data: DuplicateEventAccessTemplateArguments, retryPolicy?: Array<number>): Promise<DuplicateEventAccessTemplateResponse> =>
             this.sendCommand<DuplicateEventAccessTemplateResponse>('DuplicateEventAccessTemplate', data, retryPolicy),
+        duplicateEventAccessTemplateAccessDefinition: async (data: DuplicateEventAccessTemplateAccessDefinitionArguments, retryPolicy?: Array<number>): Promise<DuplicateEventAccessTemplateAccessDefinitionResponse> =>
+            this.sendCommand<DuplicateEventAccessTemplateAccessDefinitionResponse>('DuplicateEventAccessTemplateAccessDefinition', data, retryPolicy),
 
         // getEvent: async (query: string): Promise<QueryResponse<Event>> =>
         //     this.sendQuery<QueryResponse<Event>>(query),
