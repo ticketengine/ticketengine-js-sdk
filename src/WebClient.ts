@@ -1028,16 +1028,16 @@ export class WebClient {
             this.sendCommand<AddMailgunClientSettingsResponse>('AddMailgunClientSettings', data, retryPolicy),
         editMailgunClientSettings: async (data: EditMailgunClientSettingsArguments, retryPolicy?: Array<number>): Promise<EditMailgunClientSettingsResponse> =>
             this.sendCommand<EditMailgunClientSettingsResponse>('EditMailgunClientSettings', data, retryPolicy),
-        sendEmail: async (data: SendEmailArguments, retryPolicy?: Array<number>): Promise<SendEmailResponse> =>
-            this.sendCommand<SendEmailResponse>('SendEmail', data, retryPolicy),
+        sendEmail: async (data: SendEmailArguments): Promise<SendEmailResponse> =>
+            this.sendCommand<SendEmailResponse>('SendEmail', data, []),
         addEmailTemplate: async (data: AddEmailTemplateArguments, retryPolicy?: Array<number>): Promise<AddEmailTemplateResponse> =>
             this.sendCommand<AddEmailTemplateResponse>('AddEmailTemplate', data, retryPolicy),
         editEmailTemplate: async (data: EditEmailTemplateArguments, retryPolicy?: Array<number>): Promise<EditEmailTemplateResponse> =>
             this.sendCommand<EditEmailTemplateResponse>('EditEmailTemplate', data, retryPolicy),
         removeEmailTemplate: async (data: RemoveEmailTemplateArguments, retryPolicy?: Array<number>): Promise<RemoveEmailTemplateResponse> =>
             this.sendCommand<RemoveEmailTemplateResponse>('RemoveEmailTemplate', data, retryPolicy),
-        sendEmailTemplate: async (data: SendEmailTemplateArguments, retryPolicy?: Array<number>): Promise<SendEmailTemplateResponse> =>
-            this.sendCommand<SendEmailTemplateResponse>('SendEmailTemplate', data, retryPolicy),
+        sendEmailTemplate: async (data: SendEmailTemplateArguments): Promise<SendEmailTemplateResponse> =>
+            this.sendCommand<SendEmailTemplateResponse>('SendEmailTemplate', data, []),
     };
 
     public readonly salesChannel = {
