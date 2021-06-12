@@ -397,6 +397,11 @@ import {
     RenamePackageDefinitionArguments,
     RenamePackageDefinitionResponse
 } from "./command/package";
+import {
+    ChangeDocumentTemplateArguments, ChangeDocumentTemplateResponse, CreateDocumentArguments, CreateDocumentResponse,
+    CreateDocumentTemplateArguments,
+    CreateDocumentTemplateResponse, RemoveDocumentTemplateArguments, RemoveDocumentTemplateResponse
+} from "./command/document";
 // import * as apiResponse from './Responses';
 
 
@@ -1038,6 +1043,17 @@ export class WebClient {
             this.sendCommand<RemoveEmailTemplateResponse>('RemoveEmailTemplate', data, retryPolicy),
         sendEmailTemplate: async (data: SendEmailTemplateArguments): Promise<SendEmailTemplateResponse> =>
             this.sendCommand<SendEmailTemplateResponse>('SendEmailTemplate', data, []),
+    };
+
+    public readonly document = {
+        createDocumentTemplate: async (data: CreateDocumentTemplateArguments, retryPolicy?: Array<number>): Promise<CreateDocumentTemplateResponse> =>
+            this.sendCommand<CreateDocumentTemplateResponse>('CreateDocumentTemplate', data, retryPolicy),
+        changeDocumentTemplate: async (data: ChangeDocumentTemplateArguments, retryPolicy?: Array<number>): Promise<ChangeDocumentTemplateResponse> =>
+            this.sendCommand<ChangeDocumentTemplateResponse>('ChangeDocumentTemplate', data, retryPolicy),
+        removeDocumentTemplate: async (data: RemoveDocumentTemplateArguments, retryPolicy?: Array<number>): Promise<RemoveDocumentTemplateResponse> =>
+            this.sendCommand<RemoveDocumentTemplateResponse>('RemoveDocumentTemplate', data, retryPolicy),
+        createDocument: async (data: CreateDocumentArguments, retryPolicy?: Array<number>): Promise<CreateDocumentResponse> =>
+            this.sendCommand<CreateDocumentResponse>('CreateDocument', data, retryPolicy),
     };
 
     public readonly salesChannel = {
