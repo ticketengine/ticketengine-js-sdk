@@ -97,6 +97,13 @@ export interface CreatePaymentArguments extends CommandData {
     loyaltyCardPin?: string|null;
 }
 
+export interface CreatePaymentRefundArguments extends CommandData {
+    aggregateId: string;
+    currency: string;
+    amount: number;
+    paymentMethod: string;
+}
+
 export interface CreateAlternativePaymentMethodArguments extends CommandData {
     name: string;
     allowedRegisters: string[];
@@ -170,6 +177,12 @@ export interface CreatePaymentResponse extends ApiResponse {
     data: {
         paymentId: string;
         paymentUrl: string;
+    }
+}
+
+export interface CreatePaymentRefundResponse extends ApiResponse {
+    data: {
+        refundId: string;
     }
 }
 

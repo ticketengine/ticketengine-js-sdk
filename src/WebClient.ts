@@ -229,7 +229,10 @@ import {
     SetAlternativePaymentMethodAllowedRegistersArguments,
     RenameAlternativePaymentMethodResponse,
     RenameAlternativePaymentMethodArguments,
-    CreateAlternativePaymentMethodResponse, CreateAlternativePaymentMethodArguments
+    CreateAlternativePaymentMethodResponse,
+    CreateAlternativePaymentMethodArguments,
+    CreatePaymentRefundArguments,
+    CreatePaymentRefundResponse
 } from './command/payment';
 import {
     AddMailgunClientSettingsArguments,
@@ -1007,6 +1010,8 @@ export class WebClient {
             this.sendCommand<CreateMolliePaymentResponse>('CreateMolliePayment', data, retryPolicy),
         createPayment: async (data: CreatePaymentArguments, retryPolicy?: Array<number>): Promise<CreatePaymentResponse> =>
             this.sendCommand<CreatePaymentResponse>('CreatePayment', data, retryPolicy),
+        createPaymentRefund: async (data: CreatePaymentRefundArguments, retryPolicy?: Array<number>): Promise<CreatePaymentRefundResponse> =>
+            this.sendCommand<CreatePaymentRefundResponse>('CreatePaymentRefund', data, retryPolicy),
         createAlternativePaymentMethod: async (data: CreateAlternativePaymentMethodArguments, retryPolicy?: Array<number>): Promise<CreateAlternativePaymentMethodResponse> =>
             this.sendCommand<CreateAlternativePaymentMethodResponse>('CreateAlternativePaymentMethod', data, retryPolicy),
         renameAlternativePaymentMethod: async (data: RenameAlternativePaymentMethodArguments, retryPolicy?: Array<number>): Promise<RenameAlternativePaymentMethodResponse> =>
