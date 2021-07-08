@@ -405,6 +405,11 @@ import {
     CreateDocumentTemplateArguments,
     CreateDocumentTemplateResponse, RemoveDocumentTemplateArguments, RemoveDocumentTemplateResponse
 } from "./command/document";
+import {
+    ChangeOrderMessageDefinitionArguments, ChangeOrderMessageDefinitionResponse,
+    CreateOrderMessageDefinitionArguments,
+    CreateOrderMessageDefinitionResponse, RemoveOrderMessageDefinitionArguments, RemoveOrderMessageDefinitionResponse
+} from "./command/orderMessage";
 // import * as apiResponse from './Responses';
 
 
@@ -1219,6 +1224,15 @@ export class WebClient {
             this.sendCommand<ChangeOptInDefinitionResponse>('ChangeOptInDefinition', data, retryPolicy),
         removeOptInDefinition: async (data: RemoveOptInDefinitionArguments, retryPolicy?: Array<number>): Promise<RemoveOptInDefinitionResponse> =>
             this.sendCommand<RemoveOptInDefinitionResponse>('RemoveOptInDefinition', data, retryPolicy),
+    };
+
+    public readonly orderMessage = {
+        createOrderMessageDefinition: async (data: CreateOrderMessageDefinitionArguments, retryPolicy?: Array<number>): Promise<CreateOrderMessageDefinitionResponse> =>
+            this.sendCommand<CreateOrderMessageDefinitionResponse>('CreateOrderMessageDefinition', data, retryPolicy),
+        changeOrderMessageDefinition: async (data: ChangeOrderMessageDefinitionArguments, retryPolicy?: Array<number>): Promise<ChangeOrderMessageDefinitionResponse> =>
+            this.sendCommand<ChangeOrderMessageDefinitionResponse>('ChangeOrderMessageDefinition', data, retryPolicy),
+        removeOrderMessageDefinition: async (data: RemoveOrderMessageDefinitionArguments, retryPolicy?: Array<number>): Promise<RemoveOrderMessageDefinitionResponse> =>
+            this.sendCommand<RemoveOrderMessageDefinitionResponse>('RemoveOrderMessageDefinition', data, retryPolicy),
     };
 
     public readonly package = {
