@@ -410,6 +410,13 @@ import {
     CreateOrderMessageDefinitionArguments,
     CreateOrderMessageDefinitionResponse, RemoveOrderMessageDefinitionArguments, RemoveOrderMessageDefinitionResponse
 } from "./command/orderMessage";
+import {
+    ChangeOfferArguments,
+    ChangeOfferResponse,
+    CreateOfferArguments,
+    CreateOfferResponse,
+    RemoveOfferArguments, RemoveOfferResponse
+} from "./command/offer";
 // import * as apiResponse from './Responses';
 
 
@@ -1252,6 +1259,15 @@ export class WebClient {
             this.sendCommand<RemovePackageDefinitionProductResponse>('RemovePackageDefinitionProduct', data, retryPolicy),
         removePackageDefinitionContent: async (data: RemovePackageDefinitionContentArguments, retryPolicy?: Array<number>): Promise<RemovePackageDefinitionContentResponse> =>
             this.sendCommand<RemovePackageDefinitionContentResponse>('RemovePackageDefinitionContent', data, retryPolicy),
+    };
+
+    public readonly offer = {
+        createOffer: async (data: CreateOfferArguments, retryPolicy?: Array<number>): Promise<CreateOfferResponse> =>
+            this.sendCommand<CreateOfferResponse>('CreateOffer', data, retryPolicy),
+        changeOffer: async (data: ChangeOfferArguments, retryPolicy?: Array<number>): Promise<ChangeOfferResponse> =>
+            this.sendCommand<ChangeOfferResponse>('ChangeOffer', data, retryPolicy),
+        removeOffer: async (data: RemoveOfferArguments, retryPolicy?: Array<number>): Promise<RemoveOfferResponse> =>
+            this.sendCommand<RemoveOfferResponse>('RemoveOffer', data, retryPolicy),
     };
     
     // public readonly fionaIntegration = {
