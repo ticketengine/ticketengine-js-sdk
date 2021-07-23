@@ -411,6 +411,7 @@ import {
     CreateOrderMessageDefinitionResponse, RemoveOrderMessageDefinitionArguments, RemoveOrderMessageDefinitionResponse
 } from "./command/orderMessage";
 import {
+    AcceptOfferArguments, AcceptOfferResponse,
     ChangeOfferArguments,
     ChangeOfferResponse,
     CreateOfferArguments,
@@ -1268,6 +1269,8 @@ export class WebClient {
             this.sendCommand<ChangeOfferResponse>('ChangeOffer', data, retryPolicy),
         removeOffer: async (data: RemoveOfferArguments, retryPolicy?: Array<number>): Promise<RemoveOfferResponse> =>
             this.sendCommand<RemoveOfferResponse>('RemoveOffer', data, retryPolicy),
+        acceptOffer: async (data: AcceptOfferArguments, retryPolicy?: Array<number>): Promise<AcceptOfferResponse> =>
+            this.sendCommand<AcceptOfferResponse>('AcceptOffer', data, retryPolicy),
     };
     
     // public readonly fionaIntegration = {

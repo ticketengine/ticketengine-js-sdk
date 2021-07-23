@@ -35,6 +35,10 @@ export interface RemoveOfferArguments extends CommandData {
     id: string;
 }
 
+export interface AcceptOfferArguments extends CommandData {
+    aggregateId: string;
+    offerId: string;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,4 +52,8 @@ export interface CreateOfferResponse extends ApiResponse {
 }
 export interface ChangeOfferResponse extends ApiResponse {}
 export interface RemoveOfferResponse extends ApiResponse {}
-
+export interface AcceptOfferResponse extends ApiResponse {
+    data: {
+        orderLineItemId: string;
+    }
+}
