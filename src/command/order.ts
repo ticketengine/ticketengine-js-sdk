@@ -5,6 +5,7 @@ export enum CartOperationType {
     AddAccessItem = 'AddAccessItem',
     AddProductItem = 'AddProductItem',
     RemoveItem = 'RemoveItem',
+    BatchAddAccessItems = 'BatchAddAccessItems',
 }
 
 export interface CartOperation {
@@ -33,6 +34,17 @@ export interface AddProductItem extends CartOperation {
 export interface RemoveItem extends CartOperation {
     data: {
         orderLineItemId: string;
+    };
+}
+
+export interface BatchAddAccessItems extends CartOperation {
+    data: {
+        eventManagerId: string;
+        eventId: string;
+        accessDefinitionId: string;
+        quantity: number;
+        requestedConditionPath: Array<string>;
+        capacityLocationPath?: Array<string>;
     };
 }
 
