@@ -99,6 +99,7 @@ export interface CreatePaymentArguments extends CommandData {
 
 export interface CreatePaymentRefundArguments extends CommandData {
     aggregateId: string;
+    registerId: string;
     currency: string;
     amount: number;
     paymentMethod: string;
