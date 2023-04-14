@@ -1,15 +1,7 @@
 import axios, {AxiosInstance, AxiosResponse, Method} from 'axios';
-// import { ApiCallOptions, ApiCallResult } from './apiCall';
-// @ts-ignore
-// const PQueue = require('p-queue');
-// import * as Promise from 'bluebird';
 import * as moment from 'moment';
-import {TaskQueue} from 'cwait';
-// import {attach, RaxConfig} from 'retry-axios';
 import {LoggerInterface} from './LoggerInterface';
 import {Logger} from './Logger';
-// import pRetry = require('p-retry');
-// import * as pRetry from 'p-retry';
 import {
     CreateEventManagerArguments,
     CreateEventManagerResponse,
