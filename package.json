@@ -1,6 +1,6 @@
 {
   "name": "ticketengine-sdk",
-  "version": "1.28.1",
+  "version": "1.29.0",
   "description": "JavaScript SDK with a web client for TicketEngine",
   "dependencies": {
     "@types/lodash": "^4.14.117",
