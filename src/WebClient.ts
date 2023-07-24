@@ -649,7 +649,7 @@ export class WebClient {
 
 
     private async sendCommand<T>(name: string, data: any, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
-        this.logger.debug('send command: ' + name);
+        // this.logger.debug('send command: ' + name);
         // let url = this.adminApiUrl;
         let url = this.getAdminApiUrl();
         const headers = {
@@ -668,7 +668,7 @@ export class WebClient {
 
 
     public async sendQuery<T>(query: string, retryPolicy: Array<number> = [0, 0, 0]): Promise<T> {
-        this.logger.debug('send query :' + query);
+        // this.logger.debug('send query :' + query);
         // let url = this.graphApiUrl;
         let url = this.getGraphApiUrl();
         const body = {query};
@@ -683,7 +683,7 @@ export class WebClient {
 
     // public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: string = 'post'): Promise<T> {
     public async callAdminApi<T>(path: string, data: any = null, headers: any = {}, retryPolicy: Array<number> = [0, 0, 0], method: Method = 'post'): Promise<T> {
-        this.logger.debug('call facade :' + path);
+        // this.logger.debug('call facade :' + path);
 
         let url = this.getAdminApiUrl() + '/' + path;
         const defaultHeaders = {
@@ -704,7 +704,7 @@ export class WebClient {
     // private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: string = 'post'): Promise<AxiosResponse<T>> {
     private async request<T>(url: string, body: any, headers: any = {}, retryPolicy: Array<number> = [], method: Method = 'post'): Promise<AxiosResponse<T>> {
         const self = this;
-        this.logger.debug('make request');
+        // this.logger.debug('make request');
         try {
             const response = await this.axios.request({
                 // method: 'post',
@@ -713,11 +713,11 @@ export class WebClient {
                 data: body,
                 headers: headers
             });
-            this.logger.debug('response received');
+            // this.logger.debug('response received');
             return response;
         } catch (error) {
             const responseStatus = (error && error.response && error.response.status) ? error.response.status : null;
-            this.logger.debug('request failed with status: ' + responseStatus);
+            // this.logger.debug('request failed with status: ' + responseStatus);
             // this.logger.debug(error.response.body);
 
 
