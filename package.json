@@ -3,13 +3,13 @@
   "version": "1.32.2",
   "description": "JavaScript SDK with a web client for TicketEngine",
   "dependencies": {
-    "@types/node": "^10.12.0",
-    "axios": "^0.21.1",
+    "@types/node": "^18.15.13",
+    "axios": "^1.4.0",
     "moment": "^2.22.2"
   },
   "devDependencies": {
     "localstorage-polyfill": "^1.0.1",
-    "typescript": "^4.6.3"
+    "typescript": "^5.1.6"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
