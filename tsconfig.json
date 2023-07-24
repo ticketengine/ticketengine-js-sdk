@@ -15,7 +15,7 @@
     "strictPropertyInitialization": true,
     "noFallthroughCasesInSwitch": true,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true,
+//    "suppressImplicitAnyIndexErrors": true,
     "sourceMap": true,
     "pretty": true,
     "baseUrl": ".",
