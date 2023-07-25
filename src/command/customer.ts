@@ -36,6 +36,9 @@ export interface ChangeCustomerArguments extends CommandData {
 export interface RemoveCustomerArguments extends CommandData {
     id: string;
 }
+export interface RemoveCustomerImageArguments extends CommandData {
+    id: string;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,4 +55,7 @@ export interface ChangeCustomerResponse extends ApiResponse {
 }
 
 export interface RemoveCustomerResponse extends ApiResponse {
+}
+
+export interface RemoveCustomerImageResponse extends ApiResponse {
 }

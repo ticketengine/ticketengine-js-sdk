@@ -265,7 +265,7 @@ import {
     ChangeCustomerResponse,
     CreateCustomerArguments,
     CreateCustomerResponse,
-    RemoveCustomerArguments,
+    RemoveCustomerArguments, RemoveCustomerImageArguments, RemoveCustomerImageResponse,
     RemoveCustomerResponse
 } from "./command/customer";
 import {
@@ -1036,6 +1036,8 @@ export class WebClient {
             this.sendCommand<ChangeCustomerResponse>('ChangeCustomer', data, retryPolicy),
         removeCustomer: async (data: RemoveCustomerArguments, retryPolicy?: Array<number>): Promise<RemoveCustomerResponse> =>
             this.sendCommand<RemoveCustomerResponse>('RemoveCustomer', data, retryPolicy),
+        removeCustomerImage: async (data: RemoveCustomerImageArguments, retryPolicy?: Array<number>): Promise<RemoveCustomerImageResponse> =>
+            this.sendCommand<RemoveCustomerImageResponse>('RemoveCustomerImage', data, retryPolicy),
     };
 
     public readonly email = {
